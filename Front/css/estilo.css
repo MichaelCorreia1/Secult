@@ -1,0 +1,57 @@
+.header-noticia{
+    top: 25px;
+}
+.btn-roda-pe{
+
+
+
+}
+.linkSemDecoracao {
+    text-decoration: none;
+    color: white;
+}
+
+.desc-inf-page{
+    background-color: white;
+    padding: 16px;
+    font-size: 16px;
+    text-indent: 10px;
+    text-align: justify;
+
+}
+
+.btn-preto {
+    position: relative;
+    background-color: #444;
+    border: none;
+    font-size: 28px;
+    color: #FFFFFF;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    -webkit-transition-duration: 0.1s; /* Safari */
+    transition-duration: 0.1s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.btn-preto:after {
+    content: "";
+    background: #444444f2;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.1s
+}
+
+.btn-preto:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}

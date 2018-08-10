@@ -1,0 +1,72 @@
+<ion-view title="Atualizar Evento" id="page20">
+    <ion-nav-buttons side="right" class="has-header">
+        <button class="button icon ion-home button-clear" ui-sref="tabsController.noticias"></button>
+    </ion-nav-buttons>
+    <ion-content padding="true" class="has-header has-footer">
+        <form class="list">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Titulo</span>
+                <input type="text" placeholder="" id="tituloUp">
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Descrição</span>
+                <textarea placeholder="" rows="3" id="descricaoUp" maxLength="500"></textarea>
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Data do Evento</span>
+                <input type="date" placeholder="" id="dataEventoUp">
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Horário</span>
+                <input type="time" placeholder="" id="horarioUp">
+            </label>
+
+            <label class="item item-select">
+                <span class="input-label">Localidade</span>
+                <select id="localidadeUp">
+                    <option value="">Selecione</option>
+                    <option value="1">Aqui</option>
+                    <option value="2">Ali</option>
+
+                </select>
+            </label>
+            <label class="item item-select">
+                <span class="input-label">Visibilidade</span>
+                <select id="visibilidadeUp">
+                    <option value="">Selecione</option>
+                    <option value="s">Visivel</option>
+                    <option value="n">Invisivel</option>
+
+                </select>
+            </label>
+            <label class="item item-select">
+                <span class="input-label">Tipo do Evento</span>
+                <select id="tipoUp">
+                    <option value="">Selecione</option>
+                    <option value="p">Pequeno</option>
+                    <option value="g">Grande</option>
+                </select>
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <input type="file" id="fotoUp">
+            </label>
+
+        </form>
+
+
+    </ion-content>
+
+    <ion-footer-bar style="padding: 0px; margin: 0px">
+        <div class="buttons positive " style="width: 100%; display: block; margin: 0px; padding: 0px">
+            <button id="updateEventoBtn" class="button button-block btn-preto button-full" style=" padding: 0px; margin: 0px; height: 100%;
+    font-size: medium; color: white;
+    ">Atualizar Dados
+            </button>
+        </div>
+    </ion-footer-bar>
+
+</ion-view>

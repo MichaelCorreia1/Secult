@@ -136,5 +136,9 @@ public class Cadart {
     public void setTelefone(long telefone){
         this.telefone = telefone;
     }
+
+    public void getNomeArtistico(String nomeArtistico) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

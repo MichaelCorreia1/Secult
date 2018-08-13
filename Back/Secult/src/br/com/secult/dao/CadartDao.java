@@ -74,6 +74,7 @@ public class CadartDao {
             cadart.setProjetoAtual(rs.getString("projeto_atual"));
             cadart.setEmail(rs.getString("email"));
             cadart.setTelefone(rs.getLong("telefone"));
+            cadart.setSenha(rs.getString("senha"));
 
             objs.add(cadart);
         }
@@ -86,7 +87,7 @@ public class CadartDao {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "SELECT cpf, nome, nome_artistico, sexo, foto_perfil, descricao, data_nascimento, id_arte, projeto_atual, email, telefone FROM cadart";
+            String sql = "SELECT * FROM cadart";
             stmt = connection.prepareStatement(sql);
 
             rs = stmt.executeQuery();
@@ -103,22 +104,34 @@ public class CadartDao {
         }
     }
    
-    public void updateUsuario(Cadart cadart){
+    public boolean updateUsuario(Cadart cadart){
         this.connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = null;
+        boolean hasError = true;
         
-        String sql = "UPDATE cadart SET nome=?, descricao=?, email=?, id_arte=?, telefone=?, senha=? WHERE cpf=?";
+        String sql = "UPDATE cadart SET nome_artistico=?, descricao=?, email=?, id_arte=?, telefone=?, senha=?, projeto_atual=? WHERE cpf=?";
         try {
             stmt = connection.prepareStatement(sql);
             
-            stmt.setString(1, cadart.getNome());
+            stmt.setString(1, cadart.getNomeArtistico());
             stmt.setString(2, cadart.getDescricao());
             stmt.setString(3, cadart.getEmail());
             stmt.setInt(4, cadart.getIdArte());
             stmt.setLong(6, cadart.getTelefone());
-            stmt.
-        } catch (Exception e) {
+            stmt.setString(7, cadart.getSenha());
+            stmt.setLong(8, cadart.getCpf());
+            
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            hasError = false;
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+
         }
-        
+        return hasError;
     }
 }

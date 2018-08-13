@@ -29,7 +29,7 @@ public class CadartDao {
         boolean hasError = true;
 
         try {
-            String sql = "INSERT INTO cadart(cpf, nome, nome_artistico, sexo, descricao, projeto_atual, data_nascimento, senha, id_arte) VALUES (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO cadart (cpf, nome, nome_artistico, sexo, descricao, data_nascimento, senha, projeto_atual, telefone, email, id_arte) VALUES (?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)";
             stmt = connection.prepareStatement(sql);
 
             stmt.setLong(1, cadart.getCpf());
@@ -37,10 +37,12 @@ public class CadartDao {
             stmt.setString(3, cadart.getNomeArtistico());
             stmt.setString(4, cadart.getSexo());
             stmt.setString(5, cadart.getDescricao());
-            stmt.setString(6, cadart.getProjetoAtual());
-            stmt.setDate(7, cadart.getDataNascimento());
-            stmt.setString(8, cadart.getSenha());
-            stmt.setInt(9, cadart.getIdArte());
+            stmt.setDate(6, cadart.getDataNascimento());
+            stmt.setString(7, cadart.getSenha());
+            stmt.setString(8, cadart.getProjetoAtual());
+            stmt.setString(9, cadart.getEmail());
+            stmt.setLong(10, cadart.getTelefone());
+            stmt.setInt(11, cadart.getIdArte());
 
             stmt.execute();
         } catch (SQLException e) {
@@ -70,6 +72,8 @@ public class CadartDao {
             cadart.setDataNascimento(rs.getDate("data_nascimento"));
             cadart.setIdArte(rs.getInt("id_arte"));
             cadart.setProjetoAtual(rs.getString("projeto_atual"));
+            cadart.setEmail(rs.getString("email"));
+            cadart.setTelefone(rs.getLong("telefone"));
 
             objs.add(cadart);
         }
@@ -82,7 +86,7 @@ public class CadartDao {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "SELECT cpf, nome, nome_artistico, sexo, foto_perfil, descricao, data_nascimento, id_arte, projeto_atual FROM cadart";
+            String sql = "SELECT cpf, nome, nome_artistico, sexo, foto_perfil, descricao, data_nascimento, id_arte, projeto_atual, email, telefone FROM cadart";
             stmt = connection.prepareStatement(sql);
 
             rs = stmt.executeQuery();
@@ -98,5 +102,23 @@ public class CadartDao {
             }
         }
     }
-
+   
+    public void updateUsuario(Cadart cadart){
+        this.connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = null;
+        
+        String sql = "UPDATE cadart SET nome=?, descricao=?, email=?, id_arte=?, telefone=?, senha=? WHERE cpf=?";
+        try {
+            stmt = connection.prepareStatement(sql);
+            
+            stmt.setString(1, cadart.getNome());
+            stmt.setString(2, cadart.getDescricao());
+            stmt.setString(3, cadart.getEmail());
+            stmt.setInt(4, cadart.getIdArte());
+            stmt.setLong(6, cadart.getTelefone());
+            stmt.
+        } catch (Exception e) {
+        }
+        
+    }
 }

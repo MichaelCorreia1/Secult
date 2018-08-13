@@ -15,6 +15,7 @@ public class Cadart {
     
     private long cpf;
     private String nome;
+    private String email;
     private String nomeArtistico;
     private String sexo;
     private byte [] fotoPerfil;
@@ -23,6 +24,7 @@ public class Cadart {
     private Date dataNascimento;
     private String senha;
     private int idArte;
+    private long telefone;
 
   
     public long getCpf() {
@@ -42,6 +44,13 @@ public class Cadart {
   
     public void setNome(String nome) {
         this.nome = nome;
+    }
+    public String getEmail(){
+        return email;
+    }
+    
+    public void setEmail(String email){
+        this.email = email;
     }
 
     public String getNomeArtistico() {
@@ -120,9 +129,12 @@ public class Cadart {
     public void setIdArte(int idArte) {
         this.idArte = idArte;
     }
-
-    public void setIdArte() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public long getTelefone(){
+        return telefone;
+    }
+    public void setTelefone(long telefone){
+        this.telefone = telefone;
     }
     
 }

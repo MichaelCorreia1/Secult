@@ -141,8 +141,19 @@ angular.module('app.routes', [])
                 templateUrl: 'templates/updateEvento.html',
                 controller: 'updateEventoCtrl'
             })
-    .
-        state('informacoesNoticias', {
+            .state('administradorOpcoes', {
+                url: '/page22',
+                templateUrl: 'templates/administradorOpcoes.html',
+                controller: 'administradorOpcoesCtrl'
+            })
+
+            .state('autenticarCadart', {
+                url: '/page23',
+                templateUrl: 'templates/autenticarCadart.html',
+                controller: 'autenticarCadartCtrl'
+            })
+
+            .state('informacoesNoticias', {
             url: '/page21',
             templateUrl: 'templates/informacoesNoticias.html',
             controller: 'informacoesNoticiasCtrl'

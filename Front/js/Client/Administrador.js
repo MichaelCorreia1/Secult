@@ -74,15 +74,11 @@ function listarEvento() {
                     "\n" +
                     "            <li class=\"item\" style=\"padding: 0px\">\n" +
                     "                <div  class=\"button-bar\">\n" +
-                    "                    <a href='#/page20' onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + idLocalidade + "\")'><button  style=\"font-weight:600;color:#0092FF;font-size:17px;\"\n" +
-                    "                            class=\"button button-light button-outline\"  id='" + id + "'>Editar\n" +
-                    "                    </button></a>\n" +
-                    "                    <button  style=\"font-weight:600;color:#00B213;font-size:17px;\"\n" +
-                    "                            class=\"button button-light button-outline\">Publicar\n" +
-                    "                    </button>\n" +
-                    "                    <button  style=\"font-weight:600;color:#FF0020;font-size:17px;\"\n" +
-                    "                            class=\"button button-light button-outline \">Excluir\n" +
-                    "                    </button>\n" +
+                    "                    <a class='button button-light button-outline' href='#/page20' onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + idLocalidade + "\")'><div  style=\"font-weight:600;color:#0092FF;font-size:17px;\"\n" +
+                    "                              id='" + id + "'>Editar\n" +
+                    "                    </div></a>\n" +
+                    "                    <a class='button button-light button-outline'><div  style=\"font-weight:600;color:#FF0020;font-size:17px;\">Excluir\n" +
+                    "                    </div></a>\n" +
                     "                </div>\n" +
                     "            </li>\n" +
                     "        </ul>");

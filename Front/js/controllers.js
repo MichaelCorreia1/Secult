@@ -93,6 +93,16 @@ angular.module('app.controllers', [])
 
         }])
 
+    .controller('administradorOpcoesCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+
+        }])
+
+    .controller('autenticarCadartCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+
+        }])
+
     .controller('updateEventoCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
 

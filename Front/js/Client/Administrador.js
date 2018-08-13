@@ -168,15 +168,32 @@ function limparEListarEventoAdm() {
 
 }
 
-function refreshNoticia() {
-    $("#listaEventoNoticas").empty();
-    listarEventoNoticias();
+function pullToRefreshNoticia() {
+    PullToRefresh.init({
+        mainElement: '.refresh', // above which element?
+        onRefresh: function (done) {
+            setTimeout(function () {
+                done(); // end pull to refresh
 
+                $("#listaEventoNoticas").empty();
+                listarEventoNoticias();
+            }, 500);
+        }
+    });
 }
 
-function refreshHoje() {
-    $("#listaEventoHoje").empty();
-    listarEventoHoje();
+function pullToRefreshHoje() {
+    PullToRefresh.init({
+        mainElement: '.refresh', // above which element?
+        onRefresh: function (done) {
+            setTimeout(function () {
+                done(); // end pull to refresh
+
+                $("#listaEventoHoje").empty();
+                listarEventoHoje();
+            }, 500);
+        }
+    });
 }
 
 function pullToRefreshHome() {

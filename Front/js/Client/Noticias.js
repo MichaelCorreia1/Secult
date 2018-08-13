@@ -22,7 +22,7 @@ function listarEventoNoticias() {
                 var idLocalidade = dados[i].id_localidade;
 
 
-                    $("#listaEventoNoticas").append(" <a href='#/page21'  class='linkSemDecoracao' onclick='preencherEventoInfo(\""+descricao+'","'+ titulo+"\")'> <div class=\"list card manual-card-fullwidth \" id=\"noticias-card21\" style='padding-top: 0px'>\n" +
+                    $("#listaEventoNoticas").append(" <a href='#/page21' class='linkSemDecoracao'> <div class=\"list card manual-card-fullwidth \" id=\"noticias-card21\" style='padding-top: 0px'>\n" +
                         "            <ul class=\"item item-icon-left item-icon-right positive\">\n" +
                         "                <i class=\"icon ion-android-calendar \"></i>\n" +
                         "                <p style=\"text-align: center; font-weight: bold; font-size: large; color: #3f83f5;\">"+titulo+"</p>\n" +
@@ -33,7 +33,7 @@ function listarEventoNoticias() {
                         "                     style=\"display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;\">\n" +
                         "            </div>\n" +
                         "            <div id=\"noticias-markdown4\" style=\"text-align:center;\" class=\"show-list-numbers-and-dots padding \">\n" +
-                        "                <p style=\"margin-top:0px;color:#000000;\" >"+descricao.substring(0, 140)+"...</p>\n" +
+                        "                <p style=\"margin-top:0px;color:#000000;\" >"+descricao+"</p>\n" +
                         "            </div>\n" +
                         "            <div class=\" item item-image\">\n" +
                         "                <img src=\"img/BuueI7PTdiAXyX5Enotk_WhatsAppImage2018-07-31at13.51.37.jpeg\"\n" +

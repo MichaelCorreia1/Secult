@@ -227,7 +227,7 @@ public class EventoDao {
         int mes = c.get(Calendar.MONTH);
         int ano = c.get(Calendar.YEAR);
         
-        String sql = "SELECT * FROM evento where visibilidade = 's' and tipo_evento = 'p' and data_evento= '"+ano+"-"+(mes+1)+"-"+dia+"'";
+        String sql = "SELECT * FROM evento where visibilidade = 's' and tipo_evento = 'p'";
         try {
             stmt = connection.prepareStatement(sql);
 

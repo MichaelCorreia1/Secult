@@ -10,7 +10,7 @@ angular.module('app.controllers', [])
 
     .controller('noticiasCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            refreshNoticia();
+            listarEventoNoticias();
             pullToRefreshHome();
 
         }])
@@ -67,8 +67,9 @@ angular.module('app.controllers', [])
 
     .controller('acontecendoHojeCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            pullToRefreshHome();
-            refreshHoje();
+            listarEventoHoje();
+            pullToRefreshNoticia();
+            pullToRefreshHoje();
 
         }])
 

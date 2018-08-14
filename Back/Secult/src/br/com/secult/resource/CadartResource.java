@@ -31,7 +31,7 @@ public class CadartResource {
     @GET
     @Path("/insertUsuario/{cpf}&{nome}&{nomeArtistico}&{telefone}&{email}&{sexo}&{descricao}&{projetoAtual}&{dataNascimento}&{senha}&{idArte}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String insertUsuario(@PathParam("cpf") long cpf, @PathParam("nome") String nome, @PathParam("email") String email, @PathParam("telefone") long telefone, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao,@PathParam("projetoAtual") String projetoAtual,@PathParam("dataNascimento") Date dataNascimento, @PathParam("senha") String senha,  @PathParam("idArte") int idArte) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public String insertUsuario(@PathParam("cpf") long cpf, @PathParam("nome") String nome, @PathParam("email") String email, @PathParam("telefone") String telefone, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao,@PathParam("projetoAtual") String projetoAtual,@PathParam("dataNascimento") Date dataNascimento, @PathParam("senha") String senha,  @PathParam("idArte") int idArte) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
 
         Cadart cadart = new Cadart();
         cadart.setCpf(cpf);
@@ -83,7 +83,7 @@ public class CadartResource {
     @GET
     @Path("/updateUsuario/{cpf}&{nomeArtistico}&{email}&{telefone}&{sexo}&{descricao}&{projetoAtual}&{senha}&{idArte}")
     @Produces(MediaType.APPLICATION_JSON)
-     public String updatetUsuario(@PathParam("cpf") long cpf, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("email") String email, @PathParam("telefone") long telefone, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao,@PathParam("projetoAtual") String projetoAtual,@PathParam("dataNascimento") Date dataNascimento, @PathParam("senha") String senha,  @PathParam("idArte") int idArte) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+     public String updatetUsuario(@PathParam("cpf") long cpf, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("email") String email, @PathParam("telefone") String telefone, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao,@PathParam("projetoAtual") String projetoAtual,@PathParam("dataNascimento") Date dataNascimento, @PathParam("senha") String senha,  @PathParam("idArte") int idArte) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         Cadart cadart = new Cadart();
         cadart.setCpf(cpf);
         cadart.setNomeArtistico(nomeArtistico);

@@ -24,7 +24,7 @@ public class Cadart {
     private Date dataNascimento;
     private String senha;
     private int idArte;
-    private long telefone;
+    private String telefone;
 
   
     public long getCpf() {
@@ -130,10 +130,10 @@ public class Cadart {
         this.idArte = idArte;
     }
     
-    public long getTelefone(){
+    public String getTelefone(){
         return telefone;
     }
-    public void setTelefone(long telefone){
+    public void setTelefone(String telefone){
         this.telefone = telefone;
     }
 

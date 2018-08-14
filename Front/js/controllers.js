@@ -27,7 +27,10 @@ angular.module('app.controllers', [])
 
     .controller('cadastrarCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-
+            mascarasCadart();
+            verificarSenha();
+            verificarTel();
+            verificarCpf();
         }])
 
     .controller('loginCtrl', ['$scope', '$stateParams',
@@ -89,6 +92,16 @@ angular.module('app.controllers', [])
         }])
 
     .controller('informacoesNoticiasCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+
+        }])
+
+    .controller('administradorOpcoesCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+
+        }])
+
+    .controller('autenticarCadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
 
         }])

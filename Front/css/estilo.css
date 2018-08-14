@@ -55,3 +55,13 @@
     opacity: 1;
     transition: 0s
 }
+
+.hasSexo{
+    background-color: green;
+    color:white;
+}
+p.invalido {
+    color: red;
+    font-size: 12px;
+    text-align: center;
+}

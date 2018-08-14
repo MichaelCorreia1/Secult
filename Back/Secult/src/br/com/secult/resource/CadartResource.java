@@ -29,7 +29,7 @@ import javax.ws.rs.core.MediaType;
 @Path ("/cadart")
 public class CadartResource {
     @GET
-    @Path("/insertUsuario/{cpf}&{nome}&{nomeArtistico}&{email}&{telefone}&{sexo}&{descricao}&{projetoAtual}&{dataNascimento}&{senha}&{idArte}")
+    @Path("/insertUsuario/{cpf}&{nome}&{nomeArtistico}&{telefone}&{email}&{sexo}&{descricao}&{projetoAtual}&{dataNascimento}&{senha}&{idArte}")
     @Produces(MediaType.APPLICATION_JSON)
     public String insertUsuario(@PathParam("cpf") long cpf, @PathParam("nome") String nome, @PathParam("email") String email, @PathParam("telefone") long telefone, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao,@PathParam("projetoAtual") String projetoAtual,@PathParam("dataNascimento") Date dataNascimento, @PathParam("senha") String senha,  @PathParam("idArte") int idArte) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
 
@@ -107,5 +107,21 @@ public class CadartResource {
         }
     }
 
-    
+    @GET
+    @Path("/deleteUsuario/{cpf}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deleteUsuario(@PathParam("cpf") long cpf) throws SQLException {
+        Cadart cadart = new Cadart();
+        cadart.setCpf(cpf);
+
+        CadartDao cadartDao = new CadartDao();
+
+        if (cadartDao.delete(cadart)) {
+
+            return "{\"status\":\"ok\"}";
+        } else {
+
+            return "{\"status\":\"erro\"}";
+        }
+    }
 }

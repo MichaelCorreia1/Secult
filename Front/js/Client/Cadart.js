@@ -1,3 +1,61 @@
+function mascarasCadart() {
+    $("#telCdt").mask("000-00000-0000");
+    $("#cpfCdt").mask("000.000.000-00");
+}
+
+function verificarCpf() {
+    $("#cpfCdt").keyup(function () {
+        if ($("#cpfCdt").val() != '') {
+            var cpf = $("#cpfCdt").val();
+            cpf = cpf.replace(/[^0-9]/g, '');
+            if (isCpf(cpf) == false || $("#cpfCdt").length == 14) {
+                $("#cpfCdtInvalido").show('pulsate');
+            } else {
+                $("#cpfCdtInvalido").hide();
+            }
+        } else {
+            $("#cpfCdtInvalido").hide();
+        }
+    })
+}
+
+function verificarTel() {
+    $("#telCdt").keyup(function () {
+        if ($("#telCdt").val() != '') {
+            if ($("#telCdt").val().length < 14 & $("#telCdt").val().length > 0) {
+                $("#TelCdtInvalido").show('pulsate');
+            } else {
+                $("#TelCdtInvalido").hide();
+            }
+        } else {
+            $("#TelCdtInvalido").hide();
+        }
+    })
+}
+
+function verificarSenha() {
+    $("#senhaCdt").keyup(function () {
+
+        var senha = $("#senhaCdt").val();
+        if (senha > 0 & senha.length < 6) {
+            $("#senhaCdtInvalido").show('pulsate');
+        } else {
+            $("#senhaCdtInvalido").hide();
+        }
+    });
+    $("#senhaRedCdt").keyup(function () {
+        var senhaRed = $("#senhaRedCdt").val();
+        var senha = $("#senhaCdt").val();
+
+        if (senhaRed == senha & senhaRed != "") {
+            $("#senhaRedCdtInvalido").hide();
+        } else {
+            $("#senhaRedCdtInvalido").show('pulsate');
+
+        }
+    });
+}
+
 function validarCampos() {
     var descricao = $("#descricaoCdt").val();
     var projetos = $("#projetosCdt").val();
@@ -11,11 +69,14 @@ function validarCampos() {
     var arte = $("#arteCdt").val();
     var senha = $("#senhaCdt").val();
     var senhaRed = $("#senhaRedCdt").val();
-    if(cpf != "" & nome != "" & email != "" & tel!= "" & arte != "" & senha!= ""& dtNascimento != ""  & sexo != ""){
+    if (isCpf(cpf) & nome != "" & email != "" & tel != "" & arte != "" & senha != "" & dtNascimento != "" & sexo != "") {
+        if (senha === senhaRed) {
 
+        }
     }
 
 }
+
 function cadastrarCdt() {
     var descricao = $("#descricaoCdt").val();
     var projetos = $("#projetosCdt").val();
@@ -30,7 +91,7 @@ function cadastrarCdt() {
     var senha = $("#senhaCdt").val();
     var senhaRed = $("#senhaRedCdt").val();
 
-    var json = servidor + "/Secult/cadart/insertUsuario/" + cpf + "&" + nome + "&" + nomeArt+ "&" + email + "&"+ tel +  "&"+ sexo + "&" + descricao+  "&" + projetos + "&" + dtNascimento + "&" + senha + "&" + arte;
+    var json = servidor + "/Secult/cadart/insertUsuario/" + cpf + "&" + nome + "&" + nomeArt + "&" + email + "&" + tel + "&" + sexo + "&" + descricao + "&" + projetos + "&" + dtNascimento + "&" + senha + "&" + arte;
 
     var onSuccess = function (result) {
 
@@ -39,8 +100,15 @@ function cadastrarCdt() {
         resultado = jsonRestultado.status;
 
         if (resultado == "ok") {
+            swal({
+                title: "Cadastrado!",
+                text: "Aguarde nosso pessoal validar seus dados!",
+                icon: "success",
+                button: false,
+            });
             setTimeout(function () {
                 window.location.href = "#/page18";
+
             }, 1000)
         }
         ;
@@ -48,4 +116,25 @@ function cadastrarCdt() {
     $.getJSON(json, onSuccess).fail();
 
 
+}
+
+function isCpf(strCPF) {
+    var Soma;
+    var Resto;
+    Soma = 0;
+    if (strCPF == "00000000000") return false;
+
+    for (i = 1; i <= 9; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
+    Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11)) Resto = 0;
+    if (Resto != parseInt(strCPF.substring(9, 10))) return false;
+
+    Soma = 0;
+    for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11)) Resto = 0;
+    if (Resto != parseInt(strCPF.substring(10, 11))) return false;
+    return true;
 }

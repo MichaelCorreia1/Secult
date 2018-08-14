@@ -11,6 +11,7 @@
             </button>
         </div>
         <form id="cadastrar-form9" class="list">
+
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Descrição:</span>
                 <textarea placeholder="Escreva uma breve descrição sobre você" id="descricaoCdt"></textarea>
@@ -29,6 +30,7 @@
             <label class="item item-input item-stacked-label">
                 <span class="input-label" >CPF</span>
                 <input type="text" placeholder="Seu Cpf" id="cpfCdt">
+                <p class="invalido" id="cpfCdtInvalido" style="display: none">Cpf Inválido!</p>
             </label>
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Email</span>
@@ -37,6 +39,8 @@
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Telefone</span>
                 <input type="tel" placeholder="079-00000-0000" id="telCdt">
+                <p class="invalido" id="TelCdtInvalido" style="display: none">Telefone Inválido!</p>
+
             </label>
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Nascimento</span>
@@ -66,12 +70,15 @@
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Senha</span>
                 <input type="password" placeholder="Sua Senha" id="senhaCdt">
+                <p class="invalido" id="senhaCdtInvalido" style="display: none">Senha deve conter no pelo mínimo 6 caracteres!</p>
+
             </label>
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Senha</span>
                 <input type="password" placeholder="Confirmar Senha" id="senhaRedCdt">
+                <p class="invalido" id="senhaRedCdtInvalido" style="display: none">Senhas Inorretas!</p>
             </label>
-            <button id="cadastrarCdt" onclick="alert('bla')" class="button button-dark button-block">Cadastrar</button>
+            <button id="cadastrarCdt" onclick="bla()" class="button button-dark button-block">Cadastrar</button>
 
         </form>
     </ion-content>

@@ -27,7 +27,10 @@ angular.module('app.controllers', [])
 
     .controller('cadastrarCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-
+            mascarasCadart();
+            verificarSenha();
+            verificarTel();
+            verificarCpf();
         }])
 
     .controller('loginCtrl', ['$scope', '$stateParams',

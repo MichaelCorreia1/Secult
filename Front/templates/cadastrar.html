@@ -78,7 +78,9 @@
                 <input type="password" placeholder="Confirmar Senha" id="senhaRedCdt">
                 <p class="invalido" id="senhaRedCdtInvalido" style="display: none">Senhas Inorretas!</p>
             </label>
-            <button id="cadastrarCdt" onclick="bla()" class="button button-dark button-block">Cadastrar</button>
+            <p class="invalido" id="cadastroRedCdtInvalido" style="display: none">Preencha todos os campos!</p>
+
+            <button id="cadastrarCdt" onclick="validarCampos()" class="button button-dark button-block">Cadastrar</button>
 
         </form>
     </ion-content>

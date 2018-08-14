@@ -62,6 +62,7 @@ function validarCampos() {
     var nome = $("#nomeCdt").val();
     var nomeArt = $("#nomeArtCdt").val();
     var cpf = $("#cpfCdt").val();
+    cpf = cpf.replace(/[^0-9]/g, '');
     var email = $("#emalCdt").val();
     var tel = $("#telCdt").val();
     var dtNascimento = $("#dataNascimentoCdt").val();
@@ -71,8 +72,10 @@ function validarCampos() {
     var senhaRed = $("#senhaRedCdt").val();
     if (isCpf(cpf) & nome != "" & email != "" & tel != "" & arte != "" & senha != "" & dtNascimento != "" & sexo != "") {
         if (senha === senhaRed) {
-
+            cadastrarCdt()
         }
+    }else{
+        $("#cadastroRedCdtInvalido").show('pulsate')
     }
 
 }
@@ -83,8 +86,11 @@ function cadastrarCdt() {
     var nome = $("#nomeCdt").val();
     var nomeArt = $("#nomeArtCdt").val();
     var cpf = $("#cpfCdt").val();
+    cpf = cpf.replace(/[^0-9]/g, '');
     var email = $("#emalCdt").val();
     var tel = $("#telCdt").val();
+    tel = tel.replace(/[^0-9]/g, '');
+
     var dtNascimento = $("#dataNascimentoCdt").val();
     var sexo = $("#sexoCdt").val();
     var arte = $("#arteCdt").val();
@@ -107,9 +113,9 @@ function cadastrarCdt() {
                 button: false,
             });
             setTimeout(function () {
-                window.location.href = "#/page18";
+                window.location.href = "#/page3";
 
-            }, 1000)
+            }, 2000)
         }
         ;
     };
@@ -137,4 +143,14 @@ function isCpf(strCPF) {
     if ((Resto == 10) || (Resto == 11)) Resto = 0;
     if (Resto != parseInt(strCPF.substring(10, 11))) return false;
     return true;
+}
+
+function listarCadart(){
+    var json = servidor + "/cadart/listarUsuarios";
+    var onSucces
+    $("#listaCadart").append("<ion-item class=\"item-avatar item-icon-right\">\n" +
+    "                <img src=\"img/utumw9gLSIe2GHD32dpQ_a1.png\">\n" +
+    "                <h2>Carlos Fernando Silva</h2>\n" +
+    "                <p>Músico</p>\n" +
+    "            </ion-item>");
 }

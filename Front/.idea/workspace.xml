@@ -65,8 +65,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="276">
               <caret line="71" column="1" selection-start-line="71" selection-start-column="1" selection-end-line="71" selection-end-column="1" />
+=======
+<<<<<<< HEAD
+            <state relative-caret-position="1342">
+              <caret line="61" column="26" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
+=======
+            <state relative-caret-position="518">
+              <caret line="70" column="34" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
+>>>>>>> 4f36f4d64346cfd2e9fc7542eca183bb7e545b7f
             </state>
           </provider>
         </entry>
@@ -76,6 +85,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="704">
               <caret line="32" column="27" selection-start-line="32" selection-start-column="27" selection-end-line="32" selection-end-column="27" />
+>>>>>>> e07ee4f3a793bfd837801e3d0c938ffd1657f342
             </state>
           </provider>
         </entry>
@@ -305,8 +315,12 @@
     <option name="totallyTimeSpent" value="121096000" />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+=======
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
+>>>>>>> e07ee4f3a793bfd837801e3d0c938ffd1657f342
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16741072" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -490,8 +504,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="276">
           <caret line="71" column="1" selection-start-line="71" selection-start-column="1" selection-end-line="71" selection-end-column="1" />
+=======
+<<<<<<< HEAD
+        <state relative-caret-position="1342">
+          <caret line="61" column="26" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
+=======
+        <state relative-caret-position="518">
+          <caret line="70" column="34" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
+>>>>>>> e07ee4f3a793bfd837801e3d0c938ffd1657f342
+>>>>>>> 4f36f4d64346cfd2e9fc7542eca183bb7e545b7f
         </state>
       </provider>
     </entry>

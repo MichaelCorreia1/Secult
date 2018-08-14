@@ -40,8 +40,8 @@ public class CadartDao {
             stmt.setDate(6, cadart.getDataNascimento());
             stmt.setString(7, cadart.getSenha());
             stmt.setString(8, cadart.getProjetoAtual());
-            stmt.setString(9, cadart.getEmail());
-            stmt.setLong(10, cadart.getTelefone());
+            stmt.setString(9, cadart.getTelefone());
+            stmt.setString(10, cadart.getEmail());
             stmt.setInt(11, cadart.getIdArte());
 
             stmt.execute();
@@ -73,7 +73,7 @@ public class CadartDao {
             cadart.setIdArte(rs.getInt("id_arte"));
             cadart.setProjetoAtual(rs.getString("projeto_atual"));
             cadart.setEmail(rs.getString("email"));
-            cadart.setTelefone(rs.getLong("telefone"));
+            cadart.setTelefone(rs.getString("telefone"));
             cadart.setSenha(rs.getString("senha"));
 
             objs.add(cadart);
@@ -117,9 +117,35 @@ public class CadartDao {
             stmt.setString(2, cadart.getDescricao());
             stmt.setString(3, cadart.getEmail());
             stmt.setInt(4, cadart.getIdArte());
-            stmt.setLong(6, cadart.getTelefone());
-            stmt.setString(7, cadart.getSenha());
+            stmt.setString(5, cadart.getTelefone());
+            stmt.setString(6, cadart.getSenha());
+            stmt.setString(7, cadart.getProjetoAtual());
             stmt.setLong(8, cadart.getCpf());
+            
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            hasError = false;
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+
+        }
+        return hasError;
+    }
+    
+    public boolean delete(Cadart cadart){
+        this.connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = null;
+        boolean hasError = true;
+        
+        String sql = "DELETE FROM cadart WHERE cpf=?";
+        try {
+            stmt = connection.prepareStatement(sql);
+            
+             stmt.setLong(1, cadart.getCpf());
             
             stmt.executeUpdate();
         } catch (SQLException e) {

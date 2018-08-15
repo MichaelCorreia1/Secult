@@ -29,7 +29,7 @@ public class CadartDao {
         boolean hasError = true;
 
         try {
-            String sql = "INSERT INTO cadart (cpf, nome, nome_artistico, telefone, email, sexo, descricao, projeto_atual, data_nascimento, senha,id_arte, visibilidade) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)";
+            String sql = "INSERT INTO cadart (cpf, nome, nome_artistico, telefone, email, sexo, descricao, projeto_atual, data_nascimento, senha, id_arte, visibilidade) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)";
             stmt = connection.prepareStatement(sql);
 
             stmt.setLong(1, cadart.getCpf());
@@ -145,7 +145,7 @@ public class CadartDao {
             cadart.setSenha(rs.getString("senha"));
             cadart.setVisibilidade(rs.getString("visibilidade"));
             cadart.setNomeArte(rs.getString("nomeArte"));
-                        cadart.setIdArte(rs.getInt("id_arte"));
+            cadart.setIdArte(rs.getInt("id_arte"));
 
 
             objs.add(cadart);

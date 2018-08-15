@@ -4,13 +4,8 @@
     <list default="true" id="be2b7837-c464-47b1-8642-e64e67dcf435" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back/Secult/nbbuild/web/WEB-INF/classes/br/com/secult/dao/CadartDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Back/Secult/nbbuild/web/WEB-INF/classes/br/com/secult/dao/CadartDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back/Secult/nbbuild/web/WEB-INF/classes/br/com/secult/model/Cadart.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Back/Secult/nbbuild/web/WEB-INF/classes/br/com/secult/model/Cadart.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back/Secult/nbbuild/web/WEB-INF/classes/br/com/secult/resource/CadartResource.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Back/Secult/nbbuild/web/WEB-INF/classes/br/com/secult/resource/CadartResource.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Back/Secult/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Back/Secult/nbproject/private/private.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Back/Secult/src/br/com/secult/dao/CadartDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Back/Secult/src/br/com/secult/dao/CadartDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back/Secult/src/br/com/secult/model/Cadart.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Back/Secult/src/br/com/secult/model/Cadart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back/Secult/src/br/com/secult/resource/CadartResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Back/Secult/src/br/com/secult/resource/CadartResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -35,7 +30,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor" />
@@ -55,7 +50,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="260" />
     <option name="y" value="20" />
     <option name="width" value="1400" />
@@ -66,6 +61,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -82,7 +78,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -114,14 +109,15 @@
       <workItem from="1534277352824" duration="139000" />
       <workItem from="1534339210669" duration="27000" />
       <workItem from="1534339264870" duration="1219000" />
+      <workItem from="1534355654603" duration="606000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1385000" />
+    <option name="totallyTimeSpent" value="1991000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
@@ -150,6 +146,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>

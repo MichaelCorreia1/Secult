@@ -112,7 +112,7 @@ public class CadartDao {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "SELECT cpf, C.nome as \"nomeUsu\", nome_artistico, sexo, foto_perfil, descricao, data_nascimento, senha, projeto_atual, telefone, email, A.nome as \"nomeArte\", visibilidade, id_arte From cadart as C join arte as A ON(C.id_arte = A.id)";
+            String sql = "SELECT cpf, C.nome as \"nomeUsu\", nome_artistico, sexo, foto_perfil, descricao, data_nascimento, senha, projeto_atual, telefone, email, A.nome as \"nomeArte\", visibilidade, id_arte From cadart as C join arte as A ON(C.id_arte = A.id) Where visibilidade = 's'";
             stmt = connection.prepareStatement(sql);
 
             rs = stmt.executeQuery();

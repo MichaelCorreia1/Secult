@@ -155,7 +155,7 @@ function isCpf(strCPF) {
 }
 
 function listarCadart() {
-    var json = servidor + "/Secult/cadart/listarUsuarios";
+    var json = servidor + "/Secult/cadart/listarUsuariosByVisi";
     var onSuccess = function (result) {
 
         dados = result.usuario;
@@ -164,6 +164,8 @@ function listarCadart() {
                 var nome = dados[i].nome;
                 var nomeArtistico = dados[i].nomeArtistico;
                 var arte = dados[i].nomeArte;
+                var cpf = dados[i].cpf;
+
 
 
                 $("#listaCadart").append("<div class=\"item item-avatar item-icon-right\">\n" +

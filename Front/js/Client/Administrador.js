@@ -315,7 +315,7 @@ function inserirFotoEvento(cpf) {
     var formDataToUpload = new FormData();
 
     formDataToUpload.append("id", cpf);
-    formDataToUpload.append("foto_perfil", blob);
+    formDataToUpload.append("imagem", blob);
 
     $.ajax({
         url: json,

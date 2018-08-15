@@ -25,6 +25,8 @@ public class Cadart {
     private String senha;
     private int idArte;
     private String telefone;
+    private String visibilidade;
+    private String nomeArte;
 
   
     public long getCpf() {
@@ -136,9 +138,18 @@ public class Cadart {
     public void setTelefone(String telefone){
         this.telefone = telefone;
     }
-
-    public void getNomeArtistico(String nomeArtistico) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     public String getVisibilidade() {
+        return visibilidade;
     }
-    
+
+    public void setVisibilidade(String visibilidade) {
+        this.visibilidade = visibilidade;
+    }
+     public String getNomeArte() {
+        return nomeArte;
+    }
+
+    public void setNomeArte(String nomeArte) {
+        this.nomeArte = nomeArte;
+    }
 }

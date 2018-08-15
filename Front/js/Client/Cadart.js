@@ -89,15 +89,16 @@ function cadastrarCdt() {
     cpf = cpf.replace(/[^0-9]/g, '');
     var email = $("#emalCdt").val();
     var tel = $("#telCdt").val();
+    var visibilidade = "n"
     // tel = tel.replace(/[^0-9]/g, '');
 
     var dtNascimento = $("#dataNascimentoCdt").val();
     var sexo = $("#sexoCdt").val();
     var arte = $("#arteCdt").val();
     var senha = $("#senhaCdt").val();
-    var senhaRed = $("#senhaRedCdt").val();
+    //var senhaRed = $("#senhaRedCdt").val();
 
-    var json = servidor + "/Secult/cadart/insertUsuario/" + cpf + "&" + nome + "&" + nomeArt + "&" + tel + "&" + email + "&" + sexo + "&" + descricao + "&" + projetos + "&" + dtNascimento + "&" + senha + "&" + arte;
+    var json = servidor + "/Secult/cadart/insertUsuario/" + cpf + "&" + nome + "&" + nomeArt + "&" + tel + "&" + email + "&" + sexo + "&" + descricao + "&" + projetos + "&" + dtNascimento + "&" + senha + "&" + arte + "&" + visibilidade;
 
     var onSuccess = function (result) {
 
@@ -117,14 +118,15 @@ function cadastrarCdt() {
                 window.location.href = "#/page3";
 
             }, 2000)
-        }else if (resultado == "erro") {
+        } else if (resultado == "erro") {
             swal({
                 title: "CPF ja Cadastrado!",
                 text: "Aguarde nosso pessoal validar seus dados!",
                 icon: "error",
                 button: false,
             });
-        };
+        }
+        ;
     };
     $.getJSON(json, onSuccess).fail();
 
@@ -164,14 +166,13 @@ function listarCadart() {
                 var arte = dados[i].nomeArte;
 
 
-
-
                 $("#listaCadart").append("<div class=\"item item-avatar item-icon-right\">\n" +
                     "                <img src=\"img/utumw9gLSIe2GHD32dpQ_a1.png\">\n" +
-                    "                <h2>"+nomeArtistico+"</h2>\n" +
-                    "                <p>"+arte+"</p>\n" +
+                    "                <h2>" + nomeArtistico + "</h2>\n" +
+                    "                <p>" + arte + "</p>\n" +
                     "            </div>")
-            };
+            }
+            ;
         }
 
     }

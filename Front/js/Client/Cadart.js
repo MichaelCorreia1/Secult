@@ -162,7 +162,7 @@ function listarCadart() {
                 var nome = dados[i].nome;
                 var nomeArtistico = dados[i].nomeArtistico;
                 var arte = dados[i].nomeArte;
-               
+
 
 
 

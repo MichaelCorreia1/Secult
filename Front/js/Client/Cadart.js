@@ -161,19 +161,15 @@ function listarCadart() {
             for (var i in dados) {
                 var nome = dados[i].nome;
                 var nomeArtistico = dados[i].nomeArtistico;
-                var arte = dados[i].idArte;
-                var nome = dados[i].nome;
-                var nome = dados[i].nome;
-                var nome = dados[i].nome;
-                var nome = dados[i].nome;
-                var nome = dados[i].nome;
+                var arte = dados[i].nomeArte;
+               
 
 
 
                 $("#listaCadart").append("<div class=\"item item-avatar item-icon-right\">\n" +
                     "                <img src=\"img/utumw9gLSIe2GHD32dpQ_a1.png\">\n" +
                     "                <h2>"+nomeArtistico+"</h2>\n" +
-                    "                <p>Músico</p>\n" +
+                    "                <p>"+arte+"</p>\n" +
                     "            </div>")
             };
         }

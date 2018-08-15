@@ -32,6 +32,7 @@ angular.module('app.controllers', [])
             verificarTel();
             verificarCpf();
             saveFotoLS();
+
         }])
 
     .controller('loginCtrl', ['$scope', '$stateParams',
@@ -89,7 +90,7 @@ angular.module('app.controllers', [])
 
     .controller('cadastroEventoCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-
+            saveFotoEventoLS();
         }])
 
     .controller('informacoesNoticiasCtrl', ['$scope', '$stateParams',

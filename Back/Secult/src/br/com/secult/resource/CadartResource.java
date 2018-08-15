@@ -39,9 +39,9 @@ import javax.ws.rs.core.Response;
 public class CadartResource {
 
     @GET
-    @Path("/insertUsuario/{cpf}&{nome}&{nomeArtistico}&{telefone}&{email}&{sexo}&{descricao}&{projetoAtual}&{dataNascimento}&{senha}&{idArte}")
+    @Path("/insertUsuario/{cpf}&{nome}&{nomeArtistico}&{telefone}&{email}&{sexo}&{descricao}&{projetoAtual}&{dataNascimento}&{senha}&{idArte}&{visibilidade}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String insertUsuario(@PathParam("cpf") long cpf, @PathParam("nome") String nome, @PathParam("telefone") String telefone ,@PathParam("email") String email, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao, @PathParam("projetoAtual") String projetoAtual, @PathParam("dataNascimento") Date dataNascimento, @PathParam("senha") String senha, @PathParam("idArte") int idArte) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public String insertUsuario(@PathParam("cpf") long cpf, @PathParam("nome") String nome, @PathParam("telefone") String telefone ,@PathParam("email") String email, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao, @PathParam("projetoAtual") String projetoAtual, @PathParam("dataNascimento") Date dataNascimento, @PathParam("senha") String senha, @PathParam("idArte") int idArte, @PathParam("visibilidade") String visibilidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
 
         Cadart cadart = new Cadart();
         cadart.setCpf(cpf);
@@ -55,7 +55,8 @@ public class CadartResource {
         cadart.setDataNascimento(dataNascimento);
         cadart.setSenha(senha);
         cadart.setIdArte(idArte);
-
+        cadart.setVisibilidade(visibilidade);
+        
         CadartDao cadartDao = new CadartDao();
 
         if (cadartDao.insert(cadart)) {
@@ -74,6 +75,8 @@ public class CadartResource {
         CadartDao usuarioDao = new CadartDao();
         List<Cadart> usuarios = usuarioDao.listarUsuario();
 
+                tratarImagem(usuarios);
+
         Gson gson = new GsonBuilder().create();
 
         JsonArray ArrayUsarios = gson.toJsonTree(usuarios).getAsJsonArray();
@@ -89,6 +92,44 @@ public class CadartResource {
             return jsonObject.toString();
         }
 
+    }
+      @GET
+    @Path("/listarUsuariosByVisi")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String listarUsuariosByVisi() throws SQLException, Exception {
+
+        CadartDao usuarioDao = new CadartDao();
+        List<Cadart> usuarios = usuarioDao.listarUsuarioByVisi();
+
+        tratarImagem(usuarios);
+        Gson gson = new GsonBuilder().create();
+
+        JsonArray ArrayUsarios = gson.toJsonTree(usuarios).getAsJsonArray();
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("usuario", ArrayUsarios);
+
+        if (usuarios.size() > 0) {
+
+            return jsonObject.toString();
+        } else {
+
+            return jsonObject.toString();
+        }
+
+    }
+    
+    public void tratarImagem(List<Cadart> usuarios) {
+        for (int i = 0; i < usuarios.size(); i++) {
+
+            if (usuarios.get(i).getFotoPerfil() != null) {
+
+                String foto = usuarios.get(i).getFotoPerfil().toString();
+
+                usuarios.get(i).setFotoPerfil(foto.getBytes());
+
+            }
+        }
     }
 
     @GET

@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/compu/Desktop/Secult%20Org/Secult/Back/Secult/src/br/com/secult/dao/EventoDao.java</file>
+=======
+            <file>file:/E:/Secult%20Org/Secult/Back/Secult/src/br/com/secult/resource/CadartResource.java</file>
+            <file>file:/E:/Secult%20Org/Secult/Back/Secult/src/br/com/secult/dao/CadartDao.java</file>
+>>>>>>> af8465daf69f7d6bf5a923c696072f36a0ab907d
         </group>
     </open-files>
 </project-private>

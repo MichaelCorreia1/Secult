@@ -29,20 +29,21 @@ public class CadartDao {
         boolean hasError = true;
 
         try {
-            String sql = "INSERT INTO cadart (cpf, nome, nome_artistico, telefone, email, sexo, descricao, projeto_atual, data_nascimento, senha,id_arte) VALUES (?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)";
+            String sql = "INSERT INTO cadart (cpf, nome, nome_artistico, telefone, email, sexo, descricao, projeto_atual, data_nascimento, senha,id_arte, visibilidade) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)";
             stmt = connection.prepareStatement(sql);
 
             stmt.setLong(1, cadart.getCpf());
             stmt.setString(2, cadart.getNome());
             stmt.setString(3, cadart.getNomeArtistico());
             stmt.setString(4, cadart.getTelefone());
-             stmt.setString(5, cadart.getEmail());
+            stmt.setString(5, cadart.getEmail());
             stmt.setString(6, cadart.getSexo());
             stmt.setString(7, cadart.getDescricao());
             stmt.setString(8, cadart.getProjetoAtual());
             stmt.setDate(9, cadart.getDataNascimento());
             stmt.setString(10, cadart.getSenha());
             stmt.setInt(11, cadart.getIdArte());
+            stmt.setString(12, cadart.getVisibilidade());
 
             stmt.execute();
         } catch (SQLException e) {
@@ -75,6 +76,7 @@ public class CadartDao {
             cadart.setEmail(rs.getString("email"));
             cadart.setTelefone(rs.getString("telefone"));
             cadart.setSenha(rs.getString("senha"));
+            cadart.setVisibilidade(rs.getString("visibilidade"));
 
             objs.add(cadart);
         }
@@ -103,13 +105,60 @@ public class CadartDao {
             }
         }
     }
+    
+     public List<Cadart> listarUsuarioByVisi() throws Exception, Exception {
+        this.connection = new ConnectionFactory().getConnection();
+        ResultSet rs = null;
+        PreparedStatement stmt = null;
+
+        try {
+            String sql = "SELECT cpf, C.nome as \"nomeUsu\", nome_artistico, sexo, foto_perfil, descricao, data_nascimento, senha, projeto_atual, telefone, email, A.nome as \"nomeArte\", visibilidade, id_arte From cadart as C join arte as A ON(C.id_arte = A.id)";
+            stmt = connection.prepareStatement(sql);
+
+            rs = stmt.executeQuery();
+            
+            return resultSetToObjectTransferByVisi(rs);
+       } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+     private List<Cadart> resultSetToObjectTransferByVisi(ResultSet rs) throws Exception {
+        List<Cadart> objs = new Vector<>();
+        while (rs.next()) {
+            Cadart cadart = new Cadart();
+            cadart.setCpf(rs.getLong("cpf"));
+            cadart.setNome(rs.getString("nomeUsu"));
+            cadart.setNomeArtistico(rs.getString("nome_artistico"));
+            cadart.setSexo(rs.getString("sexo"));
+            cadart.setFotoPerfil(rs.getBytes("foto_perfil"));
+            cadart.setDescricao(rs.getString("descricao"));
+            cadart.setDataNascimento(rs.getDate("data_nascimento"));
+            cadart.setProjetoAtual(rs.getString("projeto_atual"));
+            cadart.setEmail(rs.getString("email"));
+            cadart.setTelefone(rs.getString("telefone"));
+            cadart.setSenha(rs.getString("senha"));
+            cadart.setVisibilidade(rs.getString("visibilidade"));
+            cadart.setNomeArte(rs.getString("nomeArte"));
+                        cadart.setIdArte(rs.getInt("id_arte"));
+
+
+            objs.add(cadart);
+        }
+        return objs;
+    }
    
     public boolean updateUsuario(Cadart cadart){
         this.connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = null;
         boolean hasError = true;
         
-        String sql = "UPDATE cadart SET nome_artistico=?, descricao=?, email=?, id_arte=?, telefone=?, senha=?, projeto_atual=? WHERE cpf=?";
+        String sql = "UPDATE cadart SET nome_artistico=?, descricao=?, email=?, id_arte=?, telefone=?, senha=?, projeto_atual=?, visibilidade=? WHERE cpf=?";
         try {
             stmt = connection.prepareStatement(sql);
             
@@ -121,6 +170,7 @@ public class CadartDao {
             stmt.setString(6, cadart.getSenha());
             stmt.setString(7, cadart.getProjetoAtual());
             stmt.setLong(8, cadart.getCpf());
+            stmt.setString(9, cadart.getVisibilidade());
             
             stmt.executeUpdate();
         } catch (SQLException e) {

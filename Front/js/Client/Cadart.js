@@ -8,7 +8,7 @@ function verificarCpf() {
         if ($("#cpfCdt").val() != '') {
             var cpf = $("#cpfCdt").val();
             cpf = cpf.replace(/[^0-9]/g, '');
-            if (isCpf(cpf) == false || $("#cpfCdt").length == 14) {
+            if (isCpf(cpf) == false) {
                 $("#cpfCdtInvalido").show('pulsate');
             } else {
                 $("#cpfCdtInvalido").hide();
@@ -37,7 +37,7 @@ function verificarSenha() {
     $("#senhaCdt").keyup(function () {
 
         var senha = $("#senhaCdt").val();
-        if (senha > 0 & senha.length < 6) {
+        if (senha.length > 0 & senha.length < 6) {
             $("#senhaCdtInvalido").show('pulsate');
         } else {
             $("#senhaCdtInvalido").hide();
@@ -70,11 +70,11 @@ function validarCampos() {
     var arte = $("#arteCdt").val();
     var senha = $("#senhaCdt").val();
     var senhaRed = $("#senhaRedCdt").val();
-    if (isCpf(cpf) & nome != "" & email != "" & tel != "" & arte != "" & senha != "" & dtNascimento != "" & sexo != "") {
+    if (isCpf(cpf) & nome != "" & email != "" & tel != "" & nomeArt != "" & arte != "" & senha != "" & dtNascimento != "" & sexo != "") {
         if (senha === senhaRed) {
             cadastrarCdt()
         }
-    }else{
+    } else {
         $("#cadastroRedCdtInvalido").show('pulsate')
     }
 
@@ -89,7 +89,7 @@ function cadastrarCdt() {
     cpf = cpf.replace(/[^0-9]/g, '');
     var email = $("#emalCdt").val();
     var tel = $("#telCdt").val();
-    tel = tel.replace(/[^0-9]/g, '');
+    // tel = tel.replace(/[^0-9]/g, '');
 
     var dtNascimento = $("#dataNascimentoCdt").val();
     var sexo = $("#sexoCdt").val();
@@ -97,7 +97,7 @@ function cadastrarCdt() {
     var senha = $("#senhaCdt").val();
     var senhaRed = $("#senhaRedCdt").val();
 
-    var json = servidor + "/Secult/cadart/insertUsuario/" + cpf + "&" + nome + "&" + nomeArt + "&" + email + "&" + tel + "&" + sexo + "&" + descricao + "&" + projetos + "&" + dtNascimento + "&" + senha + "&" + arte;
+    var json = servidor + "/Secult/cadart/insertUsuario/" + cpf + "&" + nome + "&" + nomeArt + "&" + tel + "&" + email + "&" + sexo + "&" + descricao + "&" + projetos + "&" + dtNascimento + "&" + senha + "&" + arte;
 
     var onSuccess = function (result) {
 
@@ -106,6 +106,7 @@ function cadastrarCdt() {
         resultado = jsonRestultado.status;
 
         if (resultado == "ok") {
+            inserirFoto(cpf);
             swal({
                 title: "Cadastrado!",
                 text: "Aguarde nosso pessoal validar seus dados!",
@@ -116,8 +117,14 @@ function cadastrarCdt() {
                 window.location.href = "#/page3";
 
             }, 2000)
-        }
-        ;
+        }else if (resultado == "erro") {
+            swal({
+                title: "CPF ja Cadastrado!",
+                text: "Aguarde nosso pessoal validar seus dados!",
+                icon: "error",
+                button: false,
+            });
+        };
     };
     $.getJSON(json, onSuccess).fail();
 
@@ -145,12 +152,32 @@ function isCpf(strCPF) {
     return true;
 }
 
-function listarCadart(){
-    var json = servidor + "/cadart/listarUsuarios";
-    var onSucces
-    $("#listaCadart").append("<ion-item class=\"item-avatar item-icon-right\">\n" +
-    "                <img src=\"img/utumw9gLSIe2GHD32dpQ_a1.png\">\n" +
-    "                <h2>Carlos Fernando Silva</h2>\n" +
-    "                <p>Músico</p>\n" +
-    "            </ion-item>");
+function listarCadart() {
+    var json = servidor + "/Secult/cadart/listarUsuarios";
+    var onSuccess = function (result) {
+
+        dados = result.usuario;
+        if (dados[0]) {
+            for (var i in dados) {
+                var nome = dados[i].nome;
+                var nomeArtistico = dados[i].nomeArtistico;
+                var arte = dados[i].idArte;
+                var nome = dados[i].nome;
+                var nome = dados[i].nome;
+                var nome = dados[i].nome;
+                var nome = dados[i].nome;
+                var nome = dados[i].nome;
+
+
+
+                $("#listaCadart").append("<div class=\"item item-avatar item-icon-right\">\n" +
+                    "                <img src=\"img/utumw9gLSIe2GHD32dpQ_a1.png\">\n" +
+                    "                <h2>"+nomeArtistico+"</h2>\n" +
+                    "                <p>Músico</p>\n" +
+                    "            </div>")
+            };
+        }
+
+    }
+    $.getJSON(json, onSuccess).fail();
 }

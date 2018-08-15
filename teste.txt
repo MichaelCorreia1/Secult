@@ -1,1 +1,2 @@
-Teste3
+1- fazer o select com join que junte cadart e arte
+2-

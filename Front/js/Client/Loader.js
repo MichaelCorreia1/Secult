@@ -1,3 +1,54 @@
+var servidor = localStorage.getItem("servidor");
+
+function autenticar(txtEmail, txtSenha) {
+    var json = servidor + "/Collegium/usuario/autenticar/" + txtEmail + '&' + txtSenha;
+
+    var onSucess = function (result) {
+        dados = result.usuario;
+
+        if (dados[0]) {
+            var id = dados[0].id;
+            var nome = dados[0].nome;
+            var email = dados[0].email;
+            var telefone = dados[0].telefone;
+            var tipo = dados[0].tipo;
+            var endereco = dados[0].endereco;
+            var cidade = dados[0].cidade;
+            var estado = dados[0].estado;
+            var foto = dados[0].foto;
+
+
+            localStorage.setItem("id", id);
+            localStorage.setItem("nome", nome);
+            localStorage.setItem("email", email);
+            localStorage.setItem("telefone", telefone);
+            localStorage.setItem("tipo", tipo);
+            localStorage.setItem("endereco", endereco);
+            localStorage.setItem("cidade", cidade);
+            localStorage.setItem("estado", estado);
+            localStorage.setItem("foto", foto);
+
+            window.location = "#/page1/page2";
+
+            validarAdministrador();
+
+
+
+        } else {
+            $("#invalido").text("Email e/ou senha inválidos");
+        }
+    };
+
+    $.getJSON(json, onSucess).fail(
+        function () {
+
+
+        }
+    );
+
+
+}
+
 function toBase64String(img) {
 
     var c = document.createElement('canvas');

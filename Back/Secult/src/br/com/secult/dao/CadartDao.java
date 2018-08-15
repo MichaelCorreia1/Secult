@@ -29,19 +29,19 @@ public class CadartDao {
         boolean hasError = true;
 
         try {
-            String sql = "INSERT INTO cadart (cpf, nome, nome_artistico, sexo, descricao, data_nascimento, senha, projeto_atual, telefone, email, id_arte) VALUES (?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)";
+            String sql = "INSERT INTO cadart (cpf, nome, nome_artistico, telefone, email, sexo, descricao, projeto_atual, data_nascimento, senha,id_arte) VALUES (?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)";
             stmt = connection.prepareStatement(sql);
 
             stmt.setLong(1, cadart.getCpf());
             stmt.setString(2, cadart.getNome());
             stmt.setString(3, cadart.getNomeArtistico());
-            stmt.setString(4, cadart.getSexo());
-            stmt.setString(5, cadart.getDescricao());
-            stmt.setDate(6, cadart.getDataNascimento());
-            stmt.setString(7, cadart.getSenha());
+            stmt.setString(4, cadart.getTelefone());
+             stmt.setString(5, cadart.getEmail());
+            stmt.setString(6, cadart.getSexo());
+            stmt.setString(7, cadart.getDescricao());
             stmt.setString(8, cadart.getProjetoAtual());
-            stmt.setString(9, cadart.getTelefone());
-            stmt.setString(10, cadart.getEmail());
+            stmt.setDate(9, cadart.getDataNascimento());
+            stmt.setString(10, cadart.getSenha());
             stmt.setInt(11, cadart.getIdArte());
 
             stmt.execute();
@@ -160,4 +160,57 @@ public class CadartDao {
         }
         return hasError;
     }
+
+    
+    public void salvarFoto(Cadart usuario) throws Exception {
+        PreparedStatement pstmt = null;
+        this.connection = new ConnectionFactory().getConnection();
+        String sql = "UPDATE cadart SET foto_perfil=? WHERE cpf = ?";
+        try {
+
+            pstmt = connection.prepareStatement(sql);
+            pstmt.setObject(1, usuario.getFotoPerfil());
+            pstmt.setLong(2, usuario.getCpf());
+
+            pstmt.execute();
+        } catch (Exception e) {
+
+            throw e;
+        } finally {
+            try {
+                pstmt.close();
+            } catch (Exception e) {
+            }
+
+        }
+
+    }
+    public List<Cadart> getById(Cadart usuario) throws SQLException, Exception {
+        PreparedStatement pstmt = null;
+        this.connection = new ConnectionFactory().getConnection();
+        String sql = "select * from cadart where  cpf = ?";
+        ResultSet rs = null;
+
+        try {
+
+            pstmt = connection.prepareStatement(sql);
+
+            pstmt.setObject(1, usuario.getCpf());
+            rs = pstmt.executeQuery();
+
+            return resultSetToObjectTransfer(rs);
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                pstmt.close();
+            } catch (Exception e) {
+            }
+
+        }
+
+    }
 }
+

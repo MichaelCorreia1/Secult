@@ -17,7 +17,7 @@ angular.module('app.controllers', [])
 
     .controller('cadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-
+            listarCadart();
         }])
 
     .controller('usuarioCtrl', ['$scope', '$stateParams',
@@ -31,6 +31,7 @@ angular.module('app.controllers', [])
             verificarSenha();
             verificarTel();
             verificarCpf();
+            saveFotoLS();
         }])
 
     .controller('loginCtrl', ['$scope', '$stateParams',

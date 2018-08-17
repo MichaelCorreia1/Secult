@@ -262,7 +262,7 @@ function inserirFoto(cpf) {
 
 function saveFotoLS() {
 
-    document.getElementById("tableBanner").style.display = "none";
+    //document.getElementById("tableBanner").style.display = "none";
     var bannerImage = document.getElementById("bannerImg");
 
     var img = document.getElementById("tableBanner");

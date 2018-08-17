@@ -2,11 +2,9 @@
     <ion-content padding="true" class="has-header">
         <div class="spacer" style="width: 300px; height: 5px;"></div>
         <div>
-            <img src="img/53JNeoZQHebM6ls1E3zP_semfoto.jpeg"
+            <img src="img/semfoto.jpeg" id="tableBanner"
                  style="display: block; width: 30%; height: auto; margin-left: auto; margin-right: auto;">
             <input id = "bannerImg" type="file">
-
-            <img src="" id="tableBanner">
         </div>
 
 
@@ -47,8 +45,16 @@
                 <input type="date" placeholder="" id="dataNascimentoCdt">
             </label>
 
-            <label class="item item-select " for="sexoCdt">
+
+
+            <!--$("#masc").children().hasClass('ng-valid-parse')-->
+            <!--<ion-list >-->
+            <!--<ion-radio id="masc" ng-model="choice" ng-value="'A'">Masculino</ion-radio>-->
+            <!--<ion-radio id="feme" ng-model="choice" ng-value="'B'">Feminino</ion-radio>-->
+            <!--</ion-list>-->
+            <label class="item radio-content">
                 <span class="input-label">Genero*</span>
+
                 <select id="sexoCdt">
                     <option value="">Selecione</option>
                     <option value="m">Masculino</option>

@@ -157,6 +157,16 @@ angular.module('app.routes', [])
             url: '/page21',
             templateUrl: 'templates/informacoesNoticias.html',
             controller: 'informacoesNoticiasCtrl'
+        })
+            .state('cultTobiasCidade', {
+                url: '/page25',
+                templateUrl: 'templates/cultTobiasCidade.html',
+                controller: 'cultTobiasCidadeCtrl'
+            })
+        .state('cultTobias', {
+            url: '/page24',
+            templateUrl: 'templates/cultTobias.html',
+            controller: 'cultTobiasCtrl'
         });
 
         $urlRouterProvider.otherwise('/page1/page2')

@@ -5,7 +5,6 @@
  */
 package br.com.secult.dao;
 
-import br.com.secult.model.Estado;
 import br.com.secult.model.Municipio;
 import br.com.secult.model.Usuario;
 import java.io.UnsupportedEncodingException;

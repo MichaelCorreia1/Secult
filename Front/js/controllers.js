@@ -111,5 +111,14 @@ angular.module('app.controllers', [])
     .controller('updateEventoCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
 
+        }])
+
+    .controller('cultTobiasCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+
+        }])
+    .controller('cultTobiasCidadeCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+
         }]);
  

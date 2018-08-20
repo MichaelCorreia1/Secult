@@ -82,7 +82,9 @@ function validarCampos() {
 
 function cadastrarCdt() {
     var descricao = $("#descricaoCdt").val();
+    descricao = descricao.replace(/\s{2,}/g, ' ').replace(/["\']/g, '');
     var projetos = $("#projetosCdt").val();
+    projetos.replace(/\s{2,}/g, ' ').replace(/["\']/g, '');
     var nome = $("#nomeCdt").val();
     var nomeArt = $("#nomeArtCdt").val();
     var cpf = $("#cpfCdt").val();
@@ -155,26 +157,61 @@ function isCpf(strCPF) {
 }
 
 function listarCadart() {
-    var json = servidor + "/Secult/cadart/listarUsuarios";
+    var json = servidor + "/Secult/cadart/listarUsuariosByVisi";
     var onSuccess = function (result) {
 
         dados = result.usuario;
         if (dados[0]) {
             for (var i in dados) {
+
                 var nome = dados[i].nome;
                 var nomeArtistico = dados[i].nomeArtistico;
                 var arte = dados[i].nomeArte;
+                var cpf = dados[i].cpf;
+                var tel = dados[i].telefone;
+                var idArte = dados[i].idArte;
+                var sexo = dados[i].sexo;
+                var dataNascimento = dados[i].dataNascimento;
+                var nomeArtistico = dados[i].nomeArtistico;
+                var descricao = dados[i].descricao;
+                var projetoAtual = dados[i].projetoAtual;
+                var nomeArte = dados[i].nomeArte;
+                var email = dados[i].email;
+                var foto = dados[i].fotoPerfil;
 
 
-                $("#listaCadart").append("<div class=\"item item-avatar item-icon-right\">\n" +
-                    "                <img src=\"img/utumw9gLSIe2GHD32dpQ_a1.png\">\n" +
+                if (foto == null) {
+                    urlImagem = "img/semfoto.jpeg"
+                } else {
+                    urlImagem = servidor + "/Secult/cadart/find/" + cpf;
+                }
+
+                $("#listaCadart").append("<a href='#/page1/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" +  nome + "\",\"" + dataNascimento + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual+ "\")' class=\"item item-avatar item-icon-right\">\n" +
+                    "                <img src='" + urlImagem + "'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "                <p>" + arte + "</p>\n" +
-                    "            </div>")
+                    "            </a>")
             }
+
+
             ;
         }
 
     }
     $.getJSON(json, onSuccess).fail();
 }
+
+function carregarInfoCadart(urlImagem , nome ,dataNascimento, email, tel, descricao, projetoAtual) {
+
+    setTimeout(function () {
+        $("#nomeInfo").text(nome);
+        $("#idadeInfo").text(dataNascimento);
+        $("#emailInfo").text(email);
+        $("#telInfo").text(tel);
+        $("#descricaoInfo").text(descricao);
+        $("#projetosInfo").text(projetoAtual);
+        $("#fotoInfo").attr('src', urlImagem);
+
+    },100)
+}
+

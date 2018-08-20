@@ -22,7 +22,7 @@ function listarEventoNoticias() {
                 var idLocalidade = dados[i].id_localidade;
 
 
-                    $("#listaEventoNoticas").append(" <a href='#/page21' class='linkSemDecoracao'> <div class=\"list card manual-card-fullwidth \" id=\"noticias-card21\" style='padding-top: 0px'>\n" +
+                    $("#listaEventoNoticas").append(" <a onclick='preencherNoticiaInfo(\""+descricao+'","'+ titulo+"\")' href='#/page21' class='linkSemDecoracao'> <div class=\"list card manual-card-fullwidth \" id=\"noticias-card21\" style='padding-top: 0px'>\n" +
                         "            <ul class=\"item item-icon-left item-icon-right positive\">\n" +
                         "                <i class=\"icon ion-android-calendar \"></i>\n" +
                         "                <p style=\"text-align: center; font-weight: bold; font-size: large; color: #3f83f5;\">"+titulo+"</p>\n" +
@@ -61,6 +61,16 @@ function listarEventoNoticias() {
     );
 
 
+}
+
+function preencherNoticiaInfo(d,t) {
+    $("#titloNoticia").empty();
+    $("#descricaoNoticia").empty();
+    setTimeout(function () {
+        $("#titloNoticia").append(""+t);
+        $("#descricaoNoticia").append(""+d);
+
+    },10)
 }
 
 

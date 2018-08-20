@@ -186,7 +186,7 @@ function listarCadart() {
                     urlImagem = servidor + "/Secult/cadart/find/" + cpf;
                 }
 
-                $("#listaCadart").append("<a href='#/page1/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" +  nome + "\",\"" + dataNascimento + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual+ "\")' class=\"item item-avatar item-icon-right\">\n" +
+                $("#listaCadart").append("<a href='#/page1/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" +  nome + "\",\"" + dataNascimento + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + sexo+ "\",\"" + nomeArtistico+ "\",\"" + + nomeArte+ "\")' class=\"item item-avatar item-icon-right\">\n" +
                     "                <img src='" + urlImagem + "'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "                <p>" + arte + "</p>\n" +
@@ -201,7 +201,7 @@ function listarCadart() {
     $.getJSON(json, onSuccess).fail();
 }
 
-function carregarInfoCadart(urlImagem , nome ,dataNascimento, email, tel, descricao, projetoAtual) {
+function carregarInfoCadart(urlImagem , nome ,dataNascimento, email, tel, descricao, projetoAtual, nomeArtistico, sexo, nomeArte) {
 
     setTimeout(function () {
         $("#nomeInfo").text(nome);
@@ -210,6 +210,9 @@ function carregarInfoCadart(urlImagem , nome ,dataNascimento, email, tel, descri
         $("#telInfo").text(tel);
         $("#descricaoInfo").text(descricao);
         $("#projetosInfo").text(projetoAtual);
+        $("#nomeArtisticoInfo").text(nomeArtistico);
+        $("#sexoInfo").text(sexo);
+        $("#nomeArteInfo").text(nomeArte);
         $("#fotoInfo").attr('src', urlImagem);
 
     },100)

@@ -11,6 +11,7 @@ angular.module('app.controllers', [])
     .controller('noticiasCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             listarEventoNoticias();
+
             pullToRefreshHome();
 
         }])
@@ -73,8 +74,6 @@ angular.module('app.controllers', [])
     .controller('acontecendoHojeCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             listarEventoHoje();
-            pullToRefreshNoticia();
-            pullToRefreshHoje();
 
         }])
 
@@ -90,7 +89,7 @@ angular.module('app.controllers', [])
 
     .controller('cadastroEventoCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            saveFotoEventoLS();
+
         }])
 
     .controller('informacoesNoticiasCtrl', ['$scope', '$stateParams',
@@ -110,7 +109,7 @@ angular.module('app.controllers', [])
 
     .controller('updateEventoCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-
+            saveFotoEventoLS();
         }])
 
     .controller('cultTobiasCtrl', ['$scope', '$stateParams',

@@ -2,11 +2,7 @@
     <ion-nav-buttons side="right" class="has-header">
         <button class="button icon ion-home button-clear" ui-sref="tabsController.noticias" onclick="pullToRefreshHome()"></button>
     </ion-nav-buttons>
-    <div class="bar bar-header">
-        <button class="button button-icon icon ion-navicon"></button>
-        <div class="h1 title">Header Buttons</div>
-        <button class="button button-clear button-positive">Edit</button>
-    </div>
+
     <ion-content padding="true" class="has-header refresh">
         <form id="administrador-form" class="list">
             <label class="item item-select">
@@ -22,23 +18,10 @@
         </form>
 
         <div class="button-bar ">
-            <button class="button button-block button-dark button-small " >Filtrar</button>
+            <button class="button button-block button-dark button-small">Filtrar</button>
             <button class="button button-block button-dark button-small tabs-icon-only ion-refresh" onclick="limparEListarEventoAdm()"></button>
-
             <button class="button button-block button-dark button-small" ui-sref="cadastroEvento()">Adicionar</button>
         </div>
-
-        <!--<div class="button-bar" style="margin-bottom: 10px; width: 100%;">-->
-            <!--<button style="font-weight:600;font-size:20px;border-radius:10px 10px 10px 10px;"-->
-                    <!--class="button button-positive button-small button-block icon-right ">Filtrar-->
-            <!--</button>-->
-            <!--<button style="font-weight:600;font-size:20px; width: 40%; border-radius:10px 10px 10px 10px;"-->
-                    <!--class="button button-positive button-small button-block icon-right ion-plus" ui-sref="cadastroEvento()">Adicionar-->
-            <!--</button>-->
-            <!--<button style="font-weight:600;font-size:20px; width: 10%; border-radius:10px 10px 10px 10px;"-->
-                    <!--class="button button-positive button-small button-block  icon-right ion-refresh" ui-sref="cadastroEvento()">-->
-            <!--</button>-->
-        <!--</div>-->
 
         <span id="inicioListaEventoHoje"></span>
 

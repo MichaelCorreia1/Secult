@@ -186,7 +186,7 @@ function listarCadart() {
                     urlImagem = servidor + "/Secult/cadart/find/" + cpf;
                 }
 
-                $("#listaCadart").append("<a href='#/page1/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" +  nome + "\",\"" + dataNascimento + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + sexo+ "\",\"" + nomeArtistico+ "\",\"" + + nomeArte+ "\")' class=\"item item-avatar item-icon-right\">\n" +
+                $("#listaCadart").append("<a href='#/page1/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" +  nome + "\",\"" + dataNascimento + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo+ "\",\"" + nomeArtistico+ "\",\"" + nomeArte+ "\")' class=\"item item-avatar item-icon-right\">\n" +
                     "                <img src='" + urlImagem + "'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "                <p>" + arte + "</p>\n" +
@@ -201,7 +201,7 @@ function listarCadart() {
     $.getJSON(json, onSuccess).fail();
 }
 
-function carregarInfoCadart(urlImagem , nome ,dataNascimento, email, tel, descricao, projetoAtual, nomeArtistico, sexo, nomeArte) {
+function carregarInfoCadart(urlImagem , nome ,dataNascimento, email, tel, descricao, projetoAtual, sexo, nomeArtistico, nomeArte) {
 
     setTimeout(function () {
         $("#nomeInfo").text(nome);
@@ -211,10 +211,61 @@ function carregarInfoCadart(urlImagem , nome ,dataNascimento, email, tel, descri
         $("#descricaoInfo").text(descricao);
         $("#projetosInfo").text(projetoAtual);
         $("#nomeArtisticoInfo").text(nomeArtistico);
+        if(sexo=='m'){sexo='Masculino'}else{sexo='Feminino'}
         $("#sexoInfo").text(sexo);
         $("#nomeArteInfo").text(nomeArte);
         $("#fotoInfo").attr('src', urlImagem);
 
     },100)
+}
+
+function autenticar(txtEmail, txtSenha) {
+    var json = servidor + "/Secult/cadart/autenticar/" + txtEmail + '&' + txtSenha;
+
+    var onSucess = function (result) {
+        dados = result.usuario;
+
+        if (dados[0]) {
+            var id = dados[0].id;
+            var nome = dados[0].nome;
+            var email = dados[0].email;
+            var telefone = dados[0].telefone;
+            var tipo = dados[0].tipo;
+            var endereco = dados[0].endereco;
+            var cidade = dados[0].cidade;
+            var estado = dados[0].estado;
+            var foto = dados[0].foto;
+
+
+            localStorage.setItem("id", id);
+            localStorage.setItem("nome", nome);
+            localStorage.setItem("email", email);
+            localStorage.setItem("telefone", telefone);
+            localStorage.setItem("tipo", tipo);
+            localStorage.setItem("endereco", endereco);
+            localStorage.setItem("cidade", cidade);
+            localStorage.setItem("estado", estado);
+            localStorage.setItem("foto", foto);
+
+            lembrar = $("#lembrar").prop("checked")
+            if(lembrar){
+                localStorage.setItem("emailUSU", txtEmail);
+                localStorage.setItem("senhaUSU", txtSenha);
+            }
+
+            window.location = "#/page1/page2";
+
+            validarAdministrador();
+
+
+
+        } else {
+            $("#invalido").text("Email e/ou senha inválidos");
+        }
+    };
+
+    $.getJSON(json, onSucess).fail();
+
+
 }
 

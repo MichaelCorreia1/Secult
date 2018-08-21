@@ -222,6 +222,32 @@ public class CadartDao {
         }
         return hasError;
     }
+    public boolean updateSenha(Cadart cadart) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        PreparedStatement pstmt = null;
+
+        this.connection = new ConnectionFactory().getConnection();
+        boolean hasError = true;
+        String sql = "UPDATE cadart SET senha = ? where cpf=?";
+        try {
+            pstmt = connection.prepareStatement(sql);
+
+            String senha = convertToHash(cadart);
+            pstmt.setString(1, senha);
+            pstmt.setLong(2, cadart.getCpf());
+            pstmt.execute();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            hasError = false;
+        } finally {
+            try {
+                pstmt.close();
+            } catch (Exception e) {
+            }
+
+        }
+        return hasError;
+    }
     
     public boolean delete(Cadart cadart){
         this.connection = new ConnectionFactory().getConnection();

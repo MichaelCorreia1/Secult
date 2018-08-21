@@ -201,6 +201,24 @@ public class CadartResource {
             return jsonObject.toString();
         
     }
+     @GET
+    @Path("/updateSenha/{cpf}&{senha}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String updateSenha(@PathParam("cpf") long cpf, @PathParam("senha") String senha) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        Cadart cadart = new Cadart();
+        cadart.setCpf(cpf);
+        cadart.setSenha(senha);
+
+        CadartDao cadartDao = new CadartDao();
+
+        if (cadartDao.updateSenha(cadart)) {
+
+            return "{\"status\":\"ok\"}";
+        } else {
+
+            return "{\"status\":\"erro\"}";
+        }
+    }
     @POST
     @Path("/salvarFoto/{cpf}")
     @Produces(MediaType.APPLICATION_JSON)

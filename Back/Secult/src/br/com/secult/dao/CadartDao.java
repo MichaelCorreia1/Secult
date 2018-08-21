@@ -81,7 +81,7 @@ public class CadartDao {
             cadart.setProjetoAtual(rs.getString("projeto_atual"));
             cadart.setEmail(rs.getString("email"));
             cadart.setTelefone(rs.getString("telefone"));
-            //cadart.setSenha(senha);
+            cadart.setSenha(rs.getString("senha"));
             cadart.setVisibilidade(rs.getString("visibilidade"));
 
             objs.add(cadart);
@@ -91,7 +91,7 @@ public class CadartDao {
      public List<Cadart> autenticar(Cadart cadart) throws SQLException, Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
-        String sql = "select * from usuario where  email=? and senha=?";
+        String sql = "select * from cadart where  email=? and senha=?";
         ResultSet rs = null;
 
         try {

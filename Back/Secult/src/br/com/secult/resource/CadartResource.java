@@ -175,6 +175,32 @@ public class CadartResource {
             return "{\"status\":\"erro\"}";
         }
     }
+    @GET
+    @Path("/autenticar/{email}&{senha}")
+    @Produces("application/json")
+    public String autenticar(@PathParam("email") String email, @PathParam("senha") String senha) throws SQLException, Exception {
+        Cadart cadart = new Cadart();
+        cadart.setEmail(email);
+        cadart.setSenha(senha);
+
+        CadartDao cadartDao = new CadartDao();
+        List<Cadart> cadarts = cadartDao.autenticar(cadart);
+
+        Gson gson = new GsonBuilder().create();
+        
+        tratarImagem(cadarts);
+        
+        
+        JsonArray ArrayUsarios = gson.toJsonTree(cadarts).getAsJsonArray();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("usuario", ArrayUsarios);
+        
+
+     
+
+            return jsonObject.toString();
+        
+    }
     @POST
     @Path("/salvarFoto/{cpf}")
     @Produces(MediaType.APPLICATION_JSON)

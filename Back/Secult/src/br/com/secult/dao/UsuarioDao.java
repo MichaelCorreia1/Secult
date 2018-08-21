@@ -358,9 +358,4 @@ public class UsuarioDao {
         }
         return hasError;
     }   
-        
-        
-        
-        
-        
 }

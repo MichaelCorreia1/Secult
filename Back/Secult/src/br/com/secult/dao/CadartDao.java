@@ -6,7 +6,9 @@
 package br.com.secult.dao;
 
 import br.com.secult.model.Cadart;
+import br.com.secult.model.Usuario;
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,6 +33,8 @@ public class CadartDao {
         try {
             String sql = "INSERT INTO cadart (cpf, nome, nome_artistico, telefone, email, sexo, descricao, projeto_atual, data_nascimento, senha, id_arte, visibilidade) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)";
             stmt = connection.prepareStatement(sql);
+            
+            String senha = convertToHash(cadart);
 
             stmt.setLong(1, cadart.getCpf());
             stmt.setString(2, cadart.getNome());
@@ -41,7 +45,7 @@ public class CadartDao {
             stmt.setString(7, cadart.getDescricao());
             stmt.setString(8, cadart.getProjetoAtual());
             stmt.setDate(9, cadart.getDataNascimento());
-            stmt.setString(10, cadart.getSenha());
+            stmt.setString(10, senha);
             stmt.setInt(11, cadart.getIdArte());
             stmt.setString(12, cadart.getVisibilidade());
 
@@ -63,6 +67,8 @@ public class CadartDao {
     private List<Cadart> resultSetToObjectTransfer(ResultSet rs) throws Exception {
         List<Cadart> objs = new Vector<>();
         while (rs.next()) {
+           
+            
             Cadart cadart = new Cadart();
             cadart.setCpf(rs.getLong("cpf"));
             cadart.setNome(rs.getString("nome"));
@@ -75,12 +81,42 @@ public class CadartDao {
             cadart.setProjetoAtual(rs.getString("projeto_atual"));
             cadart.setEmail(rs.getString("email"));
             cadart.setTelefone(rs.getString("telefone"));
-            cadart.setSenha(rs.getString("senha"));
+            //cadart.setSenha(senha);
             cadart.setVisibilidade(rs.getString("visibilidade"));
 
             objs.add(cadart);
         }
         return objs;
+    }
+     public List<Cadart> autenticar(Cadart cadart) throws SQLException, Exception {
+        PreparedStatement pstmt = null;
+        this.connection = new ConnectionFactory().getConnection();
+        String sql = "select * from usuario where  email=? and senha=?";
+        ResultSet rs = null;
+
+        try {
+
+            String senha = convertToHash(cadart);
+
+            pstmt = connection.prepareStatement(sql);
+
+            pstmt.setObject(1, cadart.getEmail());
+            pstmt.setObject(2, senha);
+            rs = pstmt.executeQuery();
+
+            return resultSetToObjectTransfer(rs);
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                pstmt.close();
+            } catch (Exception e) {
+            }
+
+        }
+
     }
 
     public List<Cadart> listarUsuario() throws Exception, Exception {
@@ -153,7 +189,7 @@ public class CadartDao {
         return objs;
     }
    
-    public boolean updateUsuario(Cadart cadart){
+    public boolean updateUsuario(Cadart cadart) throws NoSuchAlgorithmException, UnsupportedEncodingException{
         this.connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = null;
         boolean hasError = true;
@@ -161,13 +197,14 @@ public class CadartDao {
         String sql = "UPDATE cadart SET nome_artistico=?, descricao=?, email=?, id_arte=?, telefone=?, senha=?, projeto_atual=?, visibilidade=? WHERE cpf=?";
         try {
             stmt = connection.prepareStatement(sql);
+             String senha = convertToHash(cadart);
             
             stmt.setString(1, cadart.getNomeArtistico());
             stmt.setString(2, cadart.getDescricao());
             stmt.setString(3, cadart.getEmail());
             stmt.setInt(4, cadart.getIdArte());
             stmt.setString(5, cadart.getTelefone());
-            stmt.setString(6, cadart.getSenha());
+            stmt.setString(6, senha);
             stmt.setString(7, cadart.getProjetoAtual());
             stmt.setLong(8, cadart.getCpf());
             stmt.setString(9, cadart.getVisibilidade());
@@ -261,6 +298,16 @@ public class CadartDao {
 
         }
 
+    }
+     private String convertToHash(Cadart cadart) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
+        byte messageDigest[] = algorithm.digest(cadart.getSenha().getBytes("UTF-8"));
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : messageDigest) {
+            hexString.append(String.format("%02X", 0xFF & b));
+        }
+        String senha = hexString.toString();
+        return senha;
     }
 }
 

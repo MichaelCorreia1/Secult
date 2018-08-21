@@ -144,6 +144,7 @@ function updateEvento(id) {
         Administrador = jsonAdministrador.status;
 
         if (Administrador == "ok") {
+            inserirFotoEvento(id);
             setTimeout(function () {
                 window.location.href = "#/page18";
 
@@ -299,8 +300,8 @@ function saveFotoLS() {
 //////////////////FOTO EVENTO///////////////////
 //////////////////FOTO EVENTO///////////////////
 
-function inserirFotoEvento(cpf) {
-    var json = servidor + "/Secult/cadart/salvarFoto/" + cpf;
+function inserirFotoEvento(id) {
+    var json = servidor + "/Secult/evento/salvarFoto/" + id;
 
     var ImageURL = localStorage.getItem("fotoCadastroEvento");
 
@@ -314,7 +315,7 @@ function inserirFotoEvento(cpf) {
 
     var formDataToUpload = new FormData();
 
-    formDataToUpload.append("id", cpf);
+    formDataToUpload.append("id", id);
     formDataToUpload.append("imagem", blob);
 
     $.ajax({
@@ -338,7 +339,6 @@ function inserirFotoEvento(cpf) {
     })
 
 }
-
 function saveFotoEventoLS() {
 
     document.getElementById("tableBannerEvento").style.display = "none";
@@ -370,4 +370,3 @@ function saveFotoEventoLS() {
     });
 
 }
-

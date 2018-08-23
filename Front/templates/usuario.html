@@ -1,42 +1,62 @@
 <ion-view title="Usuario" id="page7">
-  <ion-content padding="true" class="has-header">
-    <div>
-      <img src="img/EZqnhFL0TPWDeLjeunbJ_a3.png" style="display: block; width: 30%; height: auto; margin-left: auto; margin-right: auto;">
-    </div>
-    <div class="spacer" style="width: 300px; height: 5px;"></div>
-    <div id="usuario-button-bar4" class="button-bar">
-      <button id="usuario-button40" style="font-size:15px;border-radius:5px 5px 5px 5px;" class="button button-dark button-small button-block">Alterar Foto</button>
-      <button id="usuario-button41" style="font-size:15px;border-radius:5px 5px 5px 5px;" class="button button-dark button-small button-block">Alterar Senha</button>
-    </div>
-    <form id="usuario-form8" class="list">
-      <label class="item item-input" id="usuario-textarea2">
-        <span class="input-label">Descrição:</span><textarea placeholder="">Escreva uma breve descrição sobre voçê</textarea></label>
-      <label class="item item-input" id="usuario-input11">
-        <span class="input-label">Nome</span>
-        <input type="text" placeholder="Jessica Souza Ribeiro">
-      </label>
-      <label class="item item-input" id="usuario-input13">
-        <span class="input-label">Email</span>
-        <input type="text" placeholder="mariajulia@e-mail.com">
-      </label>
-      <label class="item item-input" id="usuario-input12">
-        <span class="input-label">Nascimento</span>
-        <input type="date" placeholder="">
-      </label>
-      <ion-checkbox id="usuario-checkbox1">Masculino</ion-checkbox>
-      <ion-checkbox id="usuario-checkbox2">Feminino</ion-checkbox>
-      <label class="item item-select" id="usuario-select1">
-        <span class="input-label">Qual Sua Arte?</span>
-        <select>
-          <option>Selecione</option>
-          <option>Ator/Atriz</option>
-          <option>Músico</option>
-          <option>Pintor</option>
-          <option>Dançarino</option>
-          <option>Escritor</option>
-        </select>
-      </label>
-      <button id="usuario-button42" class="button button-dark button-block">Alterar</button>
-    </form>
-  </ion-content>
+    <ion-content padding="true" class="has-header animated faster fadeInDown">
+        <div>
+            <img src="img/EZqnhFL0TPWDeLjeunbJ_a3.png"
+                 style="display: block; width: 30%; height: auto; margin-left: auto; margin-right: auto;" id="fotoUp">
+        </div>
+        <div class="spacer" style="width: 300px; height: 5px;"></div>
+        <div class="button-bar">
+            <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
+                    class="button button-dark button-small button-block">Alterar Foto
+            </button>
+            <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
+                    class="button button-dark button-small button-block">Alterar Senha
+            </button>
+        </div>
+
+        <form id="usuario-form8" class="list">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Descrição:</span><textarea id="descricaoUp"></textarea>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Projetos Atuais:</span><textarea id="projetosUp"></textarea>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Nome</span>
+                <input type="text" id="nomeUp">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Nome Artístico</span>
+                <input type="text" id="nomeArtisticoUp">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Email</span>
+                <input type="text" id="emailUp">
+            </label>
+            <label class="item item-input">
+                <span class="input-label" for="dtNascimentoUp">Nascimento</span>
+                <input type="date" id="dtNascimentoUp">
+            </label>
+            <label class="item item-select">
+                <span class="input-label">Sexo</span>
+                <select id="sexoUp">
+                    <option value="">Selecione</option>
+                    <option value="m">Masculino</option>
+                    <option value="f">Feminino</option>
+                </select>
+            </label>
+            <label class="item item-select">
+                <span class="input-label">Qual Sua Arte?</span>
+                <select id="arteUp">
+                    <option value="">Selecione</option>
+                    <option value="1">Ator/Atriz</option>
+                    <option value="2">Músico</option>
+                    <option value="3">Pintor</option>
+                    <option value="4">Dançarino</option>
+                    <option value="5">Escritor</option>
+                </select>
+            </label>
+            <button class="button button-dark button-block">Alterar</button>
+        </form>
+    </ion-content>
 </ion-view>

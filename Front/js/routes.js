@@ -29,24 +29,18 @@ angular.module('app.routes', [])
                 }
             })
 
-            .state('tabsController.usuario', {
+            .state('usuario', {
                 url: '/page7',
-                views: {
-                    'tab1': {
-                        templateUrl: 'templates/usuario.html',
-                        controller: 'usuarioCtrl'
-                    }
-                }
+                templateUrl: 'templates/usuario.html',
+                controller: 'usuarioCtrl'
+
             })
 
-            .state('tabsController.cadastrar', {
+            .state('cadastrar', {
                 url: '/page14',
-                views: {
-                    'tab1': {
-                        templateUrl: 'templates/cadastrar.html',
-                        controller: 'cadastrarCtrl'
-                    }
-                }
+                templateUrl: 'templates/cadastrar.html',
+                controller: 'cadastrarCtrl'
+
             })
 
             .state('tabsController', {
@@ -55,24 +49,16 @@ angular.module('app.routes', [])
                 abstract: true
             })
 
-            .state('tabsController.login', {
+            .state('login', {
                 url: '/page15',
-                views: {
-                    'tab1': {
-                        templateUrl: 'templates/login.html',
-                        controller: 'loginCtrl'
-                    }
-                }
+                templateUrl: 'templates/login.html',
+                controller: 'loginCtrl'
             })
 
-            .state('tabsController.informacoes', {
+            .state('informacoes', {
                 url: '/page16',
-                views: {
-                    'tab1': {
-                        templateUrl: 'templates/informacoes.html',
-                        controller: 'informacoesCtrl'
-                    }
-                }
+                templateUrl: 'templates/informacoes.html',
+                controller: 'informacoesCtrl'
             })
 
             .state('cultura', {
@@ -154,20 +140,20 @@ angular.module('app.routes', [])
             })
 
             .state('informacoesNoticias', {
-            url: '/page21',
-            templateUrl: 'templates/informacoesNoticias.html',
-            controller: 'informacoesNoticiasCtrl'
-        })
+                url: '/page21',
+                templateUrl: 'templates/informacoesNoticias.html',
+                controller: 'informacoesNoticiasCtrl'
+            })
             .state('cultTobiasCidade', {
                 url: '/page25',
                 templateUrl: 'templates/cultTobiasCidade.html',
                 controller: 'cultTobiasCidadeCtrl'
             })
-        .state('cultTobias', {
-            url: '/page24',
-            templateUrl: 'templates/cultTobias.html',
-            controller: 'cultTobiasCtrl'
-        });
+            .state('cultTobias', {
+                url: '/page24',
+                templateUrl: 'templates/cultTobias.html',
+                controller: 'cultTobiasCtrl'
+            });
 
         $urlRouterProvider.otherwise('/page1/page2')
 

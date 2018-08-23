@@ -72,10 +72,10 @@ function validarCampos() {
     var senhaRed = $("#senhaRedCdt").val();
     if (isCpf(cpf) & nome != "" & email != "" & tel != "" & nomeArt != "" & arte != "" & senha != "" & dtNascimento != "" & sexo != "") {
         if (senha === senhaRed) {
-            cadastrarCdt()
+            cadastrarCdt();
         }
     } else {
-        $("#cadastroRedCdtInvalido").show('pulsate')
+        $("#cadastroRedCdtInvalido").show('pulsate');
     }
 
 }
@@ -131,9 +131,11 @@ function cadastrarCdt() {
         ;
     };
     $.getJSON(json, onSuccess).fail();
-
-
 }
+
+
+
+
 
 function isCpf(strCPF) {
     var Soma;
@@ -181,12 +183,12 @@ function listarCadart() {
 
 
                 if (foto == null) {
-                    urlImagem = "img/semfoto.jpeg"
+                    urlImagem = "img/semfoto.jpeg";
                 } else {
                     urlImagem = servidor + "/Secult/cadart/find/" + cpf;
                 }
 
-                $("#listaCadart").append("<a href='#/page1/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" +  nome + "\",\"" + dataNascimento + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo+ "\",\"" + nomeArtistico+ "\",\"" + nomeArte+ "\")' class=\"item item-avatar item-icon-right\">\n" +
+                $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" +  nome + "\",\"" + dataNascimento + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo+ "\",\"" + nomeArtistico+ "\",\"" + nomeArte+ "\")'  class=\"item item-avatar item-icon-right\">\n" +
                     "                <img src='" + urlImagem + "'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "                <p>" + arte + "</p>\n" +
@@ -201,9 +203,126 @@ function listarCadart() {
     $.getJSON(json, onSuccess).fail();
 }
 
+function InputEmailValido() {
+    var emailImp = $("#email").val();
+    var senha = $("#senha").val();
+
+    if (emailImp != "") {
+
+        if (emailImp.indexOf("@") != -1) {
+
+
+            if (emailImp.indexOf("@") == 0) {
+                $("#email").focus();
+                $("#validoEmail").empty();
+                $("#validoEmail").append("Email preisa ser valido");
+                setTimeout(function () {
+                    $("#validoEmail").empty();
+                }, 4000)
+            } else {
+                autenticar(emailImp, senha);
+            }
+        } else {
+
+            $("#email").focus();
+            $("#validoEmail").empty();
+            $("#validoEmail").append("Campo E-mail necessita de '@'");
+            setTimeout(function () {
+                $("#validoEmail").empty();
+            }, 4000)
+        }
+    } else {
+
+        $("#email").focus();
+        $("#validoEmail").empty();
+        $("#validoEmail").append("Campo E-mail vazio");
+        setTimeout(function () {
+            $("#validoEmail").empty();
+        }, 4000)
+    }
+}
+
+
+function autenticar(txtEmail, txtSenha) {
+    var json = servidor + "/Secult/cadart/autenticar/" + txtEmail + '&' + txtSenha;
+
+    var onSucess = function (result) {
+        dados = result.usuario;
+
+        if (dados[0]) {
+            var nome = dados[0].nome;
+            var nomeArtistico = dados[0].nomeArtistico;
+            var nomeArte = dados[0].nomeArte;
+            var cpf = dados[0].cpf;
+            var telefone = dados[0].telefone;
+            var idArte = dados[0].idArte;
+            var sexo = dados[0].sexo;
+            var dataNascimento = dados[0].dataNascimento;
+            var descricao = dados[0].descricao;
+            var projetoAtual = dados[0].projetoAtual;
+            var email = dados[0].email;
+
+
+            localStorage.setItem("cpf", cpf);
+            localStorage.setItem("nome", nome);
+            localStorage.setItem("nomeArtistico", nomeArtistico);
+            localStorage.setItem("email", email);
+            localStorage.setItem("telefone", telefone);
+            localStorage.setItem("nomeArte", nomeArte);
+            localStorage.setItem("sexo", sexo);
+            localStorage.setItem("idArte", idArte);
+            localStorage.setItem("dataNascimento", dataNascimento);
+            localStorage.setItem("descricao", descricao);
+            localStorage.setItem("projetoAtual", projetoAtual);
+            setTimeout(function(){
+                window.location.href = "#/page1/page3";
+                setTimeout(function (){
+                    $("#meusDados").attr('onclick', " carregarDadosPerfilCadart('"+urlImagem +"','"+ nome+"','"+ dataNascimento+"','"+ email+"','"+  telefone +"','"+ descricao +"','"+ projetoAtual +"','"+ sexo +"','"+ nomeArtistico +"','"+  idArte+"')")
+                    // $(".alt-estado").toggle()
+                },100)
+
+            },1000)
+
+
+
+
+
+        } else {
+            $("#validoEmail").text('')
+            $("#validoEmail").text("Email e/ou senha inválidos");
+        }
+    };
+
+    $.getJSON(json, onSucess).fail(
+        function () {
+
+
+        }
+    );
+}
+
+
+function sairUsuario() {
+    $(".alt-estado").toggle();
+    localStorage.setItem("cpf", '');
+    localStorage.setItem("nome", '');
+    localStorage.setItem("nomeArtistico", '');
+    localStorage.setItem("email", '');
+    localStorage.setItem("telefone", '');
+    localStorage.setItem("nomeArte", '');
+    localStorage.setItem("sexo", '');
+    localStorage.setItem("idArte", '');
+    localStorage.setItem("dataNascimento", '');
+    localStorage.setItem("descricao", '');
+    localStorage.setItem("projetoAtual", '');
+
+}
+
+
 function carregarInfoCadart(urlImagem , nome ,dataNascimento, email, tel, descricao, projetoAtual, sexo, nomeArtistico, nomeArte) {
 
     setTimeout(function () {
+
         $("#nomeInfo").text(nome);
         $("#idadeInfo").text(dataNascimento);
         $("#emailInfo").text(email);
@@ -219,53 +338,22 @@ function carregarInfoCadart(urlImagem , nome ,dataNascimento, email, tel, descri
     },100)
 }
 
-function autenticar(txtEmail, txtSenha) {
-    var json = servidor + "/Secult/cadart/autenticar/" + txtEmail + '&' + txtSenha;
+function carregarDadosPerfilCadart(urlImagem , nome ,dataNascimento, email, tel, descricao, projetoAtual, sexo, nomeArtistico, idArte) {
 
-    var onSucess = function (result) {
-        dados = result.usuario;
+    setTimeout(function () {
+        $("#nomeUp").val(nome);
+        $("#dtNascimentoUp").val('ago 3, 2010');
+        //$("#dtNascimentoUp").val(dataNascimento);
+        $("#emailUp").val(email);
+        $("#telInfo").val(tel);
+        $("#descricaoUp").val(descricao);
+        $("#projetosUp").val(projetoAtual);
+        $("#nomeArtisticoUp").val(nomeArtistico);
+        $("#sexoUp").val(sexo);
+        $("#arteUp").val(idArte);
+        $("#fotoUp").attr('src', urlImagem);
 
-        if (dados[0]) {
-            var id = dados[0].id;
-            var nome = dados[0].nome;
-            var email = dados[0].email;
-            var telefone = dados[0].telefone;
-            var tipo = dados[0].tipo;
-            var endereco = dados[0].endereco;
-            var cidade = dados[0].cidade;
-            var estado = dados[0].estado;
-            var foto = dados[0].foto;
-
-
-            localStorage.setItem("id", id);
-            localStorage.setItem("nome", nome);
-            localStorage.setItem("email", email);
-            localStorage.setItem("telefone", telefone);
-            localStorage.setItem("tipo", tipo);
-            localStorage.setItem("endereco", endereco);
-            localStorage.setItem("cidade", cidade);
-            localStorage.setItem("estado", estado);
-            localStorage.setItem("foto", foto);
-
-            lembrar = $("#lembrar").prop("checked")
-            if(lembrar){
-                localStorage.setItem("emailUSU", txtEmail);
-                localStorage.setItem("senhaUSU", txtSenha);
-            }
-
-            window.location = "#/page1/page2";
-
-            validarAdministrador();
-
-
-
-        } else {
-            $("#invalido").text("Email e/ou senha inválidos");
-        }
-    };
-
-    $.getJSON(json, onSucess).fail();
-
-
+    },100)
 }
+//onclick='carregarDadosPerfilCadart(\"" + urlImagem + "\",\"" +  nome + "\",\"" + dataNascimento + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo+ "\",\"" + nomeArtistico+ "\",\"" + nomeArte+ "\")'
 

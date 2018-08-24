@@ -142,7 +142,7 @@ public class CadartDao {
         }
     }
     
-     public List<Cadart> listarUsuarioByVisi() throws Exception, Exception {
+     public List<Cadart> listarUsuarioByVisibilidade() throws Exception, Exception {
         this.connection = new ConnectionFactory().getConnection();
         ResultSet rs = null;
         PreparedStatement stmt = null;
@@ -194,20 +194,21 @@ public class CadartDao {
         PreparedStatement stmt = null;
         boolean hasError = true;
         
-        String sql = "UPDATE cadart SET nome_artistico=?, descricao=?, email=?, id_arte=?, telefone=?, senha=?, projeto_atual=?, visibilidade=? WHERE cpf=?";
+        String sql = "UPDATE cadart SET nome_artistico=?, descricao=?, email=?, id_arte=?, telefone=?, projeto_atual=?, visibilidade=?, nome=?, data_nascimento=? WHERE cpf=?";
         try {
             stmt = connection.prepareStatement(sql);
-             String senha = convertToHash(cadart);
+           
             
             stmt.setString(1, cadart.getNomeArtistico());
             stmt.setString(2, cadart.getDescricao());
             stmt.setString(3, cadart.getEmail());
             stmt.setInt(4, cadart.getIdArte());
             stmt.setString(5, cadart.getTelefone());
-            stmt.setString(6, senha);
-            stmt.setString(7, cadart.getProjetoAtual());
-            stmt.setLong(8, cadart.getCpf());
-            stmt.setString(9, cadart.getVisibilidade());
+            stmt.setString(6, cadart.getProjetoAtual());
+            stmt.setString(7, cadart.getVisibilidade());
+            stmt.setString(8, cadart.getNome());
+            stmt.setDate(9, cadart.getDataNascimento());
+            stmt.setLong(10, cadart.getCpf());
             
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -230,6 +231,7 @@ public class CadartDao {
         String sql = "UPDATE cadart SET senha = ? where cpf=?";
         try {
             pstmt = connection.prepareStatement(sql);
+
 
             String senha = convertToHash(cadart);
             pstmt.setString(1, senha);
@@ -275,15 +277,15 @@ public class CadartDao {
     }
 
     
-    public void salvarFoto(Cadart usuario) throws Exception {
+    public void salvarFoto(Cadart cadart) throws Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
         String sql = "UPDATE cadart SET foto_perfil=? WHERE cpf = ?";
         try {
 
             pstmt = connection.prepareStatement(sql);
-            pstmt.setObject(1, usuario.getFotoPerfil());
-            pstmt.setLong(2, usuario.getCpf());
+            pstmt.setObject(1, cadart.getFotoPerfil());
+            pstmt.setLong(2, cadart.getCpf());
 
             pstmt.execute();
         } catch (Exception e) {
@@ -298,7 +300,7 @@ public class CadartDao {
         }
 
     }
-    public List<Cadart> getById(Cadart usuario) throws SQLException, Exception {
+    public List<Cadart> getById(Cadart cadart) throws SQLException, Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
         String sql = "select * from cadart where  cpf = ?";
@@ -308,7 +310,7 @@ public class CadartDao {
 
             pstmt = connection.prepareStatement(sql);
 
-            pstmt.setObject(1, usuario.getCpf());
+            pstmt.setObject(1, cadart.getCpf());
             rs = pstmt.executeQuery();
 
             return resultSetToObjectTransfer(rs);

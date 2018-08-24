@@ -93,13 +93,13 @@ public class CadartResource {
         }
 
     }
-      @GET
-    @Path("/listarUsuariosByVisi")
+    @GET
+    @Path("/listarUsuarioByVisibilidade")
     @Produces(MediaType.APPLICATION_JSON)
-    public String listarUsuariosByVisi() throws SQLException, Exception {
+    public String listarUsuarioByVisibilidade() throws SQLException, Exception {
 
         CadartDao usuarioDao = new CadartDao();
-        List<Cadart> usuarios = usuarioDao.listarUsuarioByVisi();
+        List<Cadart> usuarios = usuarioDao.listarUsuarioByVisibilidade();
 
         tratarImagem(usuarios);
         Gson gson = new GsonBuilder().create();
@@ -133,18 +133,18 @@ public class CadartResource {
     }
 
     @GET
-    @Path("/updateUsuario/{cpf}&{nomeArtistico}&{email}&{telefone}&{sexo}&{descricao}&{projetoAtual}&{senha}&{idArte}")
+    @Path("/updateUsuario/{cpf}&{nome}&{dataNascimento}&{nomeArtistico}&{email}&{telefone}&{sexo}&{descricao}&{projetoAtual}&{idArte}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String updatetUsuario(@PathParam("cpf") long cpf, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("email") String email, @PathParam("telefone") String telefone, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao, @PathParam("projetoAtual") String projetoAtual, @PathParam("dataNascimento") Date dataNascimento, @PathParam("senha") String senha, @PathParam("idArte") int idArte) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public String updatetUsuario(@PathParam("cpf") long cpf, @PathParam("nome") String nome, @PathParam("dataNascimento") Date dataNascimento, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("email") String email, @PathParam("telefone") String telefone, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao, @PathParam("projetoAtual") String projetoAtual, @PathParam("idArte") int idArte) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         Cadart cadart = new Cadart();
         cadart.setCpf(cpf);
+        cadart.setNome(nome);
         cadart.setNomeArtistico(nomeArtistico);
         cadart.setEmail(email);
         cadart.setTelefone(telefone);
         cadart.setSexo(sexo);
         cadart.setDescricao(descricao);
         cadart.setProjetoAtual(projetoAtual);
-        cadart.setSenha(senha);
         cadart.setIdArte(idArte);
 
         CadartDao cadartDao = new CadartDao();

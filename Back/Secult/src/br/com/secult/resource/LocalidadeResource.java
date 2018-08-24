@@ -5,13 +5,11 @@
  */
 package br.com.secult.resource;
 
-import br.com.secult.dao.AlunoDao;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import br.com.secult.dao.LocalidadeDao;
-import br.com.secult.model.Aluno;
 import br.com.secult.model.Localidade;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

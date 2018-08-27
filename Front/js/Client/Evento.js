@@ -1,5 +1,5 @@
-function inserirFoto() {
-    var id_usuario = 1;
+function inserirFoto(id_usuario) {
+
     var json = "http://localhost:8080/Secult/evento/salvarFoto/" + id_usuario;
 
     var ImageURL = localStorage.getItem("fotoCadastro");

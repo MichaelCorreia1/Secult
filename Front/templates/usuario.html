@@ -1,20 +1,38 @@
 <ion-view title="Usuario" id="page7">
-    <ion-content padding="true" class="has-header animated faster fadeInDown">
+    <ion-content padding="true" class="has-header animated fadeInDown faster">
         <div>
-            <img src="img/EZqnhFL0TPWDeLjeunbJ_a3.png"
+            <img src="img/semfoto.jpeg"
                  style="display: block; width: 30%; height: auto; margin-left: auto; margin-right: auto;" id="fotoUp">
         </div>
         <div class="spacer" style="width: 300px; height: 5px;"></div>
         <div class="button-bar">
+            <input type="file" id="tableBanner" style="display: none;">
             <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
-                    class="button button-dark button-small button-block">Alterar Foto
+                    class="button button-dark button-small button-block" id="btnFotoCadart">Alterar Foto
             </button>
             <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
-                    class="button button-dark button-small button-block">Alterar Senha
+                    class="button button-dark button-small button-block"  onclick="mostrarUpdateSenha()">Alterar Senha
             </button>
         </div>
 
-        <form id="usuario-form8" class="list">
+        <form class="list">
+            <div class="list card animated" style="display: none; "  id="cardSenhaUp"  >
+                <label class="item item-input">
+                    <span class="input-label">Email Atual</span>
+                    <input type="text" id="emailAtualUp">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Senha Atual</span>
+                    <input type="text" id="senhaAtualUp">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Nova Senha</span>
+                    <input type="text" id="senhaNovaUp">
+                </label>
+                <button class="button button-dark button-block "onclick="validarSenhaUp()">Alterar Senha</button>
+            </div>
+
+
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Descrição:</span><textarea id="descricaoUp"></textarea>
             </label>
@@ -32,6 +50,10 @@
             <label class="item item-input">
                 <span class="input-label">Email</span>
                 <input type="text" id="emailUp">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Telefone</span>
+                <input type="text" id="telUp">
             </label>
             <label class="item item-input">
                 <span class="input-label" for="dtNascimentoUp">Nascimento</span>
@@ -56,7 +78,7 @@
                     <option value="5">Escritor</option>
                 </select>
             </label>
-            <button class="button button-dark button-block">Alterar</button>
+            <button class="button button-dark button-block" onclick="updateCadart()">Alterar</button>
         </form>
     </ion-content>
 </ion-view>

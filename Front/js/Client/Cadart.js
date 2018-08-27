@@ -80,6 +80,7 @@ function validarCampos() {
 
 }
 
+
 function cadastrarCdt() {
     var descricao = $("#descricaoCdt").val();
     descricao = descricao.replace(/\s{2,}/g, ' ').replace(/["\']/g, '');
@@ -134,9 +135,6 @@ function cadastrarCdt() {
 }
 
 
-
-
-
 function isCpf(strCPF) {
     var Soma;
     var Resto;
@@ -188,7 +186,7 @@ function listarCadart() {
                     urlImagem = servidor + "/Secult/cadart/find/" + cpf;
                 }
 
-                $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" +  nome + "\",\"" + dataNascimento + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo+ "\",\"" + nomeArtistico+ "\",\"" + nomeArte+ "\")'  class=\"item item-avatar item-icon-right\">\n" +
+                $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + dataNascimento + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\")'  class=\"item item-avatar item-icon-right\">\n" +
                     "                <img src='" + urlImagem + "'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "                <p>" + arte + "</p>\n" +
@@ -274,17 +272,14 @@ function autenticar(txtEmail, txtSenha) {
             localStorage.setItem("dataNascimento", dataNascimento);
             localStorage.setItem("descricao", descricao);
             localStorage.setItem("projetoAtual", projetoAtual);
-            setTimeout(function(){
+            setTimeout(function () {
                 window.location.href = "#/page1/page3";
-                setTimeout(function (){
-                    $("#meusDados").attr('onclick', " carregarDadosPerfilCadart('"+urlImagem +"','"+ nome+"','"+ dataNascimento+"','"+ email+"','"+  telefone +"','"+ descricao +"','"+ projetoAtual +"','"+ sexo +"','"+ nomeArtistico +"','"+  idArte+"')")
-                    // $(".alt-estado").toggle()
-                },100)
+                setTimeout(function () {
+                    $("#meusDados").attr('onclick', " carregarDadosPerfilCadart('" + urlImagem + "','" + nome + "','" + dataNascimento + "','" + email + "','" + telefone + "','" + descricao + "','" + projetoAtual + "','" + sexo + "','" + nomeArtistico + "','" + idArte + "')")
+                    $(".alt-estado").toggle()
+                }, 100)
 
-            },1000)
-
-
-
+            }, 1000)
 
 
         } else {
@@ -319,7 +314,7 @@ function sairUsuario() {
 }
 
 
-function carregarInfoCadart(urlImagem , nome ,dataNascimento, email, tel, descricao, projetoAtual, sexo, nomeArtistico, nomeArte) {
+function carregarInfoCadart(urlImagem, nome, dataNascimento, email, tel, descricao, projetoAtual, sexo, nomeArtistico, nomeArte) {
 
     setTimeout(function () {
 
@@ -330,30 +325,128 @@ function carregarInfoCadart(urlImagem , nome ,dataNascimento, email, tel, descri
         $("#descricaoInfo").text(descricao);
         $("#projetosInfo").text(projetoAtual);
         $("#nomeArtisticoInfo").text(nomeArtistico);
-        if(sexo=='m'){sexo='Masculino'}else{sexo='Feminino'}
+        if (sexo == 'm') {
+            sexo = 'Masculino'
+        } else {
+            sexo = 'Feminino'
+        }
         $("#sexoInfo").text(sexo);
         $("#nomeArteInfo").text(nomeArte);
         $("#fotoInfo").attr('src', urlImagem);
 
-    },100)
+    }, 100)
 }
 
-function carregarDadosPerfilCadart(urlImagem , nome ,dataNascimento, email, tel, descricao, projetoAtual, sexo, nomeArtistico, idArte) {
+function carregarDadosPerfilCadart(urlImagem, nome, dataNascimento, email, tel, descricao, projetoAtual, sexo, nomeArtistico, idArte) {
 
     setTimeout(function () {
         $("#nomeUp").val(nome);
         $("#dtNascimentoUp").val('ago 3, 2010');
         //$("#dtNascimentoUp").val(dataNascimento);
         $("#emailUp").val(email);
-        $("#telInfo").val(tel);
+        $("#telUp").val(tel);
         $("#descricaoUp").val(descricao);
         $("#projetosUp").val(projetoAtual);
         $("#nomeArtisticoUp").val(nomeArtistico);
         $("#sexoUp").val(sexo);
         $("#arteUp").val(idArte);
         $("#fotoUp").attr('src', urlImagem);
+        $("#telUp").mask("000-00000-0000");
 
-    },100)
+    }, 100)
 }
+
 //onclick='carregarDadosPerfilCadart(\"" + urlImagem + "\",\"" +  nome + "\",\"" + dataNascimento + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo+ "\",\"" + nomeArtistico+ "\",\"" + nomeArte+ "\")'
 
+
+function botaoFotoFakeCadart() {
+    $("#btnFotoCadart").click(function () {
+        $("#bannerImg").click();
+    })
+}
+
+function updateCadart() {
+    var cpf = localStorage.getItem('cpf')
+
+    var nome = $("#nomeUp").val();
+    var idade = $("#dtNascimentoUp").val();
+    var email = $("#emailUp").val();
+    var tel = $("#telUp").val();
+    var desc = $("#descricaoUp").val();
+    var projeto = $("#projetosUp").val();
+    var nomeArtistio = $("#nomeArtisticoUp").val();
+    var sexo = $("#sexoUp").val();
+    var idArte = $("#nomeArteUp").val();
+
+    var json = servidor + "/Secult/cadart/updateUsuario/" + cpf + '&' + nomeArtistio + '&' + email + '&' + tel + '&' + sexo + '&' + desc + '&' + projeto + '&' + senha + '&' + idArte;
+    var onSucess = function (result) {
+        var status = result.status;
+
+        if (status == "ok") {
+            inserirFoto(cpf);
+            swal({
+                title: "Cadastrado!",
+                text: "Seus dados foram alterados com sucesso!",
+                icon: "success",
+                button: false,
+            });
+            setTimeout(function () {
+                window.location.href = "#/page3";
+
+            }, 2000)
+        } else if (resultado == "erro") {
+            swal({
+                title: "Erro!",
+                text: "Não foi possivel alterar seus dados, tente novamente ou entre em contato com a gente!",
+                icon: "error",
+                button: false,
+            });
+        }
+    }
+
+
+    $.getJSON(json, onSucess).fail()
+
+}
+
+function mostrarUpdateSenha() {
+    if ($("#cardSenhaUp").css('display') == "none") {
+        $("#cardSenhaUp").removeClass('bounceOutRight faster')
+        $("#cardSenhaUp").addClass('bounceInRight faster');
+        $("#cardSenhaUp").toggle();
+    } else {
+        $("#cardSenhaUp").removeClass('bounceInRight faster')
+        $("#cardSenhaUp").addClass('bounceOutRight faster');
+        setTimeout(function () {
+                $("#cardSenhaUp").toggle()
+            },
+            200)
+
+    }
+
+
+}
+
+function validarSenhaCdt() {
+    var email = $("#emailAtualUp").val();
+    var senha = $("#senhaAtualUp").val();
+    if (email && senha != "") {
+        var json = servidor + "/Secult/cadart/autenticar/" + email + '&' + senha;
+        var onSucess = function (result) {
+            dados = result.usuario;
+            if (dados[0]) {
+                swal({
+                    title: "Senha Alterada!",
+                    icon: "success",
+                    button: false,
+                });
+                $("#cardSenhaUp").toggle();
+            }
+        };
+        $.getJSON(json, onSucess).fail();
+    }
+}
+
+function updateSenhaCdt() {
+
+}

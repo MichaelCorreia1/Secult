@@ -23,7 +23,7 @@ angular.module('app.controllers', [])
 
     .controller('usuarioCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-
+            textAreaUp();
         }])
 
     .controller('cadastrarCtrl', ['$scope', '$stateParams',
@@ -33,6 +33,7 @@ angular.module('app.controllers', [])
             verificarTel();
             verificarCpf();
             saveFotoLS();
+            textAreaCadastro();
 
         }])
 

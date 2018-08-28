@@ -1,3 +1,141 @@
+function inserirFoto(cpf) {
+    var json = servidor + "/Secult/cadart/salvarFoto/" + cpf;
+
+    var ImageURL = localStorage.getItem("fotoCadastro");
+
+    var block = ImageURL.split(";");
+
+    var contentType = block[0].split(":")[1];
+
+    var realData = block[1].split(",")[1];
+
+    var blob = b64toBlob(realData, contentType);
+
+    var formDataToUpload = new FormData();
+
+    formDataToUpload.append("id", cpf);
+    formDataToUpload.append("foto_perfil", blob);
+
+    $.ajax({
+        url: json,
+        data: formDataToUpload,
+        type: "POST",
+        contentType: false,
+        processData: false,
+        cache: false,
+        dataType: "json",
+
+        error: function (err) {
+            console.log(err);
+
+        },
+
+        complete: function () {
+            window.location = "#/page1/page2";
+            location.reload();
+        },
+    })
+
+}
+
+function saveFotoLS() {
+
+    //document.getElementById("tableBanner").style.display = "none";
+    var bannerImage = document.getElementById("bannerImg");
+
+    var img = document.getElementById("tableBanner");
+
+    bannerImage.addEventListener("change", function () {
+
+        var file = this.files[0];
+        if (file.type.indexOf("image") < 0) {
+            alert("arquivo invalido");
+            bannerImage.value = "";
+            return;
+        }
+        var fReader = new FileReader();
+        fReader.onload = function () {
+            img.onload = function () {
+
+                localStorage.setItem("fotoCadastro", toBase64String(img));
+
+            };
+            img.src = fReader.result;
+
+        };
+
+        fReader.readAsDataURL(file);
+
+    });
+
+}
+function saveFotoLSUp() {
+
+    $("#bannerImg").click();
+    var bannerImage = document.getElementById("bannerImg");
+
+    var img = document.getElementById("tableBanner");
+
+    bannerImage.addEventListener("change", function () {
+
+        var file = this.files[0];
+        if (file.type.indexOf("image") < 0) {
+            alert("arquivo invalido");
+            bannerImage.value = "";
+            return;
+        }
+        var fReader = new FileReader();
+        fReader.onload = function () {
+            img.onload = function () {
+
+                localStorage.setItem("fotoCadastro", toBase64String(img));
+
+            };
+            img.src = fReader.result;
+
+        };
+
+        fReader.readAsDataURL(file);
+
+    });
+
+}
+
+
+
+
+function textAreaCadastro(){
+    $(".descricaoCdt").focusin(function () {
+        $(this).attr('rows', '12')
+    })
+    $("#projetosCdt").focusin(function () {
+        $(this).attr('rows', '12')
+    })
+    $("#descricaoCdt").focusout(function () {
+        $(this).removeAttr('rows')
+    })
+    $("#projetosCdt").focusout(function () {
+        $(this).removeAttr('rows')
+    })
+
+}
+
+function textAreaUp(){
+    $("#descricaoUp").focusin(function () {
+        $(this).attr('rows', '12')
+    })
+    $("#descricaoUp").focusout(function () {
+        $(this).removeAttr('rows')
+    })
+    $("#projetosUp").focusin(function () {
+        $(this).attr('rows', '12')
+    })
+    $("#projetosUp").focusout(function () {
+        $(this).removeAttr('rows')
+    })
+
+}
+
 function mascarasCadart() {
     $("#telCdt").mask("000-00000-0000");
     $("#cpfCdt").mask("000.000.000-00");
@@ -55,6 +193,7 @@ function verificarSenha() {
         }
     });
 }
+
 
 function validarCampos() {
     var descricao = $("#descricaoCdt").val();
@@ -157,7 +296,7 @@ function isCpf(strCPF) {
 }
 
 function listarCadart() {
-    var json = servidor + "/Secult/cadart/listarUsuariosByVisi";
+    var json = servidor + "/Secult/cadart/listarUsuarioByVisibilidade";
     var onSuccess = function (result) {
 
         dados = result.usuario;
@@ -341,8 +480,7 @@ function carregarDadosPerfilCadart(urlImagem, nome, dataNascimento, email, tel, 
 
     setTimeout(function () {
         $("#nomeUp").val(nome);
-        $("#dtNascimentoUp").val('ago 3, 2010');
-        //$("#dtNascimentoUp").val(dataNascimento);
+        $("#dtNascimentoUp").val(dataNascimento);
         $("#emailUp").val(email);
         $("#telUp").val(tel);
         $("#descricaoUp").val(descricao);
@@ -374,16 +512,30 @@ function updateCadart() {
     var tel = $("#telUp").val();
     var desc = $("#descricaoUp").val();
     var projeto = $("#projetosUp").val();
-    var nomeArtistio = $("#nomeArtisticoUp").val();
+    var nomeArtistico = $("#nomeArtisticoUp").val();
     var sexo = $("#sexoUp").val();
-    var idArte = $("#nomeArteUp").val();
+    var idArte = $("#arteUp").val();
 
-    var json = servidor + "/Secult/cadart/updateUsuario/" + cpf + '&' + nomeArtistio + '&' + email + '&' + tel + '&' + sexo + '&' + desc + '&' + projeto + '&' + senha + '&' + idArte;
+    var json = servidor + "/Secult/cadart/updateUsuario/" + cpf + '&' +nome+ '&' +idade+ '&' + nomeArtistio + '&' + email + '&' + tel + '&' + sexo + '&' + desc + '&' + projeto + '&' + idArte;
     var onSucess = function (result) {
         var status = result.status;
 
         if (status == "ok") {
             inserirFoto(cpf);
+
+
+            localStorage.setItem("cpf", cpf);
+            localStorage.setItem("nome", nome);
+            localStorage.setItem("nomeArtistico", nomeArtistico);
+            localStorage.setItem("email", email);
+            localStorage.setItem("telefone", tel);
+            localStorage.setItem("idArte", id);
+            localStorage.setItem("sexo", sexo);
+            localStorage.setItem("idArte", idArte);
+            localStorage.setItem("dataNascimento", idade);
+            localStorage.setItem("descricao", desc);
+            localStorage.setItem("projetoAtual", projeto);
+
             swal({
                 title: "Cadastrado!",
                 text: "Seus dados foram alterados com sucesso!",
@@ -421,10 +573,22 @@ function mostrarUpdateSenha() {
                 $("#cardSenhaUp").toggle()
             },
             200)
-
     }
-
-
+}
+function mostrarUpdateFoto() {
+    var divFotoUp = $("#cardFotoUp");
+    if (divFotoUp.css('display') == "none") {
+        divFotoUp.removeClass('bounceOutRight faster')
+        divFotoUp.addClass('bounceInRight faster');
+        divFotoUp.toggle();
+    } else {
+        divFotoUp.removeClass('bounceInRight faster')
+        divFotoUp.addClass('bounceOutRight faster');
+        setTimeout(function () {
+                divFotoUp.toggle()
+            },
+            200)
+    }
 }
 
 function validarSenhaCdt() {
@@ -447,6 +611,67 @@ function validarSenhaCdt() {
     }
 }
 
-function updateSenhaCdt() {
+function autenticarUpSenha() {
+    var email = $('#emailAtualUp').val();
+    var senha = $('#senhaAtualUp').val();
+    var novaSenha = $('#senhaNovaUp').val();
 
+    var json = servidor + "/Secult/cadart/autenticar/" + email + '&' + senha;
+
+    var onSucess = function (result) {
+        dados = result.usuario;
+
+        if (dados[0]) {
+            var cpf = dados[0].cpf;
+            updateSenhaCadart(cpf, novaSenha)
+            $('#erroSenhaEmailUp').css('display', 'none')
+        }else {
+            $('#erroSenhaEmailUp').css('display', 'block')
+        }
+    };
+    $.getJSON(json, onSucess).fail();
+}
+
+function updateSenhaCadart(cpf, senhaNova) {
+    var json = servidor + "/Secult/cadart/updateSenha/" + cpf + '&' + senhaNova;
+
+    var onSuccess = function (result) {
+        if (result.status == "ok") {
+            $('#emailAtualUp').val('');
+            $('#senhaAtualUp').val('');
+            $('#senhaNovaUp').val('');
+            $("#cardSenhaUp").removeClass('bounceInRight faster')
+            $("#cardSenhaUp").addClass('bounceOutRight faster');
+            swal({
+                title: "success!",
+                icon: "success",
+                button: false,
+            });
+            setTimeout(function () {
+                    $("#cardSenhaUp").toggle()
+                },
+                200)
+
+        } else {
+            swal({
+                title: "Erro!",
+                text: "Não foi possivel alterar sua senha, tente novamente ou entre em contato com a gente!",
+                icon: "error",
+                button: false,
+            });
+
+        }
+    };
+    $.getJSON(json, onSuccess).fail();
+}
+
+function toggleTypeInput(el){
+    $("#"+el+"").focusout();
+    $("#senhaAtualUp").focusout();
+
+    if($("#"+el+"").attr('type') == "text"){
+        $("#"+el+"").attr('type', "password")
+    }else{
+        $("#"+el+"").attr('type', "text")
+    }
 }

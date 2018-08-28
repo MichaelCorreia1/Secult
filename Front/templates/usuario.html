@@ -2,42 +2,50 @@
     <ion-content padding="true" class="has-header animated fadeInDown faster">
         <div>
             <img src="img/semfoto.jpeg"
-                 style="display: block; width: 30%; height: auto; margin-left: auto; margin-right: auto;" id="fotoUp">
+                 style="display: block; width: 150px; height: 100%; margin-left: auto; margin-right: auto;" id="tableBanner">
         </div>
         <div class="spacer" style="width: 300px; height: 5px;"></div>
         <div class="button-bar">
-            <input type="file" id="tableBanner" style="display: none;">
+            <input type="file" id="bannerImg" style="display: none;">
             <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
-                    class="button button-dark button-small button-block" id="btnFotoCadart">Alterar Foto
+                    class="button button-dark button-small button-block" id="btnFotoCadart" onclick="saveFotoLSUp()">Alterar Foto
             </button>
             <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
-                    class="button button-dark button-small button-block"  onclick="mostrarUpdateSenha()">Alterar Senha
+                    class="button button-dark button-small button-block" onclick="mostrarUpdateSenha()">Alterar Senha
             </button>
         </div>
 
         <form class="list">
-            <div class="list card animated" style="display: none; "  id="cardSenhaUp"  >
+
+
+            <div class="list card animated" style="display: none; " id="cardSenhaUp">
                 <label class="item item-input">
                     <span class="input-label">Email Atual</span>
                     <input type="text" id="emailAtualUp">
                 </label>
-                <label class="item item-input">
+
+                <label class="item item-input item-icon-right" >
                     <span class="input-label">Senha Atual</span>
-                    <input type="text" id="senhaAtualUp">
+                    <input type="password"  id="senhaAtualUp">
+                    <i class="icon ion-eye" (click)="toggleTypeInput('senhaAtualUp')"></i>
                 </label>
+
                 <label class="item item-input">
                     <span class="input-label">Nova Senha</span>
-                    <input type="text" id="senhaNovaUp">
+                    <input type="password" id="senhaNovaUp" >
                 </label>
-                <button class="button button-dark button-block "onclick="validarSenhaUp()">Alterar Senha</button>
+                <button class="button button-dark button-block " onclick="toggleTypeInput('senhaAtualUp')">Alterar Tipo</button>
+
+                <p class="invalido" id="erroSenhaEmailUp" style="display: none">Senha ou email incorretos</p>
+                <button class="button button-dark button-block " onclick="autenticarUpSenha()">Alterar Senha</button>
             </div>
 
 
             <label class="item item-input item-stacked-label">
-                <span class="input-label">Descrição:</span><textarea id="descricaoUp"></textarea>
+                <span class="input-label">Descrição:</span><textarea id="descricaoUp" maxlength="500"></textarea>
             </label>
             <label class="item item-input item-stacked-label">
-                <span class="input-label">Projetos Atuais:</span><textarea id="projetosUp"></textarea>
+                <span class="input-label">Projetos Atuais:</span><textarea id="projetosUp" maxlength="500"></textarea>
             </label>
             <label class="item item-input">
                 <span class="input-label">Nome</span>

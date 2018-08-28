@@ -21,28 +21,32 @@ public class Cadart {
     private byte [] fotoPerfil;
     private String descricao;
     private String projetoAtual;
-    private Date dataNascimento;
     private String senha;
     private int idArte;
     private String telefone;
     private String visibilidade;
     private String nomeArte;
+    private int idade;
 
-  
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
     public long getCpf() {
         return cpf;
     }
 
-   
     public void setCpf(long cpf) {
         this.cpf = cpf;
     }
 
-
     public String getNome() {
         return nome;
     }
-
   
     public void setNome(String nome) {
         this.nome = nome;
@@ -58,13 +62,11 @@ public class Cadart {
     public String getNomeArtistico() {
         return nomeArtistico;
     }
-
    
     public void setNomeArtistico(String nomeArtistico) {
         this.nomeArtistico = nomeArtistico;
     }
 
-   
     public String getSexo() {
         return sexo;
     }
@@ -73,22 +75,18 @@ public class Cadart {
         this.sexo = sexo;
     }
 
-  
     public byte[] getFotoPerfil() {
         return fotoPerfil;
     }
-
  
     public void setFotoPerfil(byte[] fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
     }
 
- 
     public String getDescricao() {
         return descricao;
     }
 
-   
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
@@ -96,38 +94,23 @@ public class Cadart {
     public String getProjetoAtual() {
         return projetoAtual;
     }
-
    
     public void setProjetoAtual(String projetoAtual) {
         this.projetoAtual = projetoAtual;
     }
 
-   
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
-
-   
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
- 
     public String getSenha() {
         return senha;
     }
 
- 
     public void setSenha(String senha) {
         this.senha = senha;
     }
 
- 
     public int getIdArte() {
         return idArte;
     }
 
-  
     public void setIdArte(int idArte) {
         this.idArte = idArte;
     }
@@ -135,9 +118,11 @@ public class Cadart {
     public String getTelefone(){
         return telefone;
     }
+    
     public void setTelefone(String telefone){
         this.telefone = telefone;
     }
+    
      public String getVisibilidade() {
         return visibilidade;
     }

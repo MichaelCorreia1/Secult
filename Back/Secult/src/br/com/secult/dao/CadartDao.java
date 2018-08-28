@@ -31,7 +31,7 @@ public class CadartDao {
         boolean hasError = true;
 
         try {
-            String sql = "INSERT INTO cadart (cpf, nome, nome_artistico, telefone, email, sexo, descricao, projeto_atual, data_nascimento, senha, id_arte, visibilidade) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)";
+            String sql = "INSERT INTO cadart (cpf, nome, nome_artistico, telefone, email, sexo, descricao, projeto_atual, idade, senha, id_arte, visibilidade) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)";
             stmt = connection.prepareStatement(sql);
             
             String senha = convertToHash(cadart);
@@ -44,7 +44,7 @@ public class CadartDao {
             stmt.setString(6, cadart.getSexo());
             stmt.setString(7, cadart.getDescricao());
             stmt.setString(8, cadart.getProjetoAtual());
-            stmt.setDate(9, cadart.getDataNascimento());
+            stmt.setInt(9, cadart.getIdade());
             stmt.setString(10, senha);
             stmt.setInt(11, cadart.getIdArte());
             stmt.setString(12, cadart.getVisibilidade());
@@ -76,7 +76,7 @@ public class CadartDao {
             cadart.setSexo(rs.getString("sexo"));
             cadart.setFotoPerfil(rs.getBytes("foto_perfil"));
             cadart.setDescricao(rs.getString("descricao"));
-            cadart.setDataNascimento(rs.getDate("data_nascimento"));
+            cadart.setIdade(rs.getInt("idade"));
             cadart.setIdArte(rs.getInt("id_arte"));
             cadart.setProjetoAtual(rs.getString("projeto_atual"));
             cadart.setEmail(rs.getString("email"));
@@ -148,7 +148,7 @@ public class CadartDao {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "SELECT cpf, C.nome as \"nomeUsu\", nome_artistico, sexo, foto_perfil, descricao, data_nascimento, senha, projeto_atual, telefone, email, A.nome as \"nomeArte\", visibilidade, id_arte From cadart as C join arte as A ON(C.id_arte = A.id) Where visibilidade = 's'";
+            String sql = "SELECT cpf, C.nome as \"nomeUsu\", nome_artistico, sexo, foto_perfil, descricao, idade, senha, projeto_atual, telefone, email, A.nome as \"nomeArte\", visibilidade, id_arte From cadart as C join arte as A ON(C.id_arte = A.id) Where visibilidade = 's'";
             stmt = connection.prepareStatement(sql);
 
             rs = stmt.executeQuery();
@@ -174,7 +174,7 @@ public class CadartDao {
             cadart.setSexo(rs.getString("sexo"));
             cadart.setFotoPerfil(rs.getBytes("foto_perfil"));
             cadart.setDescricao(rs.getString("descricao"));
-            cadart.setDataNascimento(rs.getDate("data_nascimento"));
+            cadart.setIdade(rs.getInt("idade"));
             cadart.setProjetoAtual(rs.getString("projeto_atual"));
             cadart.setEmail(rs.getString("email"));
             cadart.setTelefone(rs.getString("telefone"));
@@ -194,7 +194,7 @@ public class CadartDao {
         PreparedStatement stmt = null;
         boolean hasError = true;
         
-        String sql = "UPDATE cadart SET nome_artistico=?, descricao=?, email=?, id_arte=?, telefone=?, projeto_atual=?, visibilidade=?, nome=?, data_nascimento=? WHERE cpf=?";
+        String sql = "UPDATE cadart SET nome_artistico=?, descricao=?, email=?, id_arte=?, telefone=?, projeto_atual=?, nome=?, idade=? WHERE cpf=?";
         try {
             stmt = connection.prepareStatement(sql);
            
@@ -205,10 +205,9 @@ public class CadartDao {
             stmt.setInt(4, cadart.getIdArte());
             stmt.setString(5, cadart.getTelefone());
             stmt.setString(6, cadart.getProjetoAtual());
-            stmt.setString(7, cadart.getVisibilidade());
-            stmt.setString(8, cadart.getNome());
-            stmt.setDate(9, cadart.getDataNascimento());
-            stmt.setLong(10, cadart.getCpf());
+            stmt.setString(7, cadart.getNome());
+            stmt.setInt(8, cadart.getIdade());
+            stmt.setLong(9, cadart.getCpf());
             
             stmt.executeUpdate();
         } catch (SQLException e) {

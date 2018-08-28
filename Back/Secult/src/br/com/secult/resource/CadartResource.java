@@ -39,9 +39,9 @@ import javax.ws.rs.core.Response;
 public class CadartResource {
 
     @GET
-    @Path("/insertUsuario/{cpf}&{nome}&{nomeArtistico}&{telefone}&{email}&{sexo}&{descricao}&{projetoAtual}&{dataNascimento}&{senha}&{idArte}&{visibilidade}")
+    @Path("/insertUsuario/{cpf}&{nome}&{nomeArtistico}&{telefone}&{email}&{sexo}&{descricao}&{projetoAtual}&{idade}&{senha}&{idArte}&{visibilidade}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String insertUsuario(@PathParam("cpf") long cpf, @PathParam("nome") String nome, @PathParam("telefone") String telefone ,@PathParam("email") String email, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao, @PathParam("projetoAtual") String projetoAtual, @PathParam("dataNascimento") Date dataNascimento, @PathParam("senha") String senha, @PathParam("idArte") int idArte, @PathParam("visibilidade") String visibilidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public String insertUsuario(@PathParam("cpf") long cpf, @PathParam("nome") String nome, @PathParam("telefone") String telefone ,@PathParam("email") String email, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao, @PathParam("projetoAtual") String projetoAtual, @PathParam("idade") int idade, @PathParam("senha") String senha, @PathParam("idArte") int idArte, @PathParam("visibilidade") String visibilidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
 
         Cadart cadart = new Cadart();
         cadart.setCpf(cpf);
@@ -52,7 +52,7 @@ public class CadartResource {
         cadart.setSexo(sexo);
         cadart.setDescricao(descricao);
         cadart.setProjetoAtual(projetoAtual);
-        cadart.setDataNascimento(dataNascimento);
+        cadart.setIdade(idade);
         cadart.setSenha(senha);
         cadart.setIdArte(idArte);
         cadart.setVisibilidade(visibilidade);
@@ -133,12 +133,13 @@ public class CadartResource {
     }
 
     @GET
-    @Path("/updateUsuario/{cpf}&{nome}&{dataNascimento}&{nomeArtistico}&{email}&{telefone}&{sexo}&{descricao}&{projetoAtual}&{idArte}")
+    @Path("/updateUsuario/{cpf}&{nome}&{idade}&{nomeArtistico}&{email}&{telefone}&{sexo}&{descricao}&{projetoAtual}&{idArte}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String updatetUsuario(@PathParam("cpf") long cpf, @PathParam("nome") String nome, @PathParam("dataNascimento") Date dataNascimento, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("email") String email, @PathParam("telefone") String telefone, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao, @PathParam("projetoAtual") String projetoAtual, @PathParam("idArte") int idArte) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public String updatetUsuario(@PathParam("cpf") long cpf, @PathParam("nome") String nome, @PathParam("idade") int idade, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("email") String email, @PathParam("telefone") String telefone, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao, @PathParam("projetoAtual") String projetoAtual, @PathParam("idArte") int idArte) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         Cadart cadart = new Cadart();
         cadart.setCpf(cpf);
         cadart.setNome(nome);
+        cadart.setIdade(idade);
         cadart.setNomeArtistico(nomeArtistico);
         cadart.setEmail(email);
         cadart.setTelefone(telefone);

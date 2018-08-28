@@ -69,6 +69,7 @@ function saveFotoLS() {
     });
 
 }
+
 function saveFotoLSUp() {
 
     $("#bannerImg").click();
@@ -102,9 +103,7 @@ function saveFotoLSUp() {
 }
 
 
-
-
-function textAreaCadastro(){
+function textAreaCadastro() {
     $(".descricaoCdt").focusin(function () {
         $(this).attr('rows', '12')
     })
@@ -120,7 +119,7 @@ function textAreaCadastro(){
 
 }
 
-function textAreaUp(){
+function textAreaUp() {
     $("#descricaoUp").focusin(function () {
         $(this).attr('rows', '12')
     })
@@ -304,13 +303,12 @@ function listarCadart() {
             for (var i in dados) {
 
                 var nome = dados[i].nome;
-                var nomeArtistico = dados[i].nomeArtistico;
                 var arte = dados[i].nomeArte;
                 var cpf = dados[i].cpf;
                 var tel = dados[i].telefone;
                 var idArte = dados[i].idArte;
                 var sexo = dados[i].sexo;
-                var dataNascimento = dados[i].dataNascimento;
+                var idade = dados[i].idade;
                 var nomeArtistico = dados[i].nomeArtistico;
                 var descricao = dados[i].descricao;
                 var projetoAtual = dados[i].projetoAtual;
@@ -325,7 +323,7 @@ function listarCadart() {
                     urlImagem = servidor + "/Secult/cadart/find/" + cpf;
                 }
 
-                $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + dataNascimento + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\")'  class=\"item item-avatar item-icon-right\">\n" +
+                $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\")'  class=\"item item-avatar item-icon-right\">\n" +
                     "                <img src='" + urlImagem + "'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "                <p>" + arte + "</p>\n" +
@@ -394,7 +392,7 @@ function autenticar(txtEmail, txtSenha) {
             var telefone = dados[0].telefone;
             var idArte = dados[0].idArte;
             var sexo = dados[0].sexo;
-            var dataNascimento = dados[0].dataNascimento;
+            var idade = dados[0].idade;
             var descricao = dados[0].descricao;
             var projetoAtual = dados[0].projetoAtual;
             var email = dados[0].email;
@@ -408,13 +406,13 @@ function autenticar(txtEmail, txtSenha) {
             localStorage.setItem("nomeArte", nomeArte);
             localStorage.setItem("sexo", sexo);
             localStorage.setItem("idArte", idArte);
-            localStorage.setItem("dataNascimento", dataNascimento);
+            localStorage.setItem("idade", idade);
             localStorage.setItem("descricao", descricao);
             localStorage.setItem("projetoAtual", projetoAtual);
             setTimeout(function () {
                 window.location.href = "#/page1/page3";
                 setTimeout(function () {
-                    $("#meusDados").attr('onclick', " carregarDadosPerfilCadart('" + urlImagem + "','" + nome + "','" + dataNascimento + "','" + email + "','" + telefone + "','" + descricao + "','" + projetoAtual + "','" + sexo + "','" + nomeArtistico + "','" + idArte + "')")
+                    $("#meusDados").attr('onclick', " carregarDadosPerfilCadart('" + urlImagem + "','" + nome + "','" + idade + "','" + email + "','" + telefone + "','" + descricao + "','" + projetoAtual + "','" + sexo + "','" + nomeArtistico + "','" + idArte + "')")
                     $(".alt-estado").toggle()
                 }, 100)
 
@@ -446,19 +444,19 @@ function sairUsuario() {
     localStorage.setItem("nomeArte", '');
     localStorage.setItem("sexo", '');
     localStorage.setItem("idArte", '');
-    localStorage.setItem("dataNascimento", '');
+    localStorage.setItem("idade", '');
     localStorage.setItem("descricao", '');
     localStorage.setItem("projetoAtual", '');
 
 }
 
 
-function carregarInfoCadart(urlImagem, nome, dataNascimento, email, tel, descricao, projetoAtual, sexo, nomeArtistico, nomeArte) {
+function carregarInfoCadart(urlImagem, nome, idade, email, tel, descricao, projetoAtual, sexo, nomeArtistico, nomeArte) {
 
     setTimeout(function () {
 
         $("#nomeInfo").text(nome);
-        $("#idadeInfo").text(dataNascimento);
+        $("#idadeInfo").text(idade);
         $("#emailInfo").text(email);
         $("#telInfo").text(tel);
         $("#descricaoInfo").text(descricao);
@@ -476,11 +474,11 @@ function carregarInfoCadart(urlImagem, nome, dataNascimento, email, tel, descric
     }, 100)
 }
 
-function carregarDadosPerfilCadart(urlImagem, nome, dataNascimento, email, tel, descricao, projetoAtual, sexo, nomeArtistico, idArte) {
+function carregarDadosPerfilCadart(urlImagem, nome, idade, email, tel, descricao, projetoAtual, sexo, nomeArtistico, idArte) {
 
     setTimeout(function () {
         $("#nomeUp").val(nome);
-        $("#dtNascimentoUp").val(dataNascimento);
+        $("#dtNascimentoUp").val(idade);
         $("#emailUp").val(email);
         $("#telUp").val(tel);
         $("#descricaoUp").val(descricao);
@@ -516,7 +514,7 @@ function updateCadart() {
     var sexo = $("#sexoUp").val();
     var idArte = $("#arteUp").val();
 
-    var json = servidor + "/Secult/cadart/updateUsuario/" + cpf + '&' +nome+ '&' +idade+ '&' + nomeArtistio + '&' + email + '&' + tel + '&' + sexo + '&' + desc + '&' + projeto + '&' + idArte;
+    var json = servidor + "/Secult/cadart/updateUsuario/" + cpf + '&' + nome + '&' + idade + '&' + nomeArtistico + '&' + email + '&' + tel + '&' + sexo + '&' + desc + '&' + projeto + '&' + idArte;
     var onSucess = function (result) {
         var status = result.status;
 
@@ -532,7 +530,7 @@ function updateCadart() {
             localStorage.setItem("idArte", id);
             localStorage.setItem("sexo", sexo);
             localStorage.setItem("idArte", idArte);
-            localStorage.setItem("dataNascimento", idade);
+            localStorage.setItem("idade", idade);
             localStorage.setItem("descricao", desc);
             localStorage.setItem("projetoAtual", projeto);
 
@@ -575,6 +573,7 @@ function mostrarUpdateSenha() {
             200)
     }
 }
+
 function mostrarUpdateFoto() {
     var divFotoUp = $("#cardFotoUp");
     if (divFotoUp.css('display') == "none") {
@@ -625,7 +624,7 @@ function autenticarUpSenha() {
             var cpf = dados[0].cpf;
             updateSenhaCadart(cpf, novaSenha)
             $('#erroSenhaEmailUp').css('display', 'none')
-        }else {
+        } else {
             $('#erroSenhaEmailUp').css('display', 'block')
         }
     };
@@ -665,13 +664,48 @@ function updateSenhaCadart(cpf, senhaNova) {
     $.getJSON(json, onSuccess).fail();
 }
 
-function toggleTypeInput(el){
-    $("#"+el+"").focusout();
-    $("#senhaAtualUp").focusout();
-
-    if($("#"+el+"").attr('type') == "text"){
-        $("#"+el+"").attr('type', "password")
-    }else{
-        $("#"+el+"").attr('type', "text")
+function toggleTypeInput(el) {
+    if ($("#" + el + "").attr('type') == "text") {
+        $("#" + el + "").attr('type', "password")
+    } else {
+        $("#" + el + "").attr('type', "text")
     }
+}
+
+function cadartAutenticarVisibilidade() {
+    var json = servidor + "/Secult/cadart/listarUsuarioByVisibilidade";
+    var onSuccess = function (result) {
+
+        dados = result.usuario;
+        if (dados[0]) {
+            for (var i in dados) {
+
+                var nome = dados[i].nome;
+                var arte = dados[i].nomeArte;
+                var cpf = dados[i].cpf;
+                var tel = dados[i].telefone;
+                var idArte = dados[i].idArte;
+                var sexo = dados[i].sexo;
+                var idade = dados[i].idade;
+                var nomeArtistico = dados[i].nomeArtistico;
+                var descricao = dados[i].descricao;
+                var projetoAtual = dados[i].projetoAtual;
+                var nomeArte = dados[i].nomeArte;
+                var email = dados[i].email;
+                var foto = dados[i].fotoPerfil;
+
+                if (foto == null) {
+                    urlImagem = "img/semfoto.jpeg";
+                } else {
+                    urlImagem = servidor + "/Secult/cadart/find/" + cpf;
+                }
+                $("#listaCadartAutentiar").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\")'  class=\"item item-avatar item-icon-right\">\n" +
+                    "                <img src='" + urlImagem + "'>\n" +
+                    "                <h2>" + nomeArtistico + "</h2>\n" +
+                    "                <p>" + arte + "</p>\n" +
+                    "            </a>")
+            };
+        }
+    }
+    $.getJSON(json, onSuccess).fail();
 }

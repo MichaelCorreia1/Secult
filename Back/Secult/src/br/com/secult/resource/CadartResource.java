@@ -37,7 +37,7 @@ import javax.ws.rs.core.Response;
  */
 @Path("/cadart")
 public class CadartResource {
-
+//a
     @GET
     @Path("/insertUsuario/{cpf}&{nome}&{nomeArtistico}&{telefone}&{email}&{sexo}&{descricao}&{projetoAtual}&{idade}&{senha}&{idArte}&{visibilidade}")
     @Produces(MediaType.APPLICATION_JSON)

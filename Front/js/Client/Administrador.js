@@ -204,6 +204,8 @@ function pullToRefreshHome() {
                 listarEventoNoticias();
                 $("#listaEventoHoje").empty();
                 listarEventoHoje();
+                $("#listaCadart").empty();
+                listarCadart()
             }, 500);
         }
     });

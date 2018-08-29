@@ -65,3 +65,11 @@ p.invalido {
     font-size: 12px;
     text-align: center;
 }
+.divSelect{
+    width: 100%;
+    display: inline-block;
+}
+.divSelect select{
+    width: 49%;
+    display: inline-block;
+}

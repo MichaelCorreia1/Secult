@@ -11,7 +11,6 @@ angular.module('app.controllers', [])
     .controller('noticiasCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             listarEventoNoticias();
-
             pullToRefreshHome();
 
         }])
@@ -24,6 +23,7 @@ angular.module('app.controllers', [])
     .controller('usuarioCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             textAreaUp();
+            botaoFotoFakeCadart(1);
         }])
 
     .controller('cadastrarCtrl', ['$scope', '$stateParams',
@@ -34,6 +34,7 @@ angular.module('app.controllers', [])
             verificarCpf();
             saveFotoLS();
             textAreaCadastro();
+            botaoFotoFakeCadart(2);
 
         }])
 
@@ -105,7 +106,7 @@ angular.module('app.controllers', [])
 
     .controller('autenticarCadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-
+            cadartAutenticarVisibilidade();
         }])
 
     .controller('updateEventoCtrl', ['$scope', '$stateParams',

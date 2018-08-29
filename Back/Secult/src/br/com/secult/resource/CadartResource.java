@@ -119,6 +119,32 @@ public class CadartResource {
 
     }
     
+     @GET
+    @Path("/getByVisibilidadeDiferenteS")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getByVisibilidadeDiferenteS() throws SQLException, Exception {
+
+        CadartDao cadartDao = new CadartDao();
+        List<Cadart> cadarts = cadartDao.getByVisibilidadeDiferenteS();
+
+        tratarImagem(cadarts);
+        Gson gson = new GsonBuilder().create();
+
+        JsonArray ArrayUsarios = gson.toJsonTree(cadarts).getAsJsonArray();
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("usuario", ArrayUsarios);
+
+        if (cadarts.size() > 0) {
+
+            return jsonObject.toString();
+        } else {
+
+            return jsonObject.toString();
+        }
+
+    }
+    
     public void tratarImagem(List<Cadart> usuarios) {
         for (int i = 0; i < usuarios.size(); i++) {
 

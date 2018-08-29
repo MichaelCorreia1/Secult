@@ -326,6 +326,31 @@ public class CadartDao {
         }
 
     }
+     public List<Cadart> getByVisibilidadeDiferenteS() throws SQLException, Exception {
+        PreparedStatement pstmt = null;
+        this.connection = new ConnectionFactory().getConnection();
+        String sql = "SELECT * FROM cadart WHERE visibilidade != 's'";
+        ResultSet rs = null;
+
+        try {
+
+            pstmt = connection.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+
+            return resultSetToObjectTransfer(rs);
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                pstmt.close();
+            } catch (Exception e) {
+            }
+
+        }
+
+    }
      private String convertToHash(Cadart cadart) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
         byte messageDigest[] = algorithm.digest(cadart.getSenha().getBytes("UTF-8"));

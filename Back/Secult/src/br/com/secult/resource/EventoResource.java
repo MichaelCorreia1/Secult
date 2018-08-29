@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.secult.resource;
+package br.com.secult.resource; 
 
 import br.com.secult.dao.EventoDao;
 import br.com.secult.model.Evento;

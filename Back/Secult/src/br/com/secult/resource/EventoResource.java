@@ -83,6 +83,24 @@ public class EventoResource {
         return jsonObject.toString();
 
     }
+    
+    @GET
+    @Path("/deletarEvento/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deletarEvento(@PathParam("id") long id) throws SQLException, Exception {
+        Evento evento = new Evento();
+        evento.setId(id);
+
+        EventoDao eventoDao = new EventoDao();
+
+        if (eventoDao.deletarEvento(evento)) {
+
+            return "{\"status\":\"ok\"}";
+        } else {
+
+            return "{\"status\":\"erro\"}";
+        }
+    }
 
     public void tratarImagem(List<Evento> usuarios) {
         for (int i = 0; i < usuarios.size(); i++) {

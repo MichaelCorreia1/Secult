@@ -250,6 +250,30 @@ public class CadartDao {
         return hasError;
     }
     
+     public boolean updateVisibilidade(Cadart cadart) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        PreparedStatement pstmt = null;
+        this.connection = new ConnectionFactory().getConnection();
+        boolean hasError = true;
+        String sql = "UPDATE cadart SET visibilidade='s' WHERE cpf=?";
+        try {
+            pstmt = connection.prepareStatement(sql);
+            
+            pstmt.setLong(1, cadart.getCpf());
+            pstmt.execute();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            hasError = false;
+        } finally {
+            try {
+                pstmt.close();
+            } catch (Exception e) {
+            }
+
+        }
+        return hasError;
+    }
+    
     public boolean delete(Cadart cadart){
         this.connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = null;

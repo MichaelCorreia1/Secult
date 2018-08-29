@@ -245,5 +245,30 @@ public class EventoDao {
         }
 
     }
+     
+     public boolean deletarEvento(Evento evento) throws Exception{
+         this.connection = new ConnectionFactory().getConnection();
+         PreparedStatement stmt = null;
+         boolean hasError = true;
+         
+         String sql = "DELETE FROM evento WHERE id=?";
+         try {
+             stmt = connection.prepareStatement(sql);
+             
+             stmt.setLong(1, evento.getId());
+             stmt.executeUpdate();
+             
+         } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            hasError = false;
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+
+        }
+        return hasError;
+    }
 
 }

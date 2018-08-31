@@ -1,7 +1,16 @@
-<ion-view title="Autenticar Cadart " id="page23">
-    <ion-content padding="true" class="has-header">
+<ion-view id="page23" title="Autenticar Usuarios">
+    <ion-nav-buttons side="right" class="has-header">
+        <button class="button icon ion-home button-clear" ui-sref="tabsController.noticias" onclick="pullToRefreshHome()"></button>
+    </ion-nav-buttons>
+    <ion-header-bar class="bar bar-subheader subCabecalho">
+        <div class="button-bar">
+            <a class="button button-calm button-small barra-autenticar desbilitado" disabled >Novos</a>
+            <a class="button button-calm button-small barra-autenticar" ui-sref="autenticadosCadart" onclick="listarCadart()">Autenticados</a>
+        </div>
+    </ion-header-bar>
+    <ion-content padding="false" class="has-header">
+
         <ion-list id="listaCadartAutentiar">
         </ion-list>
-
     </ion-content>
 </ion-view>

@@ -150,9 +150,14 @@ angular.module('app.routes', [])
                 controller: 'cultTobiasCidadeCtrl'
             })
             .state('cultTobias', {
-                url: '/page24',
+                url: '/page26',
                 templateUrl: 'templates/cultTobias.html',
                 controller: 'cultTobiasCtrl'
+            })
+            .state('autenticadosCadart', {
+                url: '/page24',
+                templateUrl: 'templates/autenticadosCadart.html',
+                controller: 'autenticadosCadartCtrl'
             });
 
         $urlRouterProvider.otherwise('/page1/page2')

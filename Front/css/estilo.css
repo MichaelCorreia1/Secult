@@ -73,3 +73,15 @@ p.invalido {
     width: 49%;
     display: inline-block;
 }
+.barra-autenticar.button{
+    font-size: 17px;
+    color: #000;
+    font-weight: 900
+}
+.bar-subheader.subCabecalho {
+    top: 44px;
+    height: 35px;
+    padding: 0px;
+}
+
+

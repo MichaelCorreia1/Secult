@@ -121,5 +121,9 @@ angular.module('app.controllers', [])
     .controller('cultTobiasCidadeCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
 
+        }])
+    .controller('autenticadosCadartCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+
         }]);
  

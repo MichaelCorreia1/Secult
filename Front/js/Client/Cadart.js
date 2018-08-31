@@ -296,7 +296,7 @@ function isCpf(strCPF) {
 function listarCadart() {
     var json = servidor + "/Secult/cadart/listarUsuarioByVisibilidade";
     var onSuccess = function (result) {
-
+        $("#listaCadart").empty();
         dados = result.usuario;
         if (dados[0]) {
             for (var i in dados) {
@@ -314,15 +314,13 @@ function listarCadart() {
                 var nomeArte = dados[i].nomeArte;
                 var email = dados[i].email;
                 var foto = dados[i].fotoPerfil;
+                var vindoDe = "";
 
 
-                if (foto == null) {
-                    urlImagem = "img/semfoto.jpeg";
-                } else {
-                    urlImagem = servidor + "/Secult/cadart/find/" + cpf;
-                }
+                urlImagem = servidor + "/Secult/cadart/find/" + cpf;
 
-                $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\")'  class=\"item item-avatar item-icon-right\">\n" +
+
+                $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right\">\n" +
                     "                <img src='" + urlImagem + "'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "                <p>" + arte + "</p>\n" +
@@ -450,10 +448,15 @@ function sairUsuario() {
 }
 
 
-function carregarInfoCadart(urlImagem, nome, idade, email, tel, descricao, projetoAtual, sexo, nomeArtistico, nomeArte, cpf) {
+function carregarInfoCadart(urlImagem, nome, idade, email, tel, descricao, projetoAtual, sexo, nomeArtistico, nomeArte, cpf, vindoDe) {
 
     setTimeout(function () {
-
+        var urlImagem = servidor + "/Secult/cadart/find/" + cpf;
+        $("#fotoInfo").attr('src', urlImagem);
+        setTimeout(function () {
+            var urlImagem = servidor + "/Secult/cadart/find/" + cpf;
+            $("#fotoInfo").attr('src', urlImagem);
+        })
         $("#nomeInfo").text(nome);
         $("#idadeInfo").text(idade);
         $("#emailInfo").text(email);
@@ -468,11 +471,11 @@ function carregarInfoCadart(urlImagem, nome, idade, email, tel, descricao, proje
         }
         $("#sexoInfo").text(sexo);
         $("#nomeArteInfo").text(nomeArte);
-        $("#fotoInfo").attr('src', urlImagem);
-        $("#listaInfoCdt").append("<button class=\"button button-dark button-block\" onclick=\"autenticarVisibilidade("+cpf+")\">Alterar</button>")
 
-
-    }, 200)
+        if (vindoDe == "adm") {
+            $("#listaInfoCdt").append("<button class=\"button button-dark button-block\" onclick=\"autenticarVisibilidadeS(" + cpf + ")\">Alterar</button>")
+        }
+    }, 300)
 }
 
 function carregarDadosPerfilCadart(urlImagem, nome, idade, email, tel, descricao, projetoAtual, sexo, nomeArtistico, idArte) {
@@ -682,13 +685,13 @@ function toggleTypeInput(el) {
 }
 
 function cadartAutenticarVisibilidade() {
+    $("#listaCadartAutentiar").empty();
     var json = servidor + "/Secult/cadart/getByVisibilidadeDiferenteS";
     var onSuccess = function (result) {
 
         dados = result.usuario;
         if (dados[0]) {
             for (var i in dados) {
-                console.log(dados[i])
                 var nome = dados[i].nome;
                 var arte = dados[i].nomeArte;
                 var cpf = dados[i].cpf;
@@ -701,16 +704,14 @@ function cadartAutenticarVisibilidade() {
                 var nomeArte = dados[i].nomeArte;
                 var email = dados[i].email;
                 var foto = dados[i].fotoPerfil;
+                var vindoDe = "adm"
 
-                if (foto == null) {
-                    urlImagem = "img/semfoto.jpeg";
-                } else {
-                    urlImagem = servidor + "/Secult/cadart/find/" + cpf;
-                }
-                $("#listaCadartAutentiar").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\")'  class=\"item item-avatar item-icon-right\">\n" +
+
+                urlImagem = servidor + "/Secult/cadart/find/" + cpf;
+
+                $("#listaCadartAutentiar").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'   class=\"item item-avatar item-icon-right\">\n" +
                     "                <img src='" + urlImagem + "'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
-                    "                <p>" + arte + "</p>\n" +
                     "            </a>")
             }
             ;
@@ -720,10 +721,34 @@ function cadartAutenticarVisibilidade() {
     $.getJSON(json, onSuccess).fail();
 }
 
-function autenticarVisibilidade(cpf) {
+function autenticarVisibilidadeS(cpf) {
     var json = servidor + "/Secult/cadart/updateVisibilidade/" + cpf;
     var onSuccess = function (result) {
-        if(result.status == "ok"){
+        if (result.status == "ok") {
+            swal({
+                title: "Usuário autenticdo com sucesso!",
+                icon: "success",
+                button: false,
+            });
+            setTimeout(function () {
+                window.location.href = "#/page24";
+                listarCadart();
+            }, 500)
+        } else {
+            swal({
+                title: "Ocorreu um erro!",
+                icon: "erro",
+                button: false,
+            });
+        }
+    }
+    $.getJSON(json, onSuccess).fail();
+}
+
+function autenticarVisibilidadeN(cpf) {
+    var json = servidor + "/Secult/cadart/updateVisibilidadeN/" + cpf;
+    var onSuccess = function (result) {
+        if (result.status == "ok") {
             swal({
                 title: "Usuário autenticdo com sucesso!",
                 icon: "success",
@@ -732,8 +757,8 @@ function autenticarVisibilidade(cpf) {
             setTimeout(function () {
                 window.location.href = "#/page1/page3";
                 listarCadart();
-            },500)
-        }else{
+            }, 500)
+        } else {
             swal({
                 title: "Ocorreu um erro!",
                 icon: "erro",

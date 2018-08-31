@@ -248,15 +248,15 @@ public class CadartResource {
     }
     
     @GET
-    @Path("/updateVisibilidade/{cpf}")
+    @Path("/updateVisibilidadeS/{cpf}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String updateSenha(@PathParam("cpf") long cpf) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public String updateVisibilidadeS(@PathParam("cpf") long cpf) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         Cadart cadart = new Cadart();
         cadart.setCpf(cpf);
 
         CadartDao cadartDao = new CadartDao();
 
-        if (cadartDao.updateVisibilidade(cadart)) {
+        if (cadartDao.updateVisibilidadeS(cadart)) {
 
             return "{\"status\":\"ok\"}";
         } else {
@@ -264,6 +264,25 @@ public class CadartResource {
             return "{\"status\":\"erro\"}";
         }
     }
+    
+     @GET
+    @Path("/updateVisibilidadeN/{cpf}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String updateVisibilidadeN(@PathParam("cpf") long cpf) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        Cadart cadart = new Cadart();
+        cadart.setCpf(cpf);
+
+        CadartDao cadartDao = new CadartDao();
+
+        if (cadartDao.updateVisibilidadeN(cadart)) {
+
+            return "{\"status\":\"ok\"}";
+        } else {
+
+            return "{\"status\":\"erro\"}";
+        }
+    }
+    
     @POST
     @Path("/salvarFoto/{cpf}")
     @Produces(MediaType.APPLICATION_JSON)

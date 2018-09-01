@@ -84,4 +84,12 @@ p.invalido {
     padding: 0px;
 }
 
+.pCult p{
+    text-indent: 5px;
+    text-align: -webkit-left;
+    font-style: initial;
+    font-family: -webkit-body;
+    font-variant: proportional-width;
+}
+
 

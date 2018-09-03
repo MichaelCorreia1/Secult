@@ -27,14 +27,13 @@
                 <label class="item item-input item-icon-right" >
                     <span class="input-label">Senha Atual</span>
                     <input type="password"  id="senhaAtualUp">
-                    <i class="icon ion-eye" (click)="toggleTypeInput('senhaAtualUp')"></i>
+                    <i class="icon ion-eye" style="display: none" onclick="toggleTypeInput('senhaAtualUp')"></i>
                 </label>
 
                 <label class="item item-input">
                     <span class="input-label">Nova Senha</span>
                     <input type="password" id="senhaNovaUp" >
                 </label>
-                <button class="button button-dark button-block " onclick="toggleTypeInput('senhaAtualUp')">Alterar Tipo</button>
 
                 <p class="invalido" id="erroSenhaEmailUp" style="display: none">Senha ou email incorretos</p>
                 <button class="button button-dark button-block " onclick="autenticarUpSenha()">Alterar Senha</button>

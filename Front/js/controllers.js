@@ -106,7 +106,7 @@ angular.module('app.controllers', [])
 
     .controller('autenticarCadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-            cadartAutenticarVisibilidade();
+
         }])
 
     .controller('updateEventoCtrl', ['$scope', '$stateParams',

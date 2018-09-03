@@ -473,7 +473,15 @@ function carregarInfoCadart(urlImagem, nome, idade, email, tel, descricao, proje
         $("#nomeArteInfo").text(nomeArte);
 
         if (vindoDe == "adm") {
-            $("#listaInfoCdt").append("<button class=\"button button-dark button-block\" onclick=\"autenticarVisibilidadeS(" + cpf + ")\">Alterar</button>")
+            $("#btnInfo").css('display','block')
+            $("#btnInfo").text('Tornar Usuario Visivel Na lista')
+
+            $("#btnInfo").attr('onclick','autenticarVisibilidadeS(' + cpf + ')');
+        }
+        if (vindoDe == "desAutenticar") {
+            $("#btnInfo").css('display','block')
+            $("#btnInfo").text('Tornar Usuario Invisivel Na lista')
+            $("#btnInfo").attr('onclick','autenticarVisibilidadeN(' + cpf + ')');
         }
     }, 300)
 }

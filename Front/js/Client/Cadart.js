@@ -105,13 +105,13 @@ function saveFotoLSUp() {
 
 function textAreaCadastro() {
     $("#descricaoCdt").focusin(function () {
-        $(this).attr('rows', '12')
+        $(this).attr('rows', '11')
     })
     $("#descricaoCdt").focusout(function () {
         $(this).removeAttr('rows')
     })
     $("#projetosCdt").focusin(function () {
-        $(this).attr('rows', '12')
+        $(this).attr('rows', '11')
     })
     $("#projetosCdt").focusout(function () {
         $(this).removeAttr('rows')
@@ -120,13 +120,13 @@ function textAreaCadastro() {
 
 function textAreaUp() {
     $("#descricaoUp").focusin(function () {
-        $(this).attr('rows', '12')
+        $(this).attr('rows', '11')
     })
     $("#descricaoUp").focusout(function () {
         $(this).removeAttr('rows')
     })
     $("#projetosUp").focusin(function () {
-        $(this).attr('rows', '12')
+        $(this).attr('rows', '11')
     })
     $("#projetosUp").focusout(function () {
         $(this).removeAttr('rows')
@@ -260,8 +260,8 @@ function cadastrarCdt() {
             }, 2000)
         } else if (resultado == "erro") {
             swal({
-                title: "CPF ja Cadastrado!",
-                text: "Aguarde nosso pessoal validar seus dados!",
+                title: "CPF já cadastrado!",
+                text: "",
                 icon: "error",
                 button: false,
             });
@@ -347,7 +347,7 @@ function InputEmailValido() {
             if (emailImp.indexOf("@") == 0) {
                 $("#email").focus();
                 $("#validoEmail").empty();
-                $("#validoEmail").append("Email preisa ser valido");
+                $("#validoEmail").append("Email precisa ser valido");
                 setTimeout(function () {
                     $("#validoEmail").empty();
                 }, 4000)
@@ -619,7 +619,7 @@ function validarSenhaCdt() {
             dados = result.usuario;
             if (dados[0]) {
                 swal({
-                    title: "Senha Alterada!",
+                    title: "Senha alterada!",
                     icon: "success",
                     button: false,
                 });
@@ -691,4 +691,3 @@ function toggleTypeInput(el) {
         $("#" + el + "").attr('type', "text")
     }
 }
-

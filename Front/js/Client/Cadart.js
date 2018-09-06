@@ -316,7 +316,6 @@ function listarCadart() {
                 var foto = dados[i].fotoPerfil;
                 var vindoDe = "";
 
-console.log(tel)
                 urlImagem = servidor + "/Secult/cadart/find/" + cpf;
 
 
@@ -471,6 +470,7 @@ function carregarInfoCadart(urlImagem, nome, idade, email, tel, descricao, proje
         }
         $("#sexoInfo").text(sexo);
         $("#nomeArteInfo").text(nomeArte);
+        $("#btnInfo").css('display','none')
 
         if (vindoDe == "adm") {
             $("#btnInfo").css('display','block')

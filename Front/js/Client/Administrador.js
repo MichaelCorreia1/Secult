@@ -32,11 +32,11 @@ function cadastroEvento() {
         Administrador = jsonAdministrador.status;
 
         if (Administrador == "ok") {
+
             setTimeout(function () {
                 window.location.href = "#/page18";
-            }, 1000)
-        }
-        ;
+            }, 1000);
+        };
     };
     $.getJSON(json, onSuccess).fail();
 }
@@ -58,7 +58,7 @@ function listarEvento() {
                 var descricao = dados[i].descricao;
                 var visibilidade = dados[i].visibilidade;
                 var tipo = dados[i].tipo_evento
-
+                var imagem = servidor + "/Secult/evento/find/"+id;
                 var dataCadastro = dados[i].data_cadastro;
                 var horaEvento = dados[i].hora_evento;
                 var dataEvento = dados[i].data_evento;
@@ -66,10 +66,10 @@ function listarEvento() {
 
 
                 $("#inicioListaEventoHoje").append("<ul class='list' >\n" +
-                    "            <li class=\"item item-stable item-icon-right item-icon-left  \" >\n" +
-                    "                    <i id='visivel" + id + "' class=\"icon ion-eye inline \"></i>\n" +
-                    "                    <h2 id='titulo" + id + "'>" + titulo + "</h2>\n" +
-                    "                    <i id='checked" + id + "' class=\"icon ion-ios-checkmark inline \"></i>\n" +
+                    "            <li class=\"item item-thumbnail-left item-icon-right balanced\">\n" +
+                    "            <img src='" + imagem + "'> \n" +
+                    "                    <h2 id='titulo" + id + "'  style=\"margin: 0px; font-size: 17px; font-weight: bolder; margin-top: 30px;\">" + titulo + "</h2>\n" +
+                    "                    <i id='checked" + id + "' class=\"icon ion-eye inline\"></i>\n" +
                     "            </li>\n" +
                     "\n" +
                     "            <li class=\"item\" style=\"padding: 0px\">\n" +
@@ -247,7 +247,7 @@ function inserirFotoEvento(id) {
         },
 
         complete: function () {
-            window.location = "#/page1/page2";
+            window.location = "#/page18";
             location.reload();
         },
     })
@@ -255,7 +255,38 @@ function inserirFotoEvento(id) {
 }
 function saveFotoEventoLS() {
 
-    document.getElementById("tableBannerEvento").style.display = "none";
+    //document.getElementById("tableBannerEvento").style.display = "none";
+    var bannerImage = document.getElementById("inputImagemEvento");
+
+    var img = document.getElementById("tableBannerEvento");
+
+    bannerImage.addEventListener("change", function () {
+
+        var file = this.files[0];
+        if (file.type.indexOf("image") < 0) {
+            alert("arquivo invalido");
+            bannerImage.value = "";
+            return;
+        }
+        var fReader = new FileReader();
+        fReader.onload = function () {
+            img.onload = function () {
+
+                localStorage.setItem("fotoCadastroEvento", toBase64String(img));
+
+            };
+            img.src = fReader.result;
+
+        };
+
+        fReader.readAsDataURL(file);
+
+    });
+
+}
+function saveFotoEventoLSUp() {
+
+    //document.getElementById("tableBannerEvento").style.display = "none";
     var bannerImage = document.getElementById("inputImagemEvento");
 
     var img = document.getElementById("tableBannerEvento");
@@ -335,7 +366,7 @@ function cadartAutenticarVisibilidadeS() {
         if (dados[0]) {
             for (var i in dados) {
                 var nome = dados[i].nome;
-                var arte = dados[i].nomeArte;
+                var arte = dados[i].id;
                 var cpf = dados[i].cpf;
                 var tel = dados[i].telefone;
                 var sexo = dados[i].sexo;
@@ -345,7 +376,6 @@ function cadartAutenticarVisibilidadeS() {
                 var projetoAtual = dados[i].projetoAtual;
                 var nomeArte = dados[i].nomeArte;
                 var email = dados[i].email;
-                var foto = dados[i].fotoPerfil;
                 var vindoDe = "adm"
 
 

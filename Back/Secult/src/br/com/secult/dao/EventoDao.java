@@ -129,7 +129,7 @@ public class EventoDao {
     public List<Evento> getById(Evento evento) throws SQLException, Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
-        String sql = "select * from usuario where  id = ?";
+        String sql = "select * from evento where  id = ?";
         ResultSet rs = null;
 
         try {

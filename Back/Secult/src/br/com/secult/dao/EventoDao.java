@@ -126,16 +126,13 @@ public class EventoDao {
         }
     }
 
-    public List<Evento> getById(Evento evento) throws SQLException, Exception {
+    public List<Evento> getEventoById(Evento evento) throws SQLException, Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
-        String sql = "select * from usuario where  id = ?";
+        String sql = "select * from evento where  id = ?";
         ResultSet rs = null;
-
         try {
-
             pstmt = connection.prepareStatement(sql);
-
             pstmt.setObject(1, evento.getId());
             rs = pstmt.executeQuery();
 
@@ -149,7 +146,6 @@ public class EventoDao {
                 pstmt.close();
             } catch (Exception e) {
             }
-
         }
 
     }

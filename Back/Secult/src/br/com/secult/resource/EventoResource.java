@@ -84,6 +84,29 @@ public class EventoResource {
 
     }
     
+     @GET
+    @Path("/getEventoById/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getEventoById(@PathParam("id") long id) throws SQLException, Exception {
+        Evento evento = new Evento();
+        evento.setId(id);
+
+        EventoDao eventoDao = new EventoDao();
+        List<Evento> even = eventoDao.getEventoById(evento);
+
+        Gson gson = new GsonBuilder().create();
+
+        tratarImagem(even);
+
+        JsonArray ArrayUsuarios = gson.toJsonTree(even).getAsJsonArray();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("eventos", ArrayUsuarios);
+
+        return jsonObject.toString();
+
+    }
+    
+    
     @GET
     @Path("/deletarEvento/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -152,7 +175,7 @@ public class EventoResource {
             EventoDao eventoDao = new EventoDao();
             Evento evento = new Evento();
             evento.setId(id);
-            evento = eventoDao.getById(evento).get(0);
+            evento = eventoDao.getEventoById(evento).get(0);
             final byte[] foto = evento.getImagem();
 
             if (foto == null) {

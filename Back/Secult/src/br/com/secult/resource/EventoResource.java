@@ -55,11 +55,14 @@ public class EventoResource {
         evento.setId_localidade(id_povoado);
 
         EventoDao eventoDao = new EventoDao();
-
-        if (eventoDao.insertEvento(evento)) {
-            return "{\"status\":\"ok\"}";
-        } else {
+        long id;
+        id = eventoDao.insertEvento(evento);
+        
+        if (id == 0) {
             return "{\"status\":\"erro\"}";
+            
+        } else {
+            return "{\"status\":\"ok\"}" + id;
         }
 
     }

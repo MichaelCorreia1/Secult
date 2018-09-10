@@ -62,7 +62,7 @@ public class EventoResource {
             return "{\"status\":\"erro\"}";
             
         } else {
-            return "{\"status\":\"ok\"}" + id;
+            return "{\"status\":}" + id;
         }
 
     }

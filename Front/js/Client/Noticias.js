@@ -11,6 +11,7 @@ function listarEventoNoticias() {
             for (var i in dados) {
 
                 var id = dados[i].id;
+                var imagem = servidor + "/Secult/evento/find/"+id;
                 var titulo = dados[i].titulo;
                 var descricao = dados[i].descricao;
                 var visibilidade = dados[i].visibilidade;
@@ -22,14 +23,14 @@ function listarEventoNoticias() {
                 var idLocalidade = dados[i].id_localidade;
 
 
-                    $("#listaEventoNoticas").append(" <a onclick='preencherNoticiaInfo(\""+descricao+'","'+ titulo+"\")' href='#/page21' class='linkSemDecoracao'> <div class=\"list card manual-card-fullwidth \" id=\"noticias-card21\" style='padding-top: 0px'>\n" +
+                    $("#listaEventoNoticas").append(" <a onclick='preencherNoticiaInfo(\""+descricao+'","'+ imagem +'","'+ titulo+"\")' href='#/page21' class='linkSemDecoracao'> <div class=\"list card manual-card-fullwidth \" id=\"noticias-card21\" style='padding-top: 0px'>\n" +
                         "            <ul class=\"item item-icon-left item-icon-right positive\">\n" +
                         "                <i class=\"icon ion-android-calendar \"></i>\n" +
                         "                <p style=\"text-align: center; font-weight: bold; font-size: large; color: #3f83f5;\">"+titulo+"</p>\n" +
                         "                <i class=\"icon ion-android-share-alt\"></i>\n" +
                         "            </ul>\n" +
                         "            <div class=\" item item-image \">\n" +
-                        "                <img src=\"img/0IInOP0dQUyLRwgnLH86_e1.jpg\"\n" +
+                        "                <img src='"+imagem+"'n" +
                         "                     style=\"display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;\">\n" +
                         "            </div>\n" +
                         "            <div id=\"noticias-markdown4\" style=\"text-align:center;\" class=\"show-list-numbers-and-dots padding \">\n" +
@@ -63,14 +64,19 @@ function listarEventoNoticias() {
 
 }
 
-function preencherNoticiaInfo(d,t) {
+function preencherNoticiaInfo(d,imagem ,t) {
     $("#titloNoticia").empty();
     $("#descricaoNoticia").empty();
     setTimeout(function () {
+        $("#imagemNoticiaInfo").attr('src', imagem);
         $("#titloNoticia").append(""+t);
         $("#descricaoNoticia").append(""+d);
 
     },10)
+}
+
+function abrirImpFile(id){
+    $('#'+id).click()
 }
 
 

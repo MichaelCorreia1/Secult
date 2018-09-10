@@ -3,6 +3,12 @@
         <button class="button icon ion-home button-clear" ui-sref="tabsController.noticias"></button>
     </ion-nav-buttons>
     <ion-content padding="true" class="has-header has-footer" >
+        <label class="item item-input item-stacked-label" for="btnFotoCadart">
+            <img src="img/semImagem.png" id="tableBannerEvento" style="display: block; width: 300px; height: 250px; margin-left: auto; margin-right: auto;">
+            <input type="file" id="inputImagemEvento" style="display: none" >
+        </label>
+        <button style="font-size:15px;border-radius:5px 5px 5px 5px;"class="button button-dark button-small button-block" id="btnFotoCadart" onclick="abrirImpFile('inputImagemEvento')">Alterar Foto</button>
+
         <form class="list">
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Titulo</span>
@@ -30,7 +36,6 @@
                     <option value="">Selecione</option>
                     <option value="1">Aqui</option>
                     <option value="2">Ali</option>
-
                 </select>
             </label>
             <label class="item item-select">
@@ -49,11 +54,6 @@
                     <option value="p">Pequeno</option>
                     <option value="g">Grande</option>
                 </select>
-            </label>
-
-            <label class="item item-input item-stacked-label">
-                <input type="file" id="inputImagemEvento">
-                <img src="" id="tableBannerEvento">
             </label>
 
         </form>

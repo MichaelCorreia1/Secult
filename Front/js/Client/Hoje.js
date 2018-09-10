@@ -29,7 +29,7 @@ function listarEventoHoje() {
                     "        <h2balanced>" + titulo + "\n" +
                     "          <p style=\"white-space:normal;\">" + descricao.substring(0, 47) + "...</p>\n" +
                     "          <i class=\"icon ion-android-share\"></i>\n" +
-                    "        </h2balanced>\n" +
+                    "        </h2 balanced>\n" +
                     "      </li>\n" +
                     "      <li class=\"item item-icon-left\">\n" +
                     "        <i class=\"icon ion-android-star-outline\"></i>Entrada da Cidade\n" +

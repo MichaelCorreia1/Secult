@@ -36,7 +36,7 @@ function listarEventoNoticias() {
                         "            <div id=\"noticias-markdown4\" style=\"text-align:center;\" class=\"show-list-numbers-and-dots padding \">\n" +
                         "                <p style=\"margin-top:0px;color:#000000;\" >"+descricao+"</p>\n" +
                         "            </div>\n" +
-                        "            <div class=\" item item-image\">\n" +
+                        "            <div class=\" item item-image\" style='display: none'>\n" +
                         "                <img src=\"img/BuueI7PTdiAXyX5Enotk_WhatsAppImage2018-07-31at13.51.37.jpeg\"\n" +
                         "                     style=\"display: block; width: 100%; height: 60px; margin-left: auto; margin-right: auto;\">\n" +
                         "            </div>\n" +

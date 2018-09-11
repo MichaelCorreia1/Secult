@@ -86,12 +86,12 @@ angular.module('app.controllers', [])
 
     .controller('administradorCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-
+            listarEvento();
         }])
 
     .controller('cadastroEventoCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-
+            saveFotoEventoLSCdt()
         }])
 
     .controller('informacoesNoticiasCtrl', ['$scope', '$stateParams',

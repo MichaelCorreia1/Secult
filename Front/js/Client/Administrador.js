@@ -30,8 +30,9 @@ function cadastroEvento() {
         jsonAdministrador = result;
 
         Administrador = jsonAdministrador.status;
-
-        if (Administrador == "ok") {
+        id = jsonAdministrador.status
+        alert(id)
+        if (Administrador != "erro") {
 
             setTimeout(function () {
                 window.location.href = "#/page18";
@@ -284,12 +285,12 @@ function saveFotoEventoLS() {
     });
 
 }
-function saveFotoEventoLSUp() {
+function saveFotoEventoLSCdt() {
 
     //document.getElementById("tableBannerEvento").style.display = "none";
-    var bannerImage = document.getElementById("inputImagemEvento");
+    var bannerImage = document.getElementById("inputImagemEventoCdt");
 
-    var img = document.getElementById("tableBannerEvento");
+    var img = document.getElementById("tableBannerEventoCdt");
 
     bannerImage.addEventListener("change", function () {
 

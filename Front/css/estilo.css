@@ -92,4 +92,6 @@ p.invalido {
     font-variant: proportional-width;
 }
 
-
+.none {
+    display: none;
+}

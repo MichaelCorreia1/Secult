@@ -159,12 +159,12 @@ function verificarTel() {
     $("#telCdt").keyup(function () {
         if ($("#telCdt").val() != '') {
             if ($("#telCdt").val().length < 14 & $("#telCdt").val().length > 0) {
-                $("#TelCdtInvalido").show('pulsate');
+                $("#telInvalido").show('pulsate');
             } else {
-                $("#TelCdtInvalido").hide();
+                $("#telInvalido").hide();
             }
         } else {
-            $("#TelCdtInvalido").hide();
+            $("#telInvalido").hide();
         }
     })
 }
@@ -207,7 +207,7 @@ function validarCampos() {
     var arte = $("#arteCdt").val();
     var senha = $("#senhaCdt").val();
     var senhaRed = $("#senhaRedCdt").val();
-    if (isCpf(cpf) & nome != "" & email != "" & tel != "" & nomeArt != "" & arte != "" & senha != "" & dtNascimento != "" & sexo != "") {
+    if (isCpf(cpf) & nome != "" & validarEmail('emalCdt') & tel.length==14 & nomeArt != "" & arte != "" & senha != "" & dtNascimento != "" & sexo != "") {
         if (senha === senhaRed) {
             cadastrarCdt();
         }
@@ -372,6 +372,23 @@ function InputEmailValido() {
         }, 4000)
     }
 }
+function validarEmail(id) {
+    var emailImp = $("#"+id).val();
+    if (emailImp != "") {
+        if (emailImp.indexOf("@") != -1) {
+            if (emailImp.indexOf("@") == 0) {
+               return false
+                $("#"+id).focus()
+            } else {
+                return true
+            }
+        } else {
+            return false
+        }
+    } else {
+        return false
+    }
+}
 
 
 function autenticar(txtEmail, txtSenha) {
@@ -483,7 +500,7 @@ function carregarInfoCadart(urlImagem, nome, idade, email, tel, descricao, proje
             $("#btnInfo").text('Tornar Usuario Invisivel Na lista')
             $("#btnInfo").attr('onclick','autenticarVisibilidadeN(' + cpf + ')');
         }
-    }, 300)
+    }, 100)
 }
 
 function carregarDadosPerfilCadart(urlImagem, nome, idade, email, tel, descricao, projetoAtual, sexo, nomeArtistico, idArte) {

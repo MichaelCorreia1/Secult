@@ -41,6 +41,13 @@ function cadastroEvento() {
     };
     $.getJSON(json, onSuccess).fail();
 }
+function doRefresh() {
+    alert('inicio')
+};
+
+function doRefresh() {
+    alert(oi)
+}
 
 function listarEvento() {
 

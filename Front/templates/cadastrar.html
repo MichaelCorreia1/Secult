@@ -3,10 +3,11 @@
         <div class="spacer" style="width: 300px; height: 5px;"></div>
         <div>
             <img src="img/semfoto.jpeg" id="tableBanner"
-                 style="display: block; width: 30%; height: auto; margin-left: auto; margin-right: auto;">
-            <input id = "bannerImg" type="file" style="display: none" class="btnFotoCadartCdt">
+                 style="display: block; width: 100px; height: 120px; margin-left: auto; margin-right: auto;">
+            <input id="bannerImg" type="file" style="display: none" class="btnFotoCadartCdt">
             <button style="font-size:15px;border-radius:5px 5px 5px 5px;"
-                    class="button button-dark button-small button-block" id="btnFotoCadart" onclick="saveFotoLSUp(1)">Alterar Foto
+                    class="button button-dark button-small button-block" id="btnFotoCadart" onclick="saveFotoLSUp(1)">
+                Alterar Foto
             </button>
         </div>
 
@@ -14,11 +15,13 @@
         <form id="cadastrar-form9" class="list">
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Descrição:</span>
-                <textarea maxlength="500" placeholder="Escreva uma breve descrição sobre você" id="descricaoCdt"></textarea>
+                <textarea maxlength="500" placeholder="Escreva uma breve descrição sobre você"
+                          id="descricaoCdt"></textarea>
             </label>
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Projetos Atuais:</span><textarea
-                    placeholder="O que esta fazendo ou projetos futuros" id="projetosCdt" maxlength="400"></textarea></label>
+                    placeholder="O que esta fazendo ou projetos futuros" id="projetosCdt"
+                    maxlength="400"></textarea></label>
             <label class="item item-input item-stacked-label">
                 <span class="input-label ">Nome*</span>
                 <input type="text" placeholder="Seu nome completo" id="nomeCdt">
@@ -28,28 +31,30 @@
                 <input type="text" placeholder="Nome pelo qual é conhecido" id="nomeArtCdt">
             </label>
             <label class="item item-input item-stacked-label">
-                <span class="input-label" >CPF*</span>
+                <span class="input-label">CPF*</span>
                 <input type="text" placeholder="Seu Cpf" id="cpfCdt">
                 <p class="invalido" id="cpfCdtInvalido" style="display: none">Cpf Inválido!</p>
             </label>
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Email*</span>
-                <input type="text" placeholder="Seu Email" id="emalCdt">
+                <input type="email" placeholder="Seu Email" id="emalCdt">
             </label>
 
             <div style="display: inline-block; margin: 0px; width: 100%">
                 <label class="item item-input" style="margin: 0px; width: 49.3%; display: inline-block;">
                     <span class="input-label ">Telefone</span>
                     <input type="text" id="telCdt">
+                    <p id="telInvalido" style="display: none; color: red; text-align: left; font-size: 9pt;">Telefone
+                        precisa ser válido</p>
                 </label>
                 <label class="item item-input" style="margin: 0px; width: 49%; display: inline-block;">
                     <span class="input-label" for="dtNascimentoUp">Sua Idade</span>
-                    <input type="number" id="dataNascimentoCdt" >
+                    <input type="number" id="dataNascimentoCdt">
                 </label>
             </div>
             <div class="divSelect">
                 <select id="sexoCdt" class="item">
-                    <option value="">Seu Sexo</option>
+                    <option value="">Seu Gênero</option>
                     <option value="m">Masculino</option>
                     <option value="f">Feminino</option>
                 </select>
@@ -66,7 +71,8 @@
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Senha*</span>
                 <input type="password" placeholder="Sua Senha" id="senhaCdt">
-                <p class="invalido" id="senhaCdtInvalido" style="display: none">Senha deve conter no pelo mínimo 6 caracteres!</p>
+                <p class="invalido" id="senhaCdtInvalido" style="display: none">Senha deve conter no pelo mínimo 6
+                    caracteres!</p>
 
             </label>
             <label class="item item-input item-stacked-label">
@@ -76,7 +82,8 @@
             </label>
             <p class="invalido" id="cadastroRedCdtInvalido" style="display: none">Preencha todos os campos!</p>
 
-            <button id="cadastrarCdt" onclick="validarCampos()" class="button button-dark button-block">Cadastrar</button>
+            <button id="cadastrarCdt" onclick="validarCampos()" class="button button-dark button-block">Cadastrar
+            </button>
 
         </form>
     </ion-content>

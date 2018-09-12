@@ -5,6 +5,10 @@
     </ion-nav-buttons>
 
     <ion-content padding="true" class="has-header refresh">
+        <ion-refresher
+                pulling-text="Pull to refresh..."
+                on-refresh="listarEvento()">
+        </ion-refresher>
         <form id="administrador-form" class="list">
             <label class="item item-select">
                 <span class="input-label">Filtrar por:</span>

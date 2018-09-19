@@ -70,7 +70,7 @@ public class CadartResource {
     @GET
     @Path("/listarUsuarios")
     @Produces(MediaType.APPLICATION_JSON)
-    public String listarUsuarios() throws SQLException, Exception {
+    public Response listarUsuarios() throws SQLException, Exception {
 
         CadartDao usuarioDao = new CadartDao();
         List<Cadart> usuarios = usuarioDao.listarUsuario();
@@ -84,19 +84,14 @@ public class CadartResource {
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("usuario", ArrayUsarios);
 
-        if (usuarios.size() > 0) {
+                return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
-            return jsonObject.toString();
-        } else {
-
-            return jsonObject.toString();
-        }
 
     }
     @GET
     @Path("/listarUsuarioByVisibilidade")
     @Produces(MediaType.APPLICATION_JSON)
-    public String listarUsuarioByVisibilidade() throws SQLException, Exception {
+    public Response listarUsuarioByVisibilidade() throws SQLException, Exception {
 
         CadartDao usuarioDao = new CadartDao();
         List<Cadart> usuarios = usuarioDao.listarUsuarioByVisibilidade();
@@ -109,20 +104,15 @@ public class CadartResource {
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("usuario", ArrayUsarios);
 
-        if (usuarios.size() > 0) {
+                return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
-            return jsonObject.toString();
-        } else {
-
-            return jsonObject.toString();
-        }
 
     }
     
      @GET
     @Path("/getByVisibilidadeDiferenteS")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByVisibilidadeDiferenteS() throws SQLException, Exception {
+    public Response getByVisibilidadeDiferenteS() throws SQLException, Exception {
 
         CadartDao cadartDao = new CadartDao();
         List<Cadart> cadarts = cadartDao.getByVisibilidadeDiferenteS();
@@ -135,13 +125,8 @@ public class CadartResource {
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("usuario", ArrayUsarios);
 
-        if (cadarts.size() > 0) {
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
-            return jsonObject.toString();
-        } else {
-
-            return jsonObject.toString();
-        }
 
     }
     
@@ -205,7 +190,7 @@ public class CadartResource {
     @GET
     @Path("/autenticar/{email}&{senha}")
     @Produces("application/json")
-    public String autenticar(@PathParam("email") String email, @PathParam("senha") String senha) throws SQLException, Exception {
+    public Response autenticar(@PathParam("email") String email, @PathParam("senha") String senha) throws SQLException, Exception {
         Cadart cadart = new Cadart();
         cadart.setEmail(email);
         cadart.setSenha(senha);
@@ -224,8 +209,9 @@ public class CadartResource {
         
 
      
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
-            return jsonObject.toString();
+            
         
     }
     @GET

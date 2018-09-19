@@ -31,22 +31,16 @@ function cadastroEvento() {
 
         Administrador = jsonAdministrador.status;
         id = jsonAdministrador.status
-        alert(id)
         if (Administrador != "erro") {
 
             setTimeout(function () {
                 window.location.href = "#/page18";
             }, 1000);
+        }else{
+            alert("Não foi possivel Cadastrar o evento")
         };
     };
     $.getJSON(json, onSuccess).fail();
-}
-function doRefresh() {
-    alert('inicio')
-};
-
-function doRefresh() {
-    alert(oi)
 }
 
 function listarEvento() {
@@ -82,7 +76,7 @@ function listarEvento() {
                     "\n" +
                     "            <li class=\"item\" style=\"padding: 0px\">\n" +
                     "                <div  class=\"button-bar\">\n" +
-                    "                    <a class='button button-light button-outline' href='#/page20' onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + idLocalidade + "\")'><div  style=\"font-weight:600;color:#0092FF;font-size:17px;\"\n" +
+                    "                    <a class='button button-light button-outline' href='#/page20' onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\")'><div  style=\"font-weight:600;color:#0092FF;font-size:17px;\"\n" +
                     "                              id='" + id + "'>Editar\n" +
                     "                    </div></a>\n" +
                     "                    <a class='button button-light button-outline'><div  style=\"font-weight:600;color:#FF0020;font-size:17px;\">Excluir\n" +
@@ -119,10 +113,12 @@ function listarEvento() {
 
 }
 
-function preencherEventoAtualizar(id, visibilidade, titulo, dataEvento, descricao, horaEvento, tipo, idLocalidade) {
+function preencherEventoAtualizar(id, visibilidade, titulo, dataEvento, descricao, horaEvento, tipo, idLocalidade, imagem) {
     id = $("#" + id).attr('id');
     setTimeout(function () {
         $("#tituloUp").val(titulo);
+        $("#tableBannerEvento").attr('src',imagem);
+        localStorage.setItem('imgTeste', imagem)
         $("#descricaoUp").val(descricao);
         $("#dataEventoUp").val(dataEvento);
         $("#horarioUp").val(horaEvento);

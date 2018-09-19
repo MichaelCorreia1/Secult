@@ -1,9 +1,10 @@
+
 function listarEventoNoticias() {
 
     var json = servidor + "/Secult/evento/listarEventoGrande";
-
+    alert(json)
     var onSuccess = function (result) {
-
+        alert(result.eventos[0].id)
         dados = result.eventos;
 
         if (dados[0]) {
@@ -23,7 +24,7 @@ function listarEventoNoticias() {
                 var idLocalidade = dados[i].id_localidade;
 
 
-                    $("#listaEventoNoticas").append(" <a onclick='preencherNoticiaInfo(\""+descricao+'","'+ imagem +'","'+ titulo+"\")' href='#/page21' class='linkSemDecoracao'> <div class=\"list card manual-card-fullwidth \" id=\"noticias-card21\" style='padding-top: 0px'>\n" +
+                    $("#listaEventoNoticas").append("  <div class=\"list card manual-card-fullwidth \" style='padding-top: 0px'>\n" +
                         "            <ul class=\"item item-icon-left item-icon-right positive\">\n" +
                         "                <i class=\"icon ion-android-calendar \"></i>\n" +
                         "                <p style=\"text-align: center; font-weight: bold; font-size: large; color: #3f83f5;\">"+titulo+"</p>\n" +
@@ -33,46 +34,45 @@ function listarEventoNoticias() {
                         "                <img src='"+imagem+"'n" +
                         "                     style=\"display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;\">\n" +
                         "            </div>\n" +
-                        "            <div id=\"noticias-markdown4\" style=\"text-align:center;\" class=\"show-list-numbers-and-dots padding \">\n" +
-                        "                <p style=\"margin-top:0px;color:#000000;\" >"+descricao+"</p>\n" +
+                        "            <div id='"+id+"' style=\"text-align:left; text-indent: 10px;\" class=\"show-list-numbers-and-dots padding \">\n" +
+                        "                <p style=\"margin-top:0px;color:#000000;\" >"+descricao.substring(0, 130)+"...<span style='color: #787878;' onclick='lerMais(\""+id+'","'+ descricao+"\")'> mais</span></p>\n" +
+                        "<a href='https://api.whatsapp.com/send?text=aaaaaaaaaaaaaa'>Aeeeooo</a>"+
                         "            </div>\n" +
                         "            <div class=\" item item-image\" style='display: none'>\n" +
-                        "                <img src=\"img/BuueI7PTdiAXyX5Enotk_WhatsAppImage2018-07-31at13.51.37.jpeg\"\n" +
+                        "                <img src=\"img/semfoto.jpg\"\n" +
                         "                     style=\"display: block; width: 100%; height: 60px; margin-left: auto; margin-right: auto;\">\n" +
                         "            </div>\n" +
-                        "        </div></a>");
-
-
+                        "        </div>");
 
                 if (visibilidade != "" & titulo != "" & dataEvento != "" & descricao != "" & horaEvento != "" & tipo != "" & idLocalidade != "" & dataCadastro != "") {
                     $("#alert" + id).hide();
                 } else {
                     $("#checked" + id).hide();
                 }
-
-
             }
         }
 
     };
-
-
     $.getJSON(json, onSuccess).fail(
-
+        alert('erro')
     );
-
-
 }
 
-function preencherNoticiaInfo(d,imagem ,t) {
-    $("#titloNoticia").empty();
-    $("#descricaoNoticia").empty();
-    setTimeout(function () {
-        $("#imagemNoticiaInfo").attr('src', imagem);
-        $("#titloNoticia").append(""+t);
-        $("#descricaoNoticia").append(""+d);
+function lerMais(id, desc){
+    $("#"+id).text("");
+    $("#"+id).text(desc);
+}
 
-    },10)
+
+function preencherNoticiaInfo(d,imagem ,t) {
+    // $("#titloNoticia").empty();
+    // $("#descricaoNoticia").empty();
+    // setTimeout(function () {
+    //     $("#imagemNoticiaInfo").attr('src', imagem);
+    //     $("#titloNoticia").append(""+t);
+    //     $("#descricaoNoticia").append(""+d);
+    //
+    // },10)
 }
 
 function abrirImpFile(id){

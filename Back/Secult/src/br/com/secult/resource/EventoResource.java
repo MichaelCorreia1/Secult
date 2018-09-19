@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.secult.resource; 
+package br.com.secult.resource;
 
 import br.com.secult.dao.EventoDao;
 import br.com.secult.model.Evento;
@@ -18,9 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.ws.rs.Consumes;
@@ -43,9 +41,7 @@ public class EventoResource {
     @Path("/insertEvento/{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_povoado}")
     @Produces(MediaType.APPLICATION_JSON)
     public String insertEvento(@PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_povoado") int id_povoado) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
-
         Evento evento = new Evento();
-
         evento.setTitulo(titulo);
         evento.setDescricao(descricao);
         evento.setData_evento(data_evento);
@@ -57,12 +53,12 @@ public class EventoResource {
         EventoDao eventoDao = new EventoDao();
         long id;
         id = eventoDao.insertEvento(evento);
-        
+
         if (id == 0) {
             return "{\"status\":\"erro\"}";
-            
+
         } else {
-            return  "{\"status\":\""+ id +"\"}" ;
+            return "{\"status\":\"" + id + "\"}";
         }
 
     }
@@ -70,7 +66,7 @@ public class EventoResource {
     @GET
     @Path("/listarEvento")
     @Produces(MediaType.APPLICATION_JSON)
-    public String listarEvento() throws SQLException, Exception {
+    public Response listarEvento() throws SQLException, Exception {
 
         EventoDao eventoDao = new EventoDao();
         List<Evento> even = eventoDao.listaEventos();
@@ -83,14 +79,14 @@ public class EventoResource {
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("eventos", ArrayUsuarios);
 
-        return jsonObject.toString();
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
-    
-     @GET
+
+    @GET
     @Path("/getEventoById/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getEventoById(@PathParam("id") long id) throws SQLException, Exception {
+    public Response getEventoById(@PathParam("id") long id) throws SQLException, Exception {
         Evento evento = new Evento();
         evento.setId(id);
 
@@ -105,11 +101,10 @@ public class EventoResource {
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("eventos", ArrayUsuarios);
 
-        return jsonObject.toString();
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
-    
-    
+
     @GET
     @Path("/deletarEvento/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -221,32 +216,37 @@ public class EventoResource {
     @GET
     @Path("/listarEventoGrande")
     @Produces(MediaType.APPLICATION_JSON)
-    public String listarEventoG() throws SQLException, Exception {
+    public Response listarEventoG() throws SQLException, Exception {
         Evento even = new Evento();
         EventoDao eventoDao = new EventoDao();
         List<Evento> evento = eventoDao.listarEventoGrande(even);
 
+        tratarImagem(evento);
+
         Gson gson = new GsonBuilder().create();
         JsonArray ArrayUsuarios = gson.toJsonTree(evento).getAsJsonArray();
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("eventos", ArrayUsuarios);
 
-        return jsonObject.toString();
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
     }
-    
+
     @GET
     @Path("/listarEventoPequeno")
     @Produces(MediaType.APPLICATION_JSON)
-    public String listarEventoP() throws SQLException, Exception {
+    public Response listarEventoP() throws SQLException, Exception {
         Evento even = new Evento();
         EventoDao eventoDao = new EventoDao();
         List<Evento> evento = eventoDao.listarEventoPequeno(even);
 
+        tratarImagem(evento);
+        
         Gson gson = new GsonBuilder().create();
         JsonArray ArrayUsuarios = gson.toJsonTree(evento).getAsJsonArray();
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("eventos", ArrayUsuarios);
 
-        return jsonObject.toString();
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+
     }
 }

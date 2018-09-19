@@ -4,7 +4,7 @@ angular.module('app.controllers', [])
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams) {
-            localStorage.setItem("servidor", "http://localhost:8080");
+            localStorage.setItem("servidor", "http://salesdomain.com.br:8081");
 
         }])
 
@@ -33,7 +33,8 @@ angular.module('app.controllers', [])
             verificarTel();
             verificarCpf();
             saveFotoLS();
-            textAreaCadastro();
+            textArea("descricaoCdt");
+            textArea("projetosCdt");
             botaoFotoFakeCadart(2);
 
         }])
@@ -92,6 +93,7 @@ angular.module('app.controllers', [])
     .controller('cadastroEventoCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             saveFotoEventoLSCdt()
+            textArea("descricaoAdm");
         }])
 
     .controller('informacoesNoticiasCtrl', ['$scope', '$stateParams',

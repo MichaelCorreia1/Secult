@@ -1,34 +1,43 @@
 <ion-view title="Eventos em povoados" hide-back-button="true" id="page17">
-  <ion-content padding="true" class="has-header">
-    <form id="eventosEmPovoados-form11" class="list">
-      <h1 id="eventosEmPovoados-heading4" style="color:#000000;text-align:center;">Agrovila</h1>
-      <div id="eventosEmPovoados-markdown10" class="show-list-numbers-and-dots">
-        <p style="color:#000000;font-size:15px;">Agrovila é um povoado muito famoso pelo cultivo de suas hortaliças vendidas aqui em Tobias Barreto, principalmente os tomates vermelhos e bonitos, que dão água na boca.</p>
-      </div>
-      <div class="spacer" style="width: 300px; height: 33px;"></div>
-      <label class="item item-select" id="eventosEmPovoados-select3">
-        <span class="input-label">Select</span>
-        <select>
-          <option>Agrovila</option>
-          <option>Alslaslas</option>
-          <option>Aliasasas</option>
-        </select>
-      </label>
-    </form>
-    <div id="eventosEmPovoados-markdown11" class="show-list-numbers-and-dots">
-      <hr>
-    </div>
-    <h3 id="eventosEmPovoados-heading5" style="color:#000000;font-weight:600;text-align:center;">Eventos</h3>
-    <ion-list id="eventosEmPovoados-list32">
-      <ion-item class="item-icon-right" id="eventosEmPovoados-list-item33">Evento 1
-        <i class="icon ion-ios-medical"></i>
-      </ion-item>
-      <ion-item class="item-icon-right" id="eventosEmPovoados-list-item38">Evento 2
-        <i class="icon ion-ios-medical"></i>
-      </ion-item>
-      <ion-item class="item-icon-right" id="eventosEmPovoados-list-item42">Evento 3
-        <i class="icon ion-ios-medical"></i>
-      </ion-item>
-    </ion-list>
-  </ion-content>
+    <ion-content padding="true" class="has-header">
+        <ion-refresher
+                pulling-text="Pull to refresh..."
+                on-refresh="doRefresh()">
+        </ion-refresher>
+        <ion-list >
+            <ion-item ng-repeat="item in dados">{{titulo}}</ion-item>
+        </ion-list>
+        <form  class="list">
+            <h1  style="color:#000000;text-align:center;">Agrovila</h1>
+            <div  class="show-list-numbers-and-dots">
+                <p style="color:#000000;font-size:15px;">Agrovila é um povoado muito famoso pelo cultivo de suas
+                    hortaliças vendidas aqui em Tobias Barreto, principalmente os tomates vermelhos e bonitos, que dão
+                    água na boca.</p>
+            </div>
+            <div class="spacer" style="width: 300px; height: 33px;"></div>
+            <label class="item item-select">
+                <span class="input-label">Select</span>
+                <select>
+                    <option>Agrovila</option>
+                    <option>Alslaslas</option>
+                    <option>Aliasasas</option>
+                </select>
+            </label>
+        </form>
+        <div id="eventosEmPovoados-markdown11" class="show-list-numbers-and-dots">
+            <hr>
+        </div>
+        <h3 id="eventosEmPovoados-heading5" style="color:#000000;font-weight:600;text-align:center;">Eventos</h3>
+        <ion-list id="eventosEmPovoados-list32">
+            <ion-item class="item-icon-right" id="eventosEmPovoados-list-item33">Evento 1
+                <i class="icon ion-ios-medical"></i>
+            </ion-item>
+            <ion-item class="item-icon-right" id="eventosEmPovoados-list-item38">Evento 2
+                <i class="icon ion-ios-medical"></i>
+            </ion-item>
+            <ion-item class="item-icon-right" id="eventosEmPovoados-list-item42">Evento 3
+                <i class="icon ion-ios-medical"></i>
+            </ion-item>
+        </ion-list>
+    </ion-content>
 </ion-view>

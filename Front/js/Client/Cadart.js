@@ -134,6 +134,16 @@ function textAreaUp() {
 
 }
 
+function textArea(id) {
+    $("#" + id).focusin(function () {
+        $(this).attr('rows', '11')
+    })
+    $("#" + id).focusout(function () {
+        $(this).removeAttr('rows')
+    })
+}
+
+
 function mascarasCadart() {
     $("#telCdt").mask("000-00000-0000");
     $("#cpfCdt").mask("000.000.000-00");
@@ -207,7 +217,7 @@ function validarCampos() {
     var arte = $("#arteCdt").val();
     var senha = $("#senhaCdt").val();
     var senhaRed = $("#senhaRedCdt").val();
-    if (isCpf(cpf) & nome != "" & validarEmail('emalCdt') & tel.length==14 & nomeArt != "" & arte != "" & senha != "" & dtNascimento != "" & sexo != "") {
+    if (isCpf(cpf) & nome != "" & validarEmail('emalCdt') & tel.length == 14 & nomeArt != "" & arte != "" & senha != "" & dtNascimento != "" & sexo != "") {
         if (senha === senhaRed) {
             cadastrarCdt();
         }
@@ -237,16 +247,18 @@ function cadastrarCdt() {
     var arte = $("#arteCdt").val();
     var senha = $("#senhaCdt").val();
     //var senhaRed = $("#senhaRedCdt").val();
+    alert('Inicio')
 
     var json = servidor + "/Secult/cadart/insertUsuario/" + cpf + "&" + nome + "&" + nomeArt + "&" + tel + "&" + email + "&" + sexo + "&" + descricao + "&" + projetos + "&" + dtNascimento + "&" + senha + "&" + arte + "&" + visibilidade;
 
     var onSuccess = function (result) {
-
+        alert('Entrou')
         jsonRestultado = result;
 
         resultado = jsonRestultado.status;
-
+alert(resultado)
         if (resultado == "ok") {
+            alert('if ok')
             inserirFoto(cpf);
             swal({
                 title: "Cadastrado!",
@@ -268,7 +280,9 @@ function cadastrarCdt() {
         }
         ;
     };
-    $.getJSON(json, onSuccess).fail();
+    $.getJSON(json, onSuccess).fail(
+        alert('Erro')
+    );
 }
 
 
@@ -292,6 +306,7 @@ function isCpf(strCPF) {
     if (Resto != parseInt(strCPF.substring(10, 11))) return false;
     return true;
 }
+
 
 function listarCadart() {
     var json = servidor + "/Secult/cadart/listarUsuarioByVisibilidade";
@@ -319,7 +334,7 @@ function listarCadart() {
                 urlImagem = servidor + "/Secult/cadart/find/" + cpf;
 
 
-                $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right\">\n" +
+                $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right animated bounceInUp faster\">\n" +
                     "                <img src='" + urlImagem + "'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "                <p>" + arte + "</p>\n" +
@@ -372,13 +387,14 @@ function InputEmailValido() {
         }, 4000)
     }
 }
+
 function validarEmail(id) {
-    var emailImp = $("#"+id).val();
+    var emailImp = $("#" + id).val();
     if (emailImp != "") {
         if (emailImp.indexOf("@") != -1) {
             if (emailImp.indexOf("@") == 0) {
-               return false
-                $("#"+id).focus()
+                return false
+                $("#" + id).focus()
             } else {
                 return true
             }
@@ -487,18 +503,18 @@ function carregarInfoCadart(urlImagem, nome, idade, email, tel, descricao, proje
         }
         $("#sexoInfo").text(sexo);
         $("#nomeArteInfo").text(nomeArte);
-        $("#btnInfo").css('display','none')
+        $("#btnInfo").css('display', 'none')
 
         if (vindoDe == "adm") {
-            $("#btnInfo").css('display','block')
+            $("#btnInfo").css('display', 'block')
             $("#btnInfo").text('Tornar Usuario Visivel Na lista')
 
-            $("#btnInfo").attr('onclick','autenticarVisibilidadeS(' + cpf + ')');
+            $("#btnInfo").attr('onclick', 'autenticarVisibilidadeS(' + cpf + ')');
         }
         if (vindoDe == "desAutenticar") {
-            $("#btnInfo").css('display','block')
+            $("#btnInfo").css('display', 'block')
             $("#btnInfo").text('Tornar Usuario Invisivel Na lista')
-            $("#btnInfo").attr('onclick','autenticarVisibilidadeN(' + cpf + ')');
+            $("#btnInfo").attr('onclick', 'autenticarVisibilidadeN(' + cpf + ')');
         }
     }, 100)
 }

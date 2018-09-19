@@ -15,23 +15,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
-/**
- *
- * @author Muquifo
- */
+
 @Path("/arte")
 public class ArteResource {
 
     @GET
     @Path("/listarArte")
     @Produces(MediaType.APPLICATION_JSON)
-    public String listarArte() throws SQLException, Exception {
+    public Response listarArte() throws SQLException, Exception {
 
         ArteDao arteDao = new ArteDao();
         List<Arte> artes = arteDao.listarArte();
@@ -41,7 +36,7 @@ public class ArteResource {
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("artes", ArrayUsarios);
 
-        return jsonObject.toString();
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
 }

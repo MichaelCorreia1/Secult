@@ -15,11 +15,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -31,7 +29,7 @@ public class LocalidadeResource {
     @GET
     @Path("/listarLocalidade")
     @Produces(MediaType.APPLICATION_JSON)
-    public String listarLocalidade() throws SQLException, Exception {
+    public Response listarLocalidade() throws SQLException, Exception {
 
         LocalidadeDao localidadeDao = new LocalidadeDao();
         List<Localidade> localidade = localidadeDao.listarLocalidade();
@@ -41,7 +39,7 @@ public class LocalidadeResource {
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("localidades", ArrayUsarios);
 
-        return jsonObject.toString();
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
 

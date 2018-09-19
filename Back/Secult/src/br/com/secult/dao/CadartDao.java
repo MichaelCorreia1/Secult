@@ -6,7 +6,6 @@
 package br.com.secult.dao;
 
 import br.com.secult.model.Cadart;
-import br.com.secult.model.Usuario;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

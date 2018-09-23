@@ -1,10 +1,10 @@
 servidor = localStorage.getItem("servidor");
 
-function verificarAdministrador(){
-    if(localStorage.getItem('admOn') == 'true'){
+function verificarAdministrador() {
+    if (localStorage.getItem('admOn') == 'true') {
         $(".funcoesAdministrativas").show()
     }
-    else{
+    else {
         $(".funcoesAdministrativas").hide()
     }
 }
@@ -47,6 +47,7 @@ function cadastroEvento() {
 
         var status = jsonAdministrador.status;
         var id = jsonAdministrador.id
+        alert(id)
 
         if (status != "erro") {
             inserirFotoEvento(id)
@@ -54,7 +55,7 @@ function cadastroEvento() {
                 window.location.href = "#/page18";
             }, 1000);
         } else {
-            alert("Não foi possivel Cadastrar o evento")
+            swal("Não foi possivel Cadastrar o evento")
         }
         ;
     };
@@ -62,7 +63,7 @@ function cadastroEvento() {
 }
 
 function listarEvento() {
-
+    carregando(1)
     var json = servidor + "/Secult/evento/listarEvento";
 
     var onSuccess = function (result) {
@@ -85,7 +86,7 @@ function listarEvento() {
                 var idLocalidade = dados[i].id_localidade;
 
 
-                $("#inicioListaEventoHoje").append("<ul class='list' id='"+id+"'>\n" +
+                $("#inicioListaEventoHoje").append("<ul class='list' id='" + id + "'>\n" +
                     "            <li class=\"item item-thumbnail-left item-icon-right balanced\">\n" +
                     "            <img src='" + imagem + "'> \n" +
                     "                    <h2 id='titulo" + id + "'  style=\"margin: 0px; font-size: 17px; font-weight: bolder; margin-top: 30px;\">" + titulo + "</h2>\n" +
@@ -97,7 +98,7 @@ function listarEvento() {
                     "                    <a class='button button-light button-outline' href='#/page20' onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\")'><div  style=\"font-weight:600;color:#0092FF;font-size:17px;\"\n" +
                     "                              id='" + id + "'>Editar\n" +
                     "                    </div></a>\n" +
-                    "                    <a class='button button-light button-outline' onclick=\"excluirEvento("+id+")\"><div  style=\"font-weight:600;color:#FF0020;font-size:17px;\" >Excluir\n" +
+                    "                    <a class='button button-light button-outline' onclick=\"excluirEvento(" + id + ")\"><div  style=\"font-weight:600;color:#FF0020;font-size:17px;\" >Excluir\n" +
                     "                    </div></a>\n" +
                     "                </div>\n" +
                     "            </li>\n" +
@@ -118,8 +119,10 @@ function listarEvento() {
 
                 }
 
+
             }
         }
+        carregando(2)
 
     };
 
@@ -186,11 +189,6 @@ function limparEListarEventoAdm() {
 
 
 }
-
-
-
-
-
 
 
 //////////////////FOTO EVENTO///////////////////
@@ -466,29 +464,40 @@ function autenticarVisibilidadeN(cpf) {
 }
 
 //exluir  evento
-function excluirEvento(id){
-    var json = servidor + "/Secult/evento/deletarEvento/" + id;
-    var onSuccess = function (result) {
-        if (result.status == "ok") {
+function excluirEvento(id) {
+    swal({
+        title: "Deseja deletar esse evento?",
+        text: "Uma vez deletado não tem como recuperar!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then(function (willDelete) {
+        carregando(1)
+        if (willDelete) {
+            var json = servidor + "/Secult/evento/deletarEvento/" + id;
+            var onSuccess = function (result) {
+                if (result.status == "ok") {
+                    $("#"+id).remove();
+                    swal("Poof! Evento deletado com sucesso!", {
+                        icon: "success",
+                        buttons: false,
+                    });
+                    carregando(2)
+                } else {
+                    swal({
+                        title: "Ocorreu um erro!",
+                        icon: "erro",
+                        button: false,
+                    });
+                }
+            }
+            $.getJSON(json, onSuccess).fail();
 
 
-            swal({
-                title: "Evento Excluido!",
-                icon: "success",
-                button: false,
-            });
-            setTimeout(function () {
-                window.location.href = "#/page18";
-            }, 500)
-        } else {
-            swal({
-                title: "Ocorreu um erro!",
-                icon: "erro",
-                button: false,
-            });
         }
-    }
-    $.getJSON(json, onSuccess).fail();
+    });
+
+
 }
 
 function atualizarPaginas() {
@@ -500,17 +509,38 @@ function atualizarPaginas() {
     listarCadart()
 }
 
-function mudarCorbotaoEntrar(){
+function mudarCorbotaoEntrar() {
 
     $("#senha, #email").keyup(function () {
-       var senha =  $("#senha").val();
-       var email =  $("#email").val();
+        var senha = $("#senha").val();
+        var email = $("#email").val();
 
-        if(senha.length>5 && email.length>10){
+        if (senha.length > 5 && email.length > 10) {
             $("#btnCadastraCadart").removeClass("button-outline");
         }
     })
 }
+
+function carregando(el) {
+    if (el == 1) {
+        setTimeout(function () {
+            $("ion-content").prepend("<div class='carregando'></div>");
+        }, 200)
+    } else {
+        setTimeout(function () {
+            $(".carregando").remove();
+        }, 200)
+
+    }
+
+}
+
+function servidorEscolha() {
+    var server = localStorage.getItem("servidor");
+
+
+}
+
 
 
 

@@ -4,8 +4,7 @@ angular.module('app.controllers', [])
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams) {
-            localStorage.setItem("servidor", "http://salesdomain.com.br:8081");
-            //localStorage.setItem("servidor", "http://localhost:8080");
+
 
         }])
 
@@ -124,7 +123,11 @@ angular.module('app.controllers', [])
         function ($scope, $stateParams) {
 
         }])
-    .controller('autenticadosCadartCtrl', ['$scope', '$stateParams',
+    .controller('cultTobiasCidadeCtrl', ['$scope', '$stateParams',
+        function ($scope, $stateParams) {
+
+        }])
+    .controller('superAdministradorCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
 
         }]);

@@ -1,6 +1,6 @@
 
 function listarEventoNoticias() {
-
+carregando(1)
     var json = servidor + "/Secult/evento/listarEventoGrande";
     var onSuccess = function (result) {
         dados = result.eventos;
@@ -48,10 +48,11 @@ function listarEventoNoticias() {
                 }
             }
         }
-
+        carregando(2)
     };
     $.getJSON(json, onSuccess).fail(
     );
+
 }
 
 function lerMais(id, desc){

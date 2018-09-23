@@ -7,22 +7,11 @@
 // 'starter.controllers' is found in controllers.js
 
 angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives', 'app.services',])
-    .controller('eventosEmPovoadosCtrl', function($scope, $http) {
 
-        $scope.doRefresh = function() {
-            $http.get(servidor +'/Secult/evento/listarEvento')
-                .success(function(usu) {
-                    $scope.dados = usu;
-                    $scope.nome = dados.titulo;
-                })
-                .finally(function() {
-                    // Stop the ion-refresher from spinning
-                    $scope.$broadcast('scroll.refreshComplete');
-                });
-        };
-    })
+        localStorage.setItem("servidor", "http://salesdomain.com.br:8081")
+        //localStorage.setItem("servidor", "http://localhost:8080");
 
-    .config(function($ionicConfigProvider) {
+    .config(function ($ionicConfigProvider) {
         $ionicConfigProvider.tabs.position('bottom');
     })
 

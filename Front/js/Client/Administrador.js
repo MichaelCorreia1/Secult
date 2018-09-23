@@ -46,7 +46,7 @@ function cadastroEvento() {
         jsonAdministrador = result;
 
         var status = jsonAdministrador.status;
-        var id = jsonAdministrador.id
+        var id = jsonAdministrador.id_usuario
         alert(id)
 
         if (status != "erro") {
@@ -478,7 +478,7 @@ function excluirEvento(id) {
             var onSuccess = function (result) {
                 if (result.status == "ok") {
                     $("#"+id).remove();
-                    swal("Poof! Evento deletado com sucesso!", {
+                    swal("Puff! Evento deletado com sucesso!", {
                         icon: "success",
                         buttons: false,
                     });
@@ -535,11 +535,7 @@ function carregando(el) {
 
 }
 
-function servidorEscolha() {
-    var server = localStorage.getItem("servidor");
 
-
-}
 
 
 

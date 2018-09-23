@@ -1,5 +1,21 @@
 servidor = localStorage.getItem("servidor");
 
+function verificarAdministrador(){
+    if(localStorage.getItem('admOn') == 'true'){
+        $(".funcoesAdministrativas").show()
+    }
+    else{
+        $(".funcoesAdministrativas").hide()
+    }
+}
+
+function deslogarAdministrador() {
+    localStorage.removeItem('admOn');
+    $(".funcoesAdministrativas").hide();
+    window.location.href = "#/page1";
+
+}
+
 function validarCadastroEvento() {
     var titulo = $("#tituloAdm").val();
     var descricao = $("#descricaoAdm").val();
@@ -29,16 +45,18 @@ function cadastroEvento() {
 
         jsonAdministrador = result;
 
-        Administrador = jsonAdministrador.status;
-        id = jsonAdministrador.status
-        if (Administrador != "erro") {
+        var status = jsonAdministrador.status;
+        var id = jsonAdministrador.id
 
+        if (status != "erro") {
+            inserirFotoEvento(id)
             setTimeout(function () {
                 window.location.href = "#/page18";
             }, 1000);
-        }else{
+        } else {
             alert("Não foi possivel Cadastrar o evento")
-        };
+        }
+        ;
     };
     $.getJSON(json, onSuccess).fail();
 }
@@ -60,14 +78,14 @@ function listarEvento() {
                 var descricao = dados[i].descricao;
                 var visibilidade = dados[i].visibilidade;
                 var tipo = dados[i].tipo_evento
-                var imagem = servidor + "/Secult/evento/find/"+id;
+                var imagem = servidor + "/Secult/evento/find/" + id;
                 var dataCadastro = dados[i].data_cadastro;
                 var horaEvento = dados[i].hora_evento;
                 var dataEvento = dados[i].data_evento;
                 var idLocalidade = dados[i].id_localidade;
 
 
-                $("#inicioListaEventoHoje").append("<ul class='list' >\n" +
+                $("#inicioListaEventoHoje").append("<ul class='list' id='"+id+"'>\n" +
                     "            <li class=\"item item-thumbnail-left item-icon-right balanced\">\n" +
                     "            <img src='" + imagem + "'> \n" +
                     "                    <h2 id='titulo" + id + "'  style=\"margin: 0px; font-size: 17px; font-weight: bolder; margin-top: 30px;\">" + titulo + "</h2>\n" +
@@ -79,7 +97,7 @@ function listarEvento() {
                     "                    <a class='button button-light button-outline' href='#/page20' onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\")'><div  style=\"font-weight:600;color:#0092FF;font-size:17px;\"\n" +
                     "                              id='" + id + "'>Editar\n" +
                     "                    </div></a>\n" +
-                    "                    <a class='button button-light button-outline'><div  style=\"font-weight:600;color:#FF0020;font-size:17px;\">Excluir\n" +
+                    "                    <a class='button button-light button-outline' onclick=\"excluirEvento("+id+")\"><div  style=\"font-weight:600;color:#FF0020;font-size:17px;\" >Excluir\n" +
                     "                    </div></a>\n" +
                     "                </div>\n" +
                     "            </li>\n" +
@@ -117,7 +135,7 @@ function preencherEventoAtualizar(id, visibilidade, titulo, dataEvento, descrica
     id = $("#" + id).attr('id');
     setTimeout(function () {
         $("#tituloUp").val(titulo);
-        $("#tableBannerEvento").attr('src',imagem);
+        $("#tableBannerEvento").attr('src', imagem);
         localStorage.setItem('imgTeste', imagem)
         $("#descricaoUp").val(descricao);
         $("#dataEventoUp").val(dataEvento);
@@ -169,51 +187,11 @@ function limparEListarEventoAdm() {
 
 }
 
-function pullToRefreshNoticia() {
-    PullToRefresh.init({
-        mainElement: '.refresh', // above which element?
-        onRefresh: function (done) {
-            setTimeout(function () {
-                done(); // end pull to refresh
 
-                $("#listaEventoNoticas").empty();
-                listarEventoNoticias();
-            }, 500);
-        }
-    });
-}
 
-function pullToRefreshHoje() {
-    PullToRefresh.init({
-        mainElement: '.refresh', // above which element?
-        onRefresh: function (done) {
-            setTimeout(function () {
-                done(); // end pull to refresh
 
-                $("#listaEventoHoje").empty();
-                listarEventoHoje();
-            }, 500);
-        }
-    });
-}
 
-function pullToRefreshHome() {
-    PullToRefresh.init({
-        mainElement: '.refresh', // above which element?
-        onRefresh: function (done) {
-            setTimeout(function () {
-                done(); // end pull to refresh
 
-                $("#listaEventoNoticas").empty();
-                listarEventoNoticias();
-                $("#listaEventoHoje").empty();
-                listarEventoHoje();
-                $("#listaCadart").empty();
-                listarCadart()
-            }, 500);
-        }
-    });
-}
 
 //////////////////FOTO EVENTO///////////////////
 //////////////////FOTO EVENTO///////////////////
@@ -257,6 +235,7 @@ function inserirFotoEvento(id) {
     })
 
 }
+
 function saveFotoEventoLS() {
 
     //document.getElementById("tableBannerEvento").style.display = "none";
@@ -288,6 +267,7 @@ function saveFotoEventoLS() {
     });
 
 }
+
 function saveFotoEventoLSCdt() {
 
     //document.getElementById("tableBannerEvento").style.display = "none";
@@ -484,3 +464,54 @@ function autenticarVisibilidadeN(cpf) {
     }
     $.getJSON(json, onSuccess).fail();
 }
+
+//exluir  evento
+function excluirEvento(id){
+    var json = servidor + "/Secult/evento/deletarEvento/" + id;
+    var onSuccess = function (result) {
+        if (result.status == "ok") {
+
+
+            swal({
+                title: "Evento Excluido!",
+                icon: "success",
+                button: false,
+            });
+            setTimeout(function () {
+                window.location.href = "#/page18";
+            }, 500)
+        } else {
+            swal({
+                title: "Ocorreu um erro!",
+                icon: "erro",
+                button: false,
+            });
+        }
+    }
+    $.getJSON(json, onSuccess).fail();
+}
+
+function atualizarPaginas() {
+    $("#listaEventoNoticas").empty();
+    listarEventoNoticias();
+    $("#listaEventoHoje").empty();
+    listarEventoHoje();
+    $("#listaCadart").empty();
+    listarCadart()
+}
+
+function mudarCorbotaoEntrar(){
+
+    $("#senha, #email").keyup(function () {
+       var senha =  $("#senha").val();
+       var email =  $("#email").val();
+
+        if(senha.length>5 && email.length>10){
+            $("#btnCadastraCadart").removeClass("button-outline");
+        }
+    })
+}
+
+
+
+

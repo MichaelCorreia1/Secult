@@ -28,13 +28,13 @@ function listarEventoHoje() {
 
                 $("#listaEventoHoje").append("<a href='#/page21'  class='linkSemDecoracao' onclick='preencherEventoInfo(\""+descricao+'","'+ imagem +'","'+ titulo+"\")'><li class=\"item item-thumbnail-left item-icon-right balanced\">\n" +
                     "        <img src='" + imagem + "'>\n" +
-                    "        <h2balanced>" + titulo + "\n" +
-                    "          <p style=\"white-space:normal; margin-top: 5px\">" + descricao.substring(0, 47) + "...</p>\n" +
+                    "        <h2 class='positive' style='font-weight: bolder' >" + titulo + "\n" +
+                    "          <p style=\"white-space:normal; margin-top: 5px; font-weight: normal\">" + descricao.substring(0, 47) + "...</p>\n" +
                     "          <i class=\"icon ion-android-share\"></i>\n" +
-                    "        </h2 balanced>\n" +
+                    "        </h2>\n" +
                     "      </li>\n" +
-                    "      <li class=\"item item-icon-left\">\n" +
-                    "        <i class=\"icon ion-android-star-outline\"></i>Entrada da Cidade\n" +
+                    "      <li class=\"item item-icon-left \">\n" +
+                    "        <i class=\"icon ion-location assertive\"></i>Entrada da Cidade\n" +
                     "        <span class=\"item-note\">" + horaEvento + "</span>\n" +
                     "      </li><div class=\"spacer\" style=\"height: 5px;\"></div></a>");
 

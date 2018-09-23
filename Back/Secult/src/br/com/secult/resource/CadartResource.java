@@ -41,7 +41,7 @@ public class CadartResource {
     @GET
     @Path("/insertUsuario/{cpf}&{nome}&{nomeArtistico}&{telefone}&{email}&{sexo}&{descricao}&{projetoAtual}&{idade}&{senha}&{idArte}&{visibilidade}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String insertUsuario(@PathParam("cpf") long cpf, @PathParam("nome") String nome, @PathParam("telefone") String telefone ,@PathParam("email") String email, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao, @PathParam("projetoAtual") String projetoAtual, @PathParam("idade") int idade, @PathParam("senha") String senha, @PathParam("idArte") int idArte, @PathParam("visibilidade") String visibilidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public Response insertUsuario(@PathParam("cpf") long cpf, @PathParam("nome") String nome, @PathParam("telefone") String telefone ,@PathParam("email") String email, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao, @PathParam("projetoAtual") String projetoAtual, @PathParam("idade") int idade, @PathParam("senha") String senha, @PathParam("idArte") int idArte, @PathParam("visibilidade") String visibilidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
 
         Cadart cadart = new Cadart();
         cadart.setCpf(cpf);
@@ -60,10 +60,9 @@ public class CadartResource {
         CadartDao cadartDao = new CadartDao();
 
         if (cadartDao.insert(cadart)) {
-
-            return "{\"status\":\"ok\", \"id_usuario\":\"" + cadart.getCpf() + "\"}";
+            return Response.ok("{\"status\":\"ok\", \"id_usuario\":\"" + cadart.getCpf() + "\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
-            return "{\"status\":\"erro\"}";
+            return Response.ok("{\"status\":\"erro\"}").build();
         }
     }
 
@@ -146,7 +145,7 @@ public class CadartResource {
     @GET
     @Path("/updateUsuario/{cpf}&{nome}&{idade}&{nomeArtistico}&{email}&{telefone}&{sexo}&{descricao}&{projetoAtual}&{idArte}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String updatetUsuario(@PathParam("cpf") long cpf, @PathParam("nome") String nome, @PathParam("idade") int idade, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("email") String email, @PathParam("telefone") String telefone, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao, @PathParam("projetoAtual") String projetoAtual, @PathParam("idArte") int idArte) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public Response updatetUsuario(@PathParam("cpf") long cpf, @PathParam("nome") String nome, @PathParam("idade") int idade, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("email") String email, @PathParam("telefone") String telefone, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao, @PathParam("projetoAtual") String projetoAtual, @PathParam("idArte") int idArte) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         Cadart cadart = new Cadart();
         cadart.setCpf(cpf);
         cadart.setNome(nome);
@@ -162,29 +161,25 @@ public class CadartResource {
         CadartDao cadartDao = new CadartDao();
 
         if (cadartDao.updateUsuario(cadart)) {
-
-            return "{\"status\":\"ok\"}";
+            return Response.ok("{\"status\":\"ok\", \"id_usuario\":\"" + cadart.getCpf() + "\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
-
-            return "{\"status\":\"erro\"}";
+            return Response.ok("{\"status\":\"erro\"}").build();
         }
     }
 
     @GET
     @Path("/deleteUsuario/{cpf}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String deleteUsuario(@PathParam("cpf") long cpf) throws SQLException {
+    public Response deleteUsuario(@PathParam("cpf") long cpf) throws SQLException {
         Cadart cadart = new Cadart();
         cadart.setCpf(cpf);
 
         CadartDao cadartDao = new CadartDao();
 
         if (cadartDao.delete(cadart)) {
-
-            return "{\"status\":\"ok\"}";
+            return Response.ok("{\"status\":\"ok\", \"id_usuario\":\"" + cadart.getCpf() + "\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
-
-            return "{\"status\":\"erro\"}";
+            return Response.ok("{\"status\":\"erro\"}").build();
         }
     }
     @GET
@@ -217,55 +212,49 @@ public class CadartResource {
     @GET
     @Path("/updateSenha/{cpf}&{senha}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String updateSenha(@PathParam("cpf") long cpf, @PathParam("senha") String senha) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public Response updateSenha(@PathParam("cpf") long cpf, @PathParam("senha") String senha) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         Cadart cadart = new Cadart();
         cadart.setCpf(cpf);
         cadart.setSenha(senha);
 
         CadartDao cadartDao = new CadartDao();
 
-        if (cadartDao.updateSenha(cadart)) {
-
-            return "{\"status\":\"ok\"}";
+         if (cadartDao.updateSenha(cadart)) {
+            return Response.ok("{\"status\":\"ok\", \"id_usuario\":\"" + cadart.getCpf() + "\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
-
-            return "{\"status\":\"erro\"}";
+            return Response.ok("{\"status\":\"erro\"}").build();
         }
     }
     
     @GET
     @Path("/updateVisibilidadeS/{cpf}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String updateVisibilidadeS(@PathParam("cpf") long cpf) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public Response updateVisibilidadeS(@PathParam("cpf") long cpf) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         Cadart cadart = new Cadart();
         cadart.setCpf(cpf);
 
         CadartDao cadartDao = new CadartDao();
 
         if (cadartDao.updateVisibilidadeS(cadart)) {
-
-            return "{\"status\":\"ok\"}";
+            return Response.ok("{\"status\":\"ok\", \"id_usuario\":\"" + cadart.getCpf() + "\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
-
-            return "{\"status\":\"erro\"}";
+            return Response.ok("{\"status\":\"erro\"}").build();
         }
     }
     
      @GET
     @Path("/updateVisibilidadeN/{cpf}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String updateVisibilidadeN(@PathParam("cpf") long cpf) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public Response updateVisibilidadeN(@PathParam("cpf") long cpf) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         Cadart cadart = new Cadart();
         cadart.setCpf(cpf);
 
         CadartDao cadartDao = new CadartDao();
 
         if (cadartDao.updateVisibilidadeN(cadart)) {
-
-            return "{\"status\":\"ok\"}";
+            return Response.ok("{\"status\":\"ok\", \"id_usuario\":\"" + cadart.getCpf() + "\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
-
-            return "{\"status\":\"erro\"}";
+            return Response.ok("{\"status\":\"erro\"}").build();
         }
     }
     
@@ -294,7 +283,7 @@ public class CadartResource {
         usuario.setFotoPerfil(byteArray);
         cadartDao.salvarFoto(usuario);
 
-        return Response.ok().build();
+        return Response.ok().header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
     }
     @GET
     @Path("/find/{cpf}")
@@ -312,7 +301,7 @@ public class CadartResource {
                 return Response.ok("Imagem não encontrada").build();
             } else {
 
-                return Response.ok(foto).build();
+                return Response.ok(foto).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
             }
         } catch (Exception e) {
             e.printStackTrace();

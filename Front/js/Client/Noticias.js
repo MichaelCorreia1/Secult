@@ -2,9 +2,7 @@
 function listarEventoNoticias() {
 
     var json = servidor + "/Secult/evento/listarEventoGrande";
-    alert(json)
     var onSuccess = function (result) {
-        alert(result.eventos[0].id)
         dados = result.eventos;
 
         if (dados[0]) {
@@ -28,7 +26,7 @@ function listarEventoNoticias() {
                         "            <ul class=\"item item-icon-left item-icon-right positive\">\n" +
                         "                <i class=\"icon ion-android-calendar \"></i>\n" +
                         "                <p style=\"text-align: center; font-weight: bold; font-size: large; color: #3f83f5;\">"+titulo+"</p>\n" +
-                        "                <i class=\"icon ion-android-share-alt\"></i>\n" +
+                        "                <i class=\"icon ion-android-share-alt\" style='display: none'></i>\n" +
                         "            </ul>\n" +
                         "            <div class=\" item item-image \">\n" +
                         "                <img src='"+imagem+"'n" +
@@ -36,10 +34,9 @@ function listarEventoNoticias() {
                         "            </div>\n" +
                         "            <div id='"+id+"' style=\"text-align:left; text-indent: 10px;\" class=\"show-list-numbers-and-dots padding \">\n" +
                         "                <p style=\"margin-top:0px;color:#000000;\" >"+descricao.substring(0, 130)+"...<span style='color: #787878;' onclick='lerMais(\""+id+'","'+ descricao+"\")'> mais</span></p>\n" +
-                        "<a href='https://api.whatsapp.com/send?text=aaaaaaaaaaaaaa'>Aeeeooo</a>"+
                         "            </div>\n" +
                         "            <div class=\" item item-image\" style='display: none'>\n" +
-                        "                <img src=\"img/semfoto.jpg\"\n" +
+                        "                <img src=\"img/semfoto.png\"\n" +
                         "                     style=\"display: block; width: 100%; height: 60px; margin-left: auto; margin-right: auto;\">\n" +
                         "            </div>\n" +
                         "        </div>");
@@ -54,7 +51,6 @@ function listarEventoNoticias() {
 
     };
     $.getJSON(json, onSuccess).fail(
-        alert('erro')
     );
 }
 
@@ -65,14 +61,14 @@ function lerMais(id, desc){
 
 
 function preencherNoticiaInfo(d,imagem ,t) {
-    // $("#titloNoticia").empty();
-    // $("#descricaoNoticia").empty();
-    // setTimeout(function () {
-    //     $("#imagemNoticiaInfo").attr('src', imagem);
-    //     $("#titloNoticia").append(""+t);
-    //     $("#descricaoNoticia").append(""+d);
-    //
-    // },10)
+    $("#titloNoticia").empty();
+    $("#descricaoNoticia").empty();
+    setTimeout(function () {
+        $("#imagemNoticiaInfo").attr('src', imagem);
+        $("#titloNoticia").append(""+t);
+        $("#descricaoNoticia").append(""+d);
+
+    },10)
 }
 
 function abrirImpFile(id){

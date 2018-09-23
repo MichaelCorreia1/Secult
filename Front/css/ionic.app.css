@@ -10,10 +10,18 @@
   used under CC BY http://creativecommons.org/licenses/by/4.0/
   Modified icons to fit ionicon’s grid from original.
 */
+
 @font-face {
     font-family: "Ionicons";
     src: url("../lib/ionic/fonts/ionicons.eot?v=2.0.1");
     src: url("../lib/ionic/fonts/ionicons.eot?v=2.0.1#iefix") format("embedded-opentype"), url("../lib/ionic/fonts/ionicons.ttf?v=2.0.1") format("truetype"), url("../lib/ionic/fonts/ionicons.woff?v=2.0.1") format("woff"), url("../lib/ionic/fonts/ionicons.woff") format("woff"), url("../lib/ionic/fonts/ionicons.svg?v=2.0.1#Ionicons") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('../lib/ionic/fonts/Roboto-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -4419,6 +4427,7 @@ h1, h2, h3, h4, h5, h6,
     line-height: 1.2;
 }
 
+
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small,
 .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small {
     font-weight: normal;
@@ -4881,9 +4890,9 @@ a.subdued:last-child {
 }
 
 .bar.bar-calm {
-    border-color: #f6ba30;
-    background-color: #f8ca61;
-    background-image: linear-gradient(0deg, #f6ba30, #f6ba30 50%, transparent 50%);
+    border-color: #7baaf8;
+    background-color: #387ef5;
+    background-image: linear-gradient(0deg, #0a9dc7, #0a9dc7 50%, transparent 50%);
     color: #fff;
 }
 
@@ -11459,7 +11468,7 @@ a.button .icon:before, a.button.icon:before, a.button.icon-left:before, a.button
 }
 
 .button-bar.bar-calm > .button {
-    border-color: #f6ba30;
+    border-color: #0c60ee;
 }
 
 .button-bar.bar-assertive > .button {
@@ -12469,3 +12478,4 @@ a.button .icon:before, a.button.icon:before, a.button.icon-left:before, a.button
 body {
     color: #000000;
 }
+

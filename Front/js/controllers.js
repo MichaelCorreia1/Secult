@@ -5,14 +5,14 @@ angular.module('app.controllers', [])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams) {
             localStorage.setItem("servidor", "http://salesdomain.com.br:8081");
+            //localStorage.setItem("servidor", "http://localhost:8080");
 
         }])
 
     .controller('noticiasCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             listarEventoNoticias();
-            pullToRefreshHome();
-
+            verificarAdministrador();
         }])
 
     .controller('cadartCtrl', ['$scope', '$stateParams',
@@ -41,7 +41,7 @@ angular.module('app.controllers', [])
 
     .controller('loginCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-
+            mudarCorbotaoEntrar();
         }])
 
     .controller('informacoesCtrl', ['$scope', '$stateParams',
@@ -50,7 +50,7 @@ angular.module('app.controllers', [])
         }])
 
     .controller('culturaCtrl', ['$scope', '$stateParams',
-        function ($scope, $stateParams) {
+        function ($scope, $stateParams, $ionicSideMenuDelegate)  {
 
         }])
 

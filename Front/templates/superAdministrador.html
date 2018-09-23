@@ -1,0 +1,11 @@
+<ion-view title="Administrador" id="page18">
+    <ion-nav-buttons side="right" class="has-header">
+        <button class="button icon ion-home button-clear" ui-sref="tabsController.noticias"></button>
+    </ion-nav-buttons>
+
+    <ion-content padding="true" class="has-header refresh">
+        <ion-item>{{serve}}</ion-item>
+       <ion-item><input type="text" id="serveHost"><button onclick="localStorage.setItem('servidor', document.getElementById('serveHost').value)">Mudar</button></ion-item>
+    </ion-content>
+
+</ion-view>

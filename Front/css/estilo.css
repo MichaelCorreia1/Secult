@@ -95,3 +95,25 @@ p.invalido {
 .none {
     display: none;
 }
+
+.alt-estado{
+    font-weight: 600;
+    font-size: 17px;
+    border-radius: 7px !important;
+    margin: 10px 20px 10px 20px;
+}
+.title.title-left.header-item {
+    text-align: center;
+}
+body{
+    font-family: Roboto-Regular!important;
+}
+
+ion-view {
+    background: #fff;
+}
+
+.barra-autenticar{
+    background: #387ef5!important;
+    color: white!important;
+}

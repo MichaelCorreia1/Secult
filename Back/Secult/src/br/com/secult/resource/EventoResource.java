@@ -40,7 +40,7 @@ public class EventoResource {
     @GET
     @Path("/insertEvento/{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_povoado}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String insertEvento(@PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_povoado") int id_povoado) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public Response insertEvento(@PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_povoado") int id_povoado) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         Evento evento = new Evento();
         evento.setTitulo(titulo);
         evento.setDescricao(descricao);
@@ -51,14 +51,11 @@ public class EventoResource {
         evento.setId_localidade(id_povoado);
 
         EventoDao eventoDao = new EventoDao();
-        long id;
-        id = eventoDao.insertEvento(evento);
 
-        if (id == 0) {
-            return "{\"status\":\"erro\"}";
-
+        if (eventoDao.insertEvento(evento) > 0) {
+            return Response.ok("{\"status\":\"ok\", \"id_usuario\":\"" + evento.getId() + "\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
-            return "{\"status\":\"" + id + "\"}";
+            return Response.ok("{\"status\":\"erro\"}").build();
         }
 
     }
@@ -108,18 +105,16 @@ public class EventoResource {
     @GET
     @Path("/deletarEvento/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String deletarEvento(@PathParam("id") long id) throws SQLException, Exception {
+    public Response deletarEvento(@PathParam("id") long id) throws SQLException, Exception {
         Evento evento = new Evento();
         evento.setId(id);
 
         EventoDao eventoDao = new EventoDao();
 
-        if (eventoDao.deletarEvento(evento)) {
-
-            return "{\"status\":\"ok\"}";
+         if (eventoDao.deletarEvento(evento)) {
+            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
-
-            return "{\"status\":\"erro\"}";
+            return Response.ok("{\"status\":\"erro\"}").build();
         }
     }
 
@@ -161,7 +156,7 @@ public class EventoResource {
         usuario.setImagem(byteArray);
         usuarioDao.salvarFoto(usuario);
 
-        return Response.ok().build();
+        return Response.ok().header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
     }
 
     @GET
@@ -180,7 +175,7 @@ public class EventoResource {
                 return Response.ok("Imagem não encontrada").build();
             } else {
 
-                return Response.ok(foto).build();
+                return Response.ok(foto).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -192,7 +187,7 @@ public class EventoResource {
     @GET
     @Path("/updateEvento/{id}&{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_povoado}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String upadetEvento(@PathParam("id") long id, @PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_povoado") int id_povoado) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public Response upadetEvento(@PathParam("id") long id, @PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_povoado") int id_povoado) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         Evento evento = new Evento();
 
         evento.setId(id);
@@ -207,9 +202,9 @@ public class EventoResource {
         EventoDao eventoDao = new EventoDao();
 
         if (eventoDao.updateEvento(evento)) {
-            return "{\"status\":\"ok\"}";
+            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
-            return "{\"status\":\"erro\"}";
+            return Response.ok("{\"status\":\"erro\"}").build();
         }
     }
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.secult.resource;
 
 import java.util.List;
@@ -15,21 +10,19 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
-/**
- *
- * @author Muquifo
- */
 @Path("/localidade")
 public class LocalidadeResource {
 
     @GET
     @Path("/listarLocalidade")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listarLocalidade() throws SQLException, Exception {
+    public String listarLocalidade() throws SQLException, Exception {
 
         LocalidadeDao localidadeDao = new LocalidadeDao();
         List<Localidade> localidade = localidadeDao.listarLocalidade();
@@ -39,7 +32,41 @@ public class LocalidadeResource {
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("localidades", ArrayUsarios);
 
-        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        return jsonObject.toString();
+
+    }
+
+    @GET
+    @Path("/carregarLocalidade")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String carregarLocalidade() throws SQLException, Exception {
+
+        LocalidadeDao localidadeDao = new LocalidadeDao();
+        List<Localidade> localidade = localidadeDao.carregarLocalidade();
+
+        Gson gson = new GsonBuilder().create();
+        JsonArray ArrayUsarios = gson.toJsonTree(localidade).getAsJsonArray();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("localidades", ArrayUsarios);
+
+        return jsonObject.toString();
+
+    }
+
+    @GET
+    @Path("/listarLocalidadeComEvento")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String listarLocalidadeComEvento() throws SQLException, Exception {
+
+        LocalidadeDao localidadeDao = new LocalidadeDao();
+        List<Localidade> localidade = localidadeDao.listarLocalidadeComEvento();
+
+        Gson gson = new GsonBuilder().create();
+        JsonArray ArrayUsarios = gson.toJsonTree(localidade).getAsJsonArray();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("localidades", ArrayUsarios);
+
+        return jsonObject.toString();
 
     }
 

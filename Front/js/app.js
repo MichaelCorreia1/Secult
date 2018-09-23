@@ -8,8 +8,8 @@
 
 angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives', 'app.services',])
 
-        localStorage.setItem("servidor", "http://salesdomain.com.br:8081")
-        //localStorage.setItem("servidor", "http://localhost:8080");
+        //localStorage.setItem("servidor", "http://salesdomain.com.br:8081")
+        localStorage.setItem("servidor", "http://localhost:8080")
 
     .config(function ($ionicConfigProvider) {
         $ionicConfigProvider.tabs.position('bottom');

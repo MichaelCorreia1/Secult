@@ -51,9 +51,9 @@ public class EventoResource {
         evento.setId_localidade(id_povoado);
 
         EventoDao eventoDao = new EventoDao();
-
-        if (eventoDao.insertEvento(evento) > 0) {
-            return Response.ok("{\"status\":\"ok\", \"id_usuario\":\"" + evento.getId() + "\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        long id = eventoDao.insertEvento(evento);
+        if ( id > 0) {
+            return Response.ok("{\"status\":\"ok\", \"id_usuario\":\"" + id + "\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
             return Response.ok("{\"status\":\"erro\"}").build();
         }

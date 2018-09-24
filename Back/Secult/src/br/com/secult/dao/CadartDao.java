@@ -6,6 +6,10 @@
 package br.com.secult.dao;
 
 import br.com.secult.model.Cadart;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -15,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -32,7 +37,7 @@ public class CadartDao {
         try {
             String sql = "INSERT INTO cadart (cpf, nome, nome_artistico, telefone, email, sexo, descricao, projeto_atual, idade, senha, id_arte, visibilidade) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)";
             stmt = connection.prepareStatement(sql);
-            
+
             String senha = convertToHash(cadart);
 
             stmt.setLong(1, cadart.getCpf());
@@ -66,8 +71,7 @@ public class CadartDao {
     private List<Cadart> resultSetToObjectTransfer(ResultSet rs) throws Exception {
         List<Cadart> objs = new Vector<>();
         while (rs.next()) {
-           
-            
+
             Cadart cadart = new Cadart();
             cadart.setCpf(rs.getLong("cpf"));
             cadart.setNome(rs.getString("nome"));
@@ -87,7 +91,8 @@ public class CadartDao {
         }
         return objs;
     }
-     public List<Cadart> autenticar(Cadart cadart) throws SQLException, Exception {
+
+    public List<Cadart> autenticar(Cadart cadart) throws SQLException, Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
         String sql = "select * from cadart where  email=? and senha=?";
@@ -128,9 +133,9 @@ public class CadartDao {
             stmt = connection.prepareStatement(sql);
 
             rs = stmt.executeQuery();
-            
+
             return resultSetToObjectTransfer(rs);
-       } catch (Exception e) {
+        } catch (Exception e) {
             throw e;
         } finally {
             try {
@@ -140,8 +145,8 @@ public class CadartDao {
             }
         }
     }
-    
-     public List<Cadart> listarUsuarioByVisibilidade() throws Exception, Exception {
+
+    public List<Cadart> listarUsuarioByVisibilidade() throws Exception, Exception {
         this.connection = new ConnectionFactory().getConnection();
         ResultSet rs = null;
         PreparedStatement stmt = null;
@@ -151,9 +156,9 @@ public class CadartDao {
             stmt = connection.prepareStatement(sql);
 
             rs = stmt.executeQuery();
-            
+
             return resultSetToObjectTransferByVisi(rs);
-       } catch (Exception e) {
+        } catch (Exception e) {
             throw e;
         } finally {
             try {
@@ -163,7 +168,8 @@ public class CadartDao {
             }
         }
     }
-     private List<Cadart> resultSetToObjectTransferByVisi(ResultSet rs) throws Exception {
+
+    private List<Cadart> resultSetToObjectTransferByVisi(ResultSet rs) throws Exception {
         List<Cadart> objs = new Vector<>();
         while (rs.next()) {
             Cadart cadart = new Cadart();
@@ -182,22 +188,20 @@ public class CadartDao {
             cadart.setNomeArte(rs.getString("nomeArte"));
             cadart.setIdArte(rs.getInt("id_arte"));
 
-
             objs.add(cadart);
         }
         return objs;
     }
-   
-    public boolean updateUsuario(Cadart cadart) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+
+    public boolean updateUsuario(Cadart cadart) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         this.connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = null;
         boolean hasError = true;
-        
+
         String sql = "UPDATE cadart SET nome_artistico=?, descricao=?, email=?, id_arte=?, telefone=?, projeto_atual=?, nome=?, idade=? WHERE cpf=?";
         try {
             stmt = connection.prepareStatement(sql);
-           
-            
+
             stmt.setString(1, cadart.getNomeArtistico());
             stmt.setString(2, cadart.getDescricao());
             stmt.setString(3, cadart.getEmail());
@@ -207,7 +211,7 @@ public class CadartDao {
             stmt.setString(7, cadart.getNome());
             stmt.setInt(8, cadart.getIdade());
             stmt.setLong(9, cadart.getCpf());
-            
+
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -221,6 +225,7 @@ public class CadartDao {
         }
         return hasError;
     }
+
     public boolean updateSenha(Cadart cadart) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         PreparedStatement pstmt = null;
 
@@ -229,7 +234,6 @@ public class CadartDao {
         String sql = "UPDATE cadart SET senha = ? where cpf=?";
         try {
             pstmt = connection.prepareStatement(sql);
-
 
             String senha = convertToHash(cadart);
             pstmt.setString(1, senha);
@@ -248,15 +252,15 @@ public class CadartDao {
         }
         return hasError;
     }
-    
-     public boolean updateVisibilidadeS(Cadart cadart) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+
+    public boolean updateVisibilidadeS(Cadart cadart) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
         boolean hasError = true;
         String sql = "UPDATE cadart SET visibilidade='s' WHERE cpf=?";
         try {
             pstmt = connection.prepareStatement(sql);
-            
+
             pstmt.setLong(1, cadart.getCpf());
             pstmt.execute();
 
@@ -272,15 +276,15 @@ public class CadartDao {
         }
         return hasError;
     }
-     
-     public boolean updateVisibilidadeN(Cadart cadart) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+
+    public boolean updateVisibilidadeN(Cadart cadart) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
         boolean hasError = true;
         String sql = "UPDATE cadart SET visibilidade='n' WHERE cpf=?";
         try {
             pstmt = connection.prepareStatement(sql);
-            
+
             pstmt.setLong(1, cadart.getCpf());
             pstmt.execute();
 
@@ -296,18 +300,18 @@ public class CadartDao {
         }
         return hasError;
     }
-    
-    public boolean delete(Cadart cadart){
+
+    public boolean delete(Cadart cadart) {
         this.connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = null;
         boolean hasError = true;
-        
+
         String sql = "DELETE FROM cadart WHERE cpf=?";
         try {
             stmt = connection.prepareStatement(sql);
-            
-             stmt.setLong(1, cadart.getCpf());
-            
+
+            stmt.setLong(1, cadart.getCpf());
+
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -322,30 +326,6 @@ public class CadartDao {
         return hasError;
     }
 
-    
-    public void salvarFoto(Cadart cadart) throws Exception {
-        PreparedStatement pstmt = null;
-        this.connection = new ConnectionFactory().getConnection();
-        String sql = "UPDATE cadart SET foto_perfil=? WHERE cpf = ?";
-        try {
-
-            pstmt = connection.prepareStatement(sql);
-            pstmt.setObject(1, cadart.getFotoPerfil());
-            pstmt.setLong(2, cadart.getCpf());
-
-            pstmt.execute();
-        } catch (Exception e) {
-
-            throw e;
-        } finally {
-            try {
-                pstmt.close();
-            } catch (Exception e) {
-            }
-
-        }
-
-    }
     public List<Cadart> getById(Cadart cadart) throws SQLException, Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
@@ -373,7 +353,8 @@ public class CadartDao {
         }
 
     }
-     public List<Cadart> getByVisibilidadeDiferenteS() throws SQLException, Exception {
+
+    public List<Cadart> getByVisibilidadeDiferenteS() throws SQLException, Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
         String sql = "SELECT * FROM cadart WHERE visibilidade != 's'";
@@ -398,7 +379,9 @@ public class CadartDao {
         }
 
     }
-     private String convertToHash(Cadart cadart) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+    //criptografar senha
+
+    private String convertToHash(Cadart cadart) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
         byte messageDigest[] = algorithm.digest(cadart.getSenha().getBytes("UTF-8"));
         StringBuilder hexString = new StringBuilder();
@@ -408,5 +391,81 @@ public class CadartDao {
         String senha = hexString.toString();
         return senha;
     }
-}
+    //inserção de foto
 
+    public void salvarFoto(Cadart cadart) throws Exception {
+        PreparedStatement pstmt = null;
+        this.connection = new ConnectionFactory().getConnection();
+        String sql = "UPDATE cadart SET foto_perfil=? WHERE cpf = ?";
+        try {
+
+            pstmt = connection.prepareStatement(sql);
+            pstmt.setObject(1, tratarImagem(cadart.getFotoPerfil()));
+            pstmt.setLong(2, cadart.getCpf());
+
+            pstmt.execute();
+
+        } catch (Exception e) {
+
+            throw e;
+        } finally {
+            try {
+                pstmt.close();
+            } catch (Exception e) {
+            }
+
+        }
+
+    }
+    //métodos pra diminuir arquivos de foto
+
+    public byte[] tratarImagem(byte[] img) throws Exception {
+        int nBase = 300;
+        int nProporcao = 0;
+
+        BufferedImage imgScale = bytesToImage(img);
+        int width = (int) imgScale.getWidth();
+        int height = (int) imgScale.getHeight();
+
+        if (width > 300 || height > 300) {
+            if (width > height) {
+                nProporcao = (int) ((80 * nBase) / width);
+                height = (int) ((height * nProporcao) / 80);
+                width = nBase;
+            } else {
+                nProporcao = (int) ((80 * nBase) / height);
+                width = (int) ((width * nProporcao) / 80);
+                height = nBase;
+            }
+        }
+
+        imgScale = createScaledImage(imgScale, width, height);
+        img = imageToBytes(imgScale);
+        return img;
+    }
+
+    public BufferedImage createScaledImage(BufferedImage image, int width, int heigth) {
+        int cachedWidth = width;
+        int cachedHeight = heigth;
+
+        BufferedImage scaledImage;
+        scaledImage = new BufferedImage(cachedWidth, cachedHeight, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = scaledImage.createGraphics();
+        g.drawImage(image, 0, 0, cachedWidth, cachedHeight, null);
+        return scaledImage;
+    }
+
+    public BufferedImage bytesToImage(byte[] img) throws Exception {
+
+        ByteArrayInputStream bais = new ByteArrayInputStream(img);
+        BufferedImage bi = ImageIO.read(bais);
+
+        return bi;
+    }
+
+    public byte[] imageToBytes(BufferedImage bi) throws Exception {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(bi, "JPG", baos);
+        return baos.toByteArray();
+    }
+}

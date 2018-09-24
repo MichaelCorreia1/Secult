@@ -1,6 +1,10 @@
 package br.com.secult.dao;
 
 import br.com.secult.model.Evento;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -12,6 +16,7 @@ import java.sql.Statement;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -100,29 +105,6 @@ public class EventoDao {
         return objs;
     }
 
-    public void salvarFoto(Evento evento) throws Exception {
-        PreparedStatement pstmt = null;
-        this.connection = new ConnectionFactory().getConnection();
-        String sql = "UPDATE evento SET imagem=? WHERE id = ?";
-        try {
-
-            pstmt = connection.prepareStatement(sql);
-            pstmt.setObject(1, evento.getImagem());
-            pstmt.setLong(2, evento.getId());
-
-            pstmt.execute();
-        } catch (Exception e) {
-
-            throw e;
-        } finally {
-            try {
-                pstmt.close();
-            } catch (Exception e) {
-            }
-
-        }
-    }
-
     public List<Evento> getEventoById(Evento evento) throws SQLException, Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
@@ -147,7 +129,7 @@ public class EventoDao {
 
     }
 
-    public boolean updateEvento(Evento evento) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public boolean updateEvento(Evento evento) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
         PreparedStatement stmt = null;
 
         this.connection = new ConnectionFactory().getConnection();
@@ -157,9 +139,7 @@ public class EventoDao {
 
             //converte String para o tipo Date
             Date date = Date.valueOf(evento.getData_evento());
-
             stmt = connection.prepareStatement(sql);
-
             stmt.setString(1, evento.getTitulo());
             stmt.setString(2, evento.getDescricao());
             stmt.setString(3, evento.getTipo_evento());
@@ -262,6 +242,78 @@ public class EventoDao {
 
         }
         return hasError;
+    }
+     
+      public void salvarFoto(Evento evento) throws Exception {
+        PreparedStatement pstmt = null;
+        this.connection = new ConnectionFactory().getConnection();
+        String sql = "UPDATE evento SET imagem=? WHERE id = ?";
+        try {
+            pstmt = connection.prepareStatement(sql);
+            
+            pstmt.setObject(1, tratarImagem(evento.getImagem()));
+            pstmt.setLong(2, evento.getId());
+
+            pstmt.execute();
+        } catch (Exception e) {
+
+            throw e;
+        } finally {
+            try {
+                pstmt.close();
+            } catch (Exception e) {
+            }
+
+        }
+    }
+ public byte[] tratarImagem(byte[] img) throws Exception {
+        int nBase = 300;
+        int nProporcao = 0;
+
+        BufferedImage imgScale = bytesToImage(img);
+        int width = (int) imgScale.getWidth();
+        int height = (int) imgScale.getHeight();
+
+        if (width > 300 || height > 300) {
+            if (width > height) {
+                nProporcao = (int) ((60 * nBase) / width);
+                height = (int) ((height * nProporcao) / 60);
+                width = nBase;
+            } else {
+                nProporcao = (int) ((60 * nBase) / height);
+                width = (int) ((width * nProporcao) / 60);
+                height = nBase;
+            }
+        }
+
+        imgScale = createScaledImage(imgScale, width, height);
+        img = imageToBytes(imgScale);
+        return img;
+    }
+
+    public BufferedImage createScaledImage(BufferedImage image, int width, int heigth) {
+        int cachedWidth = width;
+        int cachedHeight = heigth;
+
+        BufferedImage scaledImage;
+        scaledImage = new BufferedImage(cachedWidth, cachedHeight, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = scaledImage.createGraphics();
+        g.drawImage(image, 0, 0, cachedWidth, cachedHeight, null);
+        return scaledImage;
+    }
+
+    public BufferedImage bytesToImage(byte[] img) throws Exception {
+
+        ByteArrayInputStream bais = new ByteArrayInputStream(img);
+        BufferedImage bi = ImageIO.read(bais);
+
+        return bi;
+    }
+
+    public byte[] imageToBytes(BufferedImage bi) throws Exception {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(bi, "JPG", baos);
+        return baos.toByteArray();
     }
 
 }

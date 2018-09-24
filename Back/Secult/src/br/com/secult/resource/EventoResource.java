@@ -187,7 +187,7 @@ public class EventoResource {
     @GET
     @Path("/updateEvento/{id}&{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_povoado}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response upadetEvento(@PathParam("id") long id, @PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_povoado") int id_povoado) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public Response upadetEvento(@PathParam("id") long id, @PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_povoado") int id_povoado) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
         Evento evento = new Evento();
 
         evento.setId(id);

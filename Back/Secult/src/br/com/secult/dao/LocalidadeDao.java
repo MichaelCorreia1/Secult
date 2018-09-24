@@ -2,12 +2,17 @@ package br.com.secult.dao;
 
 import br.com.secult.model.Evento;
 import br.com.secult.model.Localidade;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
+import javax.imageio.ImageIO;
 
 public class LocalidadeDao {
 

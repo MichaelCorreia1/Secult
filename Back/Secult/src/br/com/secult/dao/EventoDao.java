@@ -83,8 +83,8 @@ public class EventoDao {
         }
 
     }
-
-    private List<Evento> resultSetToObjectTransfer(ResultSet rs) throws Exception {
+    
+     private List<Evento> resultSetToObjectTransfer(ResultSet rs) throws Exception {
         List<Evento> objs = new Vector();
         while (rs.next()) {
             Evento even = new Evento();
@@ -170,13 +170,13 @@ public class EventoDao {
 
         ResultSet rs = null;
 
-        String sql = "SELECT * FROM evento where visibilidade = 's' and tipo_evento = 'g'";
+        String sql = "SELECT e.id, titulo, e.descricao, visibilidade, data_cadastro, data_evento, hora_evento, id_povoado, tipo_evento, l.nome as \"nomeLocalidade\" ,imagem FROM evento AS e JOIN localidade AS l ON(l.id = e.id_povoado) where visibilidade = 's' and tipo_evento = 'g'";
         try {
             stmt = connection.prepareStatement(sql);
 
             rs = stmt.executeQuery();
 
-            return resultSetToObjectTransfer(rs);
+            return listarEventoComLocalidade(rs);
         } catch (Exception e) {
             throw e;
         } finally {
@@ -187,6 +187,28 @@ public class EventoDao {
             }
         }
 
+    }
+    
+     private List<Evento> listarEventoComLocalidade(ResultSet rs) throws Exception {
+        List<Evento> objs = new Vector();
+        while (rs.next()) {
+            Evento even = new Evento();
+            even.setId(rs.getLong("id"));
+            even.setTitulo(rs.getString("titulo"));
+            even.setDescricao(rs.getString("descricao"));
+            even.setData_evento(rs.getString("data_evento"));
+            even.setData_cadastro(rs.getDate("data_cadastro"));
+            even.setTipo_evento(rs.getString("tipo_evento"));
+            even.setHora_evento(rs.getString("hora_evento"));
+            even.setVisibilidade(rs.getString("visibilidade"));
+            even.setId_localidade(rs.getInt("id_povoado"));
+            even.setImagem(rs.getBytes("imagem"));
+            even.setNomeEvento(rs.getString("nomeLocalidade"));
+
+            objs.add(even);
+
+        }
+        return objs;
     }
     
      public List<Evento> listarEventoPequeno(Evento even) throws SQLException, Exception {
@@ -267,21 +289,21 @@ public class EventoDao {
         }
     }
  public byte[] tratarImagem(byte[] img) throws Exception {
-        int nBase = 300;
+        int nBase = 100;
         int nProporcao = 0;
 
         BufferedImage imgScale = bytesToImage(img);
         int width = (int) imgScale.getWidth();
         int height = (int) imgScale.getHeight();
 
-        if (width > 300 || height > 300) {
+        if (width > 100 || height > 100) {
             if (width > height) {
-                nProporcao = (int) ((60 * nBase) / width);
-                height = (int) ((height * nProporcao) / 60);
+                nProporcao = (int) ((20 * nBase) / width);
+                height = (int) ((height * nProporcao) / 20);
                 width = nBase;
             } else {
-                nProporcao = (int) ((60 * nBase) / height);
-                width = (int) ((width * nProporcao) / 60);
+                nProporcao = (int) ((20 * nBase) / height);
+                width = (int) ((width * nProporcao) / 20);
                 height = nBase;
             }
         }

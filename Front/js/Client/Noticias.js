@@ -20,7 +20,7 @@ carregando(1)
                 var horaEvento = dados[i].hora_evento;
                 var dataEvento = dados[i].data_evento;
                 var idLocalidade = dados[i].id_localidade;
-                var nomeLocalidade = dados[i].nomeLocalidade;
+                var nomeLocalidade = dados[i].nomeEvento;
 
 
 

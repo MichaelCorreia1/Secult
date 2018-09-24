@@ -22,7 +22,16 @@ public class Evento {
     private String tipo_evento;
     private Date data_cadastro;
     private String data_evento;
-    private String hora_evento;            
+    private String hora_evento;
+    private String nomeEvento;
+
+    public String getNomeEvento() {
+        return nomeEvento;
+    }
+
+    public void setNomeEvento(String nomeEvento) {
+        this.nomeEvento = nomeEvento;
+    }
     private byte[] imagem;
     private int id_localidade;
 

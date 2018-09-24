@@ -81,7 +81,8 @@ angular.module('app.controllers', [])
 
     .controller('eventosEmPovoadosCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
-
+            preencherDadosLocalidade();
+            selectLocalidade();
         }])
 
     .controller('administradorCtrl', ['$scope', '$stateParams',
@@ -93,6 +94,7 @@ angular.module('app.controllers', [])
         function ($scope, $stateParams) {
             saveFotoEventoLSCdt()
             textArea("descricaoAdm");
+            selectLocalidadeCadastro();
         }])
 
     .controller('informacoesNoticiasCtrl', ['$scope', '$stateParams',
@@ -113,6 +115,8 @@ angular.module('app.controllers', [])
     .controller('updateEventoCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             saveFotoEventoLS();
+            selectLocalidadeCadastro();
+
         }])
 
     .controller('cultTobiasCtrl', ['$scope', '$stateParams',

@@ -1,6 +1,6 @@
 function preencherDadosLocalidade() {
     $("#nomeEvento").empty();
-    var json = servidor + "/Secult/localidade/listarLocalidadeComNome";
+    var json = servidor + "/Secult/localidade/listarLocalidadeComEvento";
 
     var onSuccess = function (result) {
 
@@ -19,7 +19,7 @@ function preencherDadosLocalidade() {
                 $("#nomeLocalidade").append(nome);
                 $("#descLocalidade").append(descricao);
 
-                $("#nomeEvento").append("<ion-item class=\"item-icon-right item positive\">"+nomeEvento+"\n" +
+                $("#nomeEvento").append("<ion-item class=\"item-icon-right item assertive\">"+nomeEvento+"\n" +
                     "        <i class=\"icon ion-flame\"></i>\n" +
                     "      </ion-item>");
             }
@@ -46,6 +46,28 @@ function selectLocalidade() {
                 $("#idLocalidade").append("<option value=" + idLocal + ">" + local + "</option>")
             }
             $("#idLocalidade option[value=1]").prop("selected", true).change()
+        }
+        $.getJSON(json, onSuccess).fail();
+    },1000)
+}
+
+function selectLocalidadeCadastro() {
+    setTimeout(function () {
+
+        var json = servidor + "/Secult/localidade/carregarLocalidade";
+
+        var onSuccess = function (result) {
+
+            dados = result.localidades;
+
+            for (var i in dados) {
+
+                var idLocal = dados[i].id;
+                var local = dados[i].nome;
+
+                $("#localidadeAdm").append("<option value=" + idLocal + ">" + local + "</option>")
+            }
+            $("#localidadeAdm option[value=1]").prop("selected", true).change()
         }
         $.getJSON(json, onSuccess).fail();
     },1000)

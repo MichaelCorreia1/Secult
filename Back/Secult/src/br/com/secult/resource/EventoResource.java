@@ -38,9 +38,9 @@ import javax.ws.rs.core.Response;
 public class EventoResource {
 
     @GET
-    @Path("/insertEvento/{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_povoado}")
+    @Path("/insertEvento/{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_povoado}&{local_cidade}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertEvento(@PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_povoado") int id_povoado) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public Response insertEvento(@PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_povoado") int id_povoado, @PathParam("local_cidade") String localCidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         Evento evento = new Evento();
         evento.setTitulo(titulo);
         evento.setDescricao(descricao);
@@ -49,10 +49,11 @@ public class EventoResource {
         evento.setTipo_evento(tipo_evento);
         evento.setHora_evento(hora_evento);
         evento.setId_localidade(id_povoado);
+        evento.setLocalCidade(localCidade);
 
         EventoDao eventoDao = new EventoDao();
         long id = eventoDao.insertEvento(evento);
-        if ( id > 0) {
+        if (id > 0) {
             return Response.ok("{\"status\":\"ok\", \"id_usuario\":\"" + id + "\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
             return Response.ok("{\"status\":\"erro\"}").build();
@@ -111,7 +112,7 @@ public class EventoResource {
 
         EventoDao eventoDao = new EventoDao();
 
-         if (eventoDao.deletarEvento(evento)) {
+        if (eventoDao.deletarEvento(evento)) {
             return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
             return Response.ok("{\"status\":\"erro\"}").build();
@@ -185,9 +186,9 @@ public class EventoResource {
     }
 
     @GET
-    @Path("/updateEvento/{id}&{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_povoado}")
+    @Path("/updateEvento/{id}&{titulo}&{descricao}&{data_evento}&{visibilidade}&{tipo_evento}&{hora_evento}&{id_povoado}&{local_cidade}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response upadetEvento(@PathParam("id") long id, @PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_povoado") int id_povoado) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
+    public Response upadetEvento(@PathParam("id") long id, @PathParam("titulo") String titulo, @PathParam("descricao") String descricao, @PathParam("data_evento") String data_evento, @PathParam("visibilidade") String visibilidade, @PathParam("tipo_evento") String tipo_evento, @PathParam("hora_evento") String hora_evento, @PathParam("id_povoado") int id_povoado, @PathParam("local_cidade") String localCidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
         Evento evento = new Evento();
 
         evento.setId(id);
@@ -198,6 +199,7 @@ public class EventoResource {
         evento.setTipo_evento(tipo_evento);
         evento.setHora_evento(hora_evento);
         evento.setId_localidade(id_povoado);
+        evento.setLocalCidade(localCidade);
 
         EventoDao eventoDao = new EventoDao();
 
@@ -235,7 +237,7 @@ public class EventoResource {
         List<Evento> evento = eventoDao.listarEventoPequeno(even);
 
         tratarImagem(evento);
-        
+
         Gson gson = new GsonBuilder().create();
         JsonArray ArrayUsuarios = gson.toJsonTree(evento).getAsJsonArray();
         JsonObject jsonObject = new JsonObject();

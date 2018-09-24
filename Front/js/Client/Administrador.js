@@ -38,8 +38,9 @@ function cadastroEvento() {
     var horaEvento = $("#horarioAdm").val();
     var localidade = $("#localidadeAdm").val();
     var tipo = $("#tipoAdm").val();
+    var localCidade = $("#localAdm").val();
 
-    var json = servidor + "/Secult/evento/insertEvento/" + titulo + "&" + descricao + "&" + dataEvento + "&n&" + tipo + "&" + horaEvento + "&" + localidade;
+    var json = servidor + "/Secult/evento/insertEvento/" + titulo + "&" + descricao + "&" + dataEvento + "&n&" + tipo + "&" + horaEvento + "&" + localidade + "&" + localCidade;
 
     var onSuccess = function (result) {
 
@@ -82,6 +83,7 @@ function listarEvento() {
                 var horaEvento = dados[i].hora_evento;
                 var dataEvento = dados[i].data_evento;
                 var idLocalidade = dados[i].id_localidade;
+                var localCidade = dados[i].localCidade;
 
 
                 $("#inicioListaEventoHoje").append("<ul class='list' id='" + id + "'>\n" +
@@ -93,7 +95,7 @@ function listarEvento() {
                     "\n" +
                     "            <li class=\"item\" style=\"padding: 0px\">\n" +
                     "                <div  class=\"button-bar\">\n" +
-                    "                    <a class='button button-light button-outline' href='#/page20' onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\")'><div  style=\"font-weight:600;color:#0092FF;font-size:17px;\"\n" +
+                    "                    <a class='button button-light button-outline' href='#/page20' onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\",\"" + localCidade + "\")'><div  style=\"font-weight:600;color:#0092FF;font-size:17px;\"\n" +
                     "                              id='" + id + "'>Editar\n" +
                     "                    </div></a>\n" +
                     "                    <a class='button button-light button-outline' onclick=\"excluirEvento(" + id + ")\"><div  style=\"font-weight:600;color:#FF0020;font-size:17px;\" >Excluir\n" +
@@ -132,7 +134,7 @@ function listarEvento() {
 
 }
 
-function preencherEventoAtualizar(id, visibilidade, titulo, dataEvento, descricao, horaEvento, tipo, idLocalidade, imagem) {
+function preencherEventoAtualizar(id, visibilidade, titulo, dataEvento, descricao, horaEvento, tipo, idLocalidade, imagem, localCidade) {
     id = $("#" + id).attr('id');
     setTimeout(function () {
         $("#tituloUp").val(titulo);
@@ -144,6 +146,7 @@ function preencherEventoAtualizar(id, visibilidade, titulo, dataEvento, descrica
         $("#localidadeUp").val(idLocalidade);
         $("#tipoUp").val(tipo);
         $("#visibilidadeUp").val(visibilidade);
+        $("#localUp").val(localCidade);
         $("#updateEventoBtn").attr('onclick', "updateEvento(" + id + ")");
     }, 1000);
 }
@@ -156,9 +159,10 @@ function updateEvento(id) {
     var localidade = $("#localidadeUp").val();
     var tipo = $("#tipoUp").val();
     var visibilidade = $("#visibilidadeUp").val();
+    var local = $("#localUp").val();
 
 
-    var json = servidor + "/Secult/evento/updateEvento/" + id + "&" + titulo + "&" + descricao + "&" + dataEvento + "&" + visibilidade + "&" + tipo + "&" + horaEvento + "&" + localidade;
+    var json = servidor + "/Secult/evento/updateEvento/" + id + "&" + titulo + "&" + descricao + "&" + dataEvento + "&" + visibilidade + "&" + tipo + "&" + horaEvento + "&" + localidade + "&" + local;
 
     var onSuccess = function (result) {
 
@@ -187,7 +191,6 @@ function limparEListarEventoAdm() {
 
 
 }
-
 
 //////////////////FOTO EVENTO///////////////////
 //////////////////FOTO EVENTO///////////////////

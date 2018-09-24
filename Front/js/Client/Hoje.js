@@ -23,6 +23,7 @@ function listarEventoHoje() {
                 var horaEvento = dados[i].hora_evento;
                 var dataEvento = dados[i].data_evento;
                 var idLocalidade = dados[i].id_localidade;
+                var localCidade = dados[i].localCidade;
 
             //<a href='#/page21' class='linkSemDecoracao' onclick='preencherEventoNoticiaInfo(\""+descricao+'","'+ titulo+"\")'>
 
@@ -34,7 +35,7 @@ function listarEventoHoje() {
                     "        </h2>\n" +
                     "      </li>\n" +
                     "      <li class=\"item item-icon-left \">\n" +
-                    "        <i class=\"icon ion-location assertive\"></i>Entrada da Cidade\n" +
+                    "        <i class=\"icon ion-location assertive\"></i> "+localCidade +"\n" +
                     "        <span class=\"item-note\">" + horaEvento + "</span>\n" +
                     "      </li><div class=\"spacer\" style=\"height: 5px;\"></div></a>");
 

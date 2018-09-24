@@ -24,6 +24,15 @@ public class Evento {
     private String data_evento;
     private String hora_evento;
     private String nomeEvento;
+    private String localCidade;
+
+    public String getLocalCidade() {
+        return localCidade;
+    }
+
+    public void setLocalCidade(String localCidade) {
+        this.localCidade = localCidade;
+    }
 
     public String getNomeEvento() {
         return nomeEvento;

@@ -31,7 +31,7 @@ public class EventoDao {
         this.connection = new ConnectionFactory().getConnection();
         ResultSet rs;
         long id = 0;
-        String sql = "INSERT INTO public.evento (titulo, descricao, data_evento, visibilidade, tipo_evento, hora_evento, id_povoado)  values (?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO public.evento (titulo, descricao, data_evento, visibilidade, tipo_evento, hora_evento, id_povoado, local_cidade)  values (?, ?, ?, ?, ?, ?, ?, ?);";
         try {
             Date date = Date.valueOf(evento.getData_evento());
             stmt = connection.prepareStatement(sql, (Statement.RETURN_GENERATED_KEYS));
@@ -43,6 +43,7 @@ public class EventoDao {
             stmt.setString(5, evento.getTipo_evento());
             stmt.setString(6, evento.getHora_evento());
             stmt.setInt(7, evento.getId_localidade());
+            stmt.setString(8, evento.getLocalCidade());
 
             stmt.executeUpdate();
 
@@ -83,8 +84,8 @@ public class EventoDao {
         }
 
     }
-    
-     private List<Evento> resultSetToObjectTransfer(ResultSet rs) throws Exception {
+
+    private List<Evento> resultSetToObjectTransfer(ResultSet rs) throws Exception {
         List<Evento> objs = new Vector();
         while (rs.next()) {
             Evento even = new Evento();
@@ -98,6 +99,7 @@ public class EventoDao {
             even.setVisibilidade(rs.getString("visibilidade"));
             even.setId_localidade(rs.getInt("id_povoado"));
             even.setImagem(rs.getBytes("imagem"));
+            even.setLocalCidade(rs.getString("local_cidade"));
 
             objs.add(even);
 
@@ -134,7 +136,7 @@ public class EventoDao {
 
         this.connection = new ConnectionFactory().getConnection();
         boolean hasError = true;
-        String sql = "UPDATE evento SET titulo=?, descricao=?, tipo_evento=?, visibilidade=?, data_evento=?, hora_evento=?, id_povoado=? WHERE id=?";
+        String sql = "UPDATE evento SET titulo=?, descricao=?, tipo_evento=?, visibilidade=?, data_evento=?, hora_evento=?, id_povoado=?, local_cidade=? WHERE id=?";
         try {
 
             //converte String para o tipo Date
@@ -147,7 +149,8 @@ public class EventoDao {
             stmt.setDate(5, date);
             stmt.setString(6, evento.getHora_evento());
             stmt.setInt(7, evento.getId_localidade());
-            stmt.setLong(8, evento.getId());
+            stmt.setString(8, evento.getLocalCidade());
+            stmt.setLong(9, evento.getId());
 
             stmt.execute();
         } catch (SQLException e) {
@@ -188,8 +191,8 @@ public class EventoDao {
         }
 
     }
-    
-     private List<Evento> listarEventoComLocalidade(ResultSet rs) throws Exception {
+
+    private List<Evento> listarEventoComLocalidade(ResultSet rs) throws Exception {
         List<Evento> objs = new Vector();
         while (rs.next()) {
             Evento even = new Evento();
@@ -210,8 +213,8 @@ public class EventoDao {
         }
         return objs;
     }
-    
-     public List<Evento> listarEventoPequeno(Evento even) throws SQLException, Exception {
+
+    public List<Evento> listarEventoPequeno(Evento even) throws SQLException, Exception {
         PreparedStatement stmt = null;
         this.connection = new ConnectionFactory().getConnection();
 
@@ -221,7 +224,7 @@ public class EventoDao {
         int dia = c.get(Calendar.DAY_OF_MONTH);
         int mes = c.get(Calendar.MONTH);
         int ano = c.get(Calendar.YEAR);
-        
+
         String sql = "SELECT * FROM evento where visibilidade = 's' and tipo_evento = 'p'";
         try {
             stmt = connection.prepareStatement(sql);
@@ -240,20 +243,20 @@ public class EventoDao {
         }
 
     }
-     
-     public boolean deletarEvento(Evento evento) throws Exception{
-         this.connection = new ConnectionFactory().getConnection();
-         PreparedStatement stmt = null;
-         boolean hasError = true;
-         
-         String sql = "DELETE FROM evento WHERE id=?";
-         try {
-             stmt = connection.prepareStatement(sql);
-             
-             stmt.setLong(1, evento.getId());
-             stmt.executeUpdate();
-             
-         } catch (SQLException e) {
+
+    public boolean deletarEvento(Evento evento) throws Exception {
+        this.connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = null;
+        boolean hasError = true;
+
+        String sql = "DELETE FROM evento WHERE id=?";
+        try {
+            stmt = connection.prepareStatement(sql);
+
+            stmt.setLong(1, evento.getId());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             hasError = false;
         } finally {
@@ -265,14 +268,14 @@ public class EventoDao {
         }
         return hasError;
     }
-     
-      public void salvarFoto(Evento evento) throws Exception {
+
+    public void salvarFoto(Evento evento) throws Exception {
         PreparedStatement pstmt = null;
         this.connection = new ConnectionFactory().getConnection();
         String sql = "UPDATE evento SET imagem=? WHERE id = ?";
         try {
             pstmt = connection.prepareStatement(sql);
-            
+
             pstmt.setObject(1, tratarImagem(evento.getImagem()));
             pstmt.setLong(2, evento.getId());
 
@@ -288,7 +291,8 @@ public class EventoDao {
 
         }
     }
- public byte[] tratarImagem(byte[] img) throws Exception {
+
+    public byte[] tratarImagem(byte[] img) throws Exception {
         int nBase = 1024;
         int nProporcao = 0;
 

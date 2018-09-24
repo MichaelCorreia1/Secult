@@ -170,4 +170,7 @@ ion-view {
     right: 0px;
     overflow: hidden;
 }
+.listaCadartUsuarios{
+    border-width: 0px 0px 1px 0px;
+}
 

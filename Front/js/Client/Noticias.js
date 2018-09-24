@@ -20,6 +20,9 @@ carregando(1)
                 var horaEvento = dados[i].hora_evento;
                 var dataEvento = dados[i].data_evento;
                 var idLocalidade = dados[i].id_localidade;
+                var nomeLocalidade = dados[i].nomeLocalidade;
+
+
 
 
                     $("#listaEventoNoticas").append("  <div class=\"list card manual-card-fullwidth \" style='padding-top: 0px'>\n" +
@@ -31,7 +34,8 @@ carregando(1)
                         "            <div class=\" item item-image \">\n" +
                         "                <img src='"+imagem+"'n" +
                         "                     style=\"display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;\">\n" +
-                        "            </div>\n" +
+                        "<div class=\"item item-icon-left\" href=\"#\" style='text-align: left;'> <i class=\"icon ion-location\"></i>"+nomeLocalidade+"<span class=\"item-note\"> "+dataEvento+" </span> </div>\n" +
+                        "</div>\n" +
                         "            <div id='"+id+"' style=\"text-align:left; text-indent: 10px;\" class=\"show-list-numbers-and-dots padding \">\n" +
                         "                <p style=\"margin-top:0px;color:#000000;\" >"+descricao.substring(0, 130)+"...<span style='color: #787878;' onclick='lerMais(\""+id+'","'+ descricao+"\")'> mais</span></p>\n" +
                         "            </div>\n" +
@@ -53,6 +57,14 @@ carregando(1)
     $.getJSON(json, onSuccess).fail(
     );
 
+}
+
+function checarDataEvento(data) {
+    if(data=="NaN"){
+        return "Indefinida"
+    }else{
+        return data
+    }
 }
 
 function lerMais(id, desc){

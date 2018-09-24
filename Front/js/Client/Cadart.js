@@ -329,7 +329,7 @@ function listarCadart() {
                 urlImagem = servidor + "/Secult/cadart/find/" + cpf;
 
 
-                $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right animated bounceInUp faster\">\n" +
+                $("#listaCadart").append("<a href='#/page16' onclick='carregarInfoCadart(\"" + urlImagem + "\",\"" + nome + "\",\"" + idade + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo + "\",\"" + nomeArtistico + "\",\"" + nomeArte + "\",\"" + cpf + "\",\"" + vindoDe + "\")'  class=\"item item-avatar item-icon-right animated fadeIn  listaCadartUsuarios\">\n" +
                     "                <img src='" + urlImagem + "'>\n" +
                     "                <h2>" + nomeArtistico + "</h2>\n" +
                     "                <p>" + arte + "</p>\n" +

@@ -420,7 +420,7 @@ public class CadartDao {
     //métodos pra diminuir arquivos de foto
 
     public byte[] tratarImagem(byte[] img) throws Exception {
-        int nBase = 300;
+        int nBase = 100;
         int nProporcao = 0;
 
         BufferedImage imgScale = bytesToImage(img);
@@ -429,12 +429,12 @@ public class CadartDao {
 
         if (width > 300 || height > 300) {
             if (width > height) {
-                nProporcao = (int) ((80 * nBase) / width);
-                height = (int) ((height * nProporcao) / 80);
+                nProporcao = (int) ((20 * nBase) / width);
+                height = (int) ((height * nProporcao) / 20);
                 width = nBase;
             } else {
-                nProporcao = (int) ((80 * nBase) / height);
-                width = (int) ((width * nProporcao) / 80);
+                nProporcao = (int) ((20 * nBase) / height);
+                width = (int) ((width * nProporcao) / 20);
                 height = nBase;
             }
         }

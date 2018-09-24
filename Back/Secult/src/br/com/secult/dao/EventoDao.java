@@ -289,21 +289,21 @@ public class EventoDao {
         }
     }
  public byte[] tratarImagem(byte[] img) throws Exception {
-        int nBase = 100;
+        int nBase = 1024;
         int nProporcao = 0;
 
         BufferedImage imgScale = bytesToImage(img);
         int width = (int) imgScale.getWidth();
         int height = (int) imgScale.getHeight();
 
-        if (width > 100 || height > 100) {
+        if (width > 1024 || height > 768) {
             if (width > height) {
-                nProporcao = (int) ((20 * nBase) / width);
-                height = (int) ((height * nProporcao) / 20);
+                nProporcao = (int) ((60 * nBase) / width);
+                height = (int) ((height * nProporcao) / 60);
                 width = nBase;
             } else {
-                nProporcao = (int) ((20 * nBase) / height);
-                width = (int) ((width * nProporcao) / 20);
+                nProporcao = (int) ((60 * nBase) / height);
+                width = (int) ((width * nProporcao) / 60);
                 height = nBase;
             }
         }

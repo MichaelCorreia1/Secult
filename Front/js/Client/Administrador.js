@@ -51,9 +51,7 @@ function cadastroEvento() {
 
         if (status != "erro") {
             inserirFotoEvento(id)
-            setTimeout(function () {
-                window.location.href = "#/page18";
-            }, 1000);
+
         } else {
             swal("Não foi possivel Cadastrar o evento")
         }
@@ -195,7 +193,7 @@ function limparEListarEventoAdm() {
 //////////////////FOTO EVENTO///////////////////
 
 function inserirFotoEvento(id) {
-    var json = servidor + "/Secult/evento/salvarFoto/" + id;
+    var json =  servidor + "/Secult/evento/salvarFoto/" + id;
 
     var ImageURL = localStorage.getItem("fotoCadastroEvento");
 

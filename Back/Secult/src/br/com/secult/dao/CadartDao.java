@@ -420,21 +420,21 @@ public class CadartDao {
     //métodos pra diminuir arquivos de foto
 
     public byte[] tratarImagem(byte[] img) throws Exception {
-        int nBase = 150;
+        int nBase = 200;
         int nProporcao = 0;
 
         BufferedImage imgScale = bytesToImage(img);
         int width = (int) imgScale.getWidth();
         int height = (int) imgScale.getHeight();
 
-        if (width > 150 || height > 150) {
+        if (width > 120  || height > 200) {
             if (width > height) {
-                nProporcao = (int) ((60 * nBase) / width);
-                height = (int) ((height * nProporcao) / 60);
+                nProporcao = (int) ((120 * nBase) / width);
+                height = (int) ((height * nProporcao) / 120);
                 width = nBase;
             } else {
-                nProporcao = (int) ((60 * nBase) / height);
-                width = (int) ((width * nProporcao) / 60);
+                nProporcao = (int) ((120 * nBase) / height);
+                width = (int) ((width * nProporcao) / 120);
                 height = nBase;
             }
         }

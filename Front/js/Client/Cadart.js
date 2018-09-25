@@ -441,10 +441,12 @@ function autenticar(txtEmail, txtSenha) {
             localStorage.setItem("idade", idade);
             localStorage.setItem("descricao", descricao);
             localStorage.setItem("projetoAtual", projetoAtual);
+            localStorage.setItem("usuarioAtivo", "true")
+
+
             setTimeout(function () {
                 window.location.href = "#/page1/page3";
                 setTimeout(function () {
-                    $("#meusDados").attr('onclick', " carregarDadosPerfilCadart('" + urlImagem + "','" + nome + "','" + idade + "','" + email + "','" + telefone + "','" + descricao + "','" + projetoAtual + "','" + sexo + "','" + nomeArtistico + "','" + idArte + "')")
                     $(".alt-estado").toggle()
                 }, 100)
 
@@ -468,18 +470,62 @@ function autenticar(txtEmail, txtSenha) {
 
 function sairUsuario() {
     $(".alt-estado").toggle();
-    localStorage.setItem("cpf", '');
-    localStorage.setItem("nome", '');
-    localStorage.setItem("nomeArtistico", '');
-    localStorage.setItem("email", '');
-    localStorage.setItem("telefone", '');
-    localStorage.setItem("nomeArte", '');
-    localStorage.setItem("sexo", '');
-    localStorage.setItem("idArte", '');
-    localStorage.setItem("idade", '');
-    localStorage.setItem("descricao", '');
-    localStorage.setItem("projetoAtual", '');
+    localStorage.removeItem("cpf");
+    localStorage.removeItem("nome");
+    localStorage.removeItem("nomeArtistico");
+    localStorage.removeItem("email");
+    localStorage.removeItem("telefone");
+    localStorage.removeItem("nomeArte");
+    localStorage.removeItem("sexo");
+    localStorage.removeItem("idArte");
+    localStorage.removeItem("idade");
+    localStorage.removeItem("descricao");
+    localStorage.removeItem("projetoAtual");
+    localStorage.setItem("usuarioAtivo", "false");
 
+
+}
+
+function usuarioAtivo() {
+    if(localStorage.getItem("usuarioAtivo")=="true"){
+        $(".alt-estado").toggle();
+    }
+}
+
+function usuarioLogado(){
+    setTimeout(function () {
+        $("#nomeUp").val(localStorage.getItem("nome"));
+        $("#dtNascimentoUp").val(localStorage.getItem("idade"));
+        $("#emailUp").val(localStorage.getItem("email"));
+        $("#telUp").val(localStorage.getItem("telefone"));
+        $("#descricaoUp").val(localStorage.getItem("descricao"));
+        $("#projetosUp").val(localStorage.getItem("projetoAtual"));
+        $("#nomeArtisticoUp").val(localStorage.getItem("nomeArtistico"));
+        $("#sexoUp").val(localStorage.getItem("sexo"));
+        $("#arteUp").val(localStorage.getItem("idArte"));
+        $("#tableBanner").attr('src', servidor+"/Secult/cadart/find/"+localStorage.getItem("cpf"));
+        $("#telUp").mask("00-00000-0000");
+
+    }, 100)
+}
+
+function carregarDadosUpdateCadart() {
+    setTimeout(function () {
+        $("#nomeUp").val(nome);
+        $("#dtNascimentoUp").val(idade);
+        $("#emailUp").val(email);
+        $("#telUp").val(tel);
+        $("#telUp").val(tel);
+
+        $("#descricaoUp").val(descricao);
+        $("#projetosUp").val(projetoAtual);
+        $("#nomeArtisticoUp").val(nomeArtistico);
+        $("#sexoUp").val(sexo);
+        $("#arteUp").val(idArte);
+        $("#tableBanner").attr('src', servidor+"/Secult/cadart/find/"+localStorage.getItem("cpf"));
+        $("#telUp").mask("00-00000-0000");
+
+    }, 100)
 }
 
 
@@ -523,28 +569,7 @@ function carregarInfoCadart(urlImagem, nome, idade, email, tel, descricao, proje
     }, 100)
 }
 
-function carregarDadosPerfilCadart(urlImagem, nome, idade, email, tel, descricao, projetoAtual, sexo, nomeArtistico, idArte) {
 
-    setTimeout(function () {
-        $("#nomeUp").val(nome);
-        $("#dtNascimentoUp").val(idade);
-        $("#emailUp").val(email);
-        $("#telUp").val(tel);
-        $("#telUp").val(tel);
-        alert(tel.replace(/[^0-9]/g, ''))
-
-        $("#descricaoUp").val(descricao);
-        $("#projetosUp").val(projetoAtual);
-        $("#nomeArtisticoUp").val(nomeArtistico);
-        $("#sexoUp").val(sexo);
-        $("#arteUp").val(idArte);
-        $("#fotoUp").attr('src', urlImagem);
-        $("#telUp").mask("00-00000-0000");
-
-    }, 100)
-}
-
-//onclick='carregarDadosPerfilCadart(\"" + urlImagem + "\",\"" +  nome + "\",\"" + dataNascimento + "\",\"" + email + "\",\"" + tel + "\",\"" + descricao + "\",\"" + projetoAtual + "\",\"" + sexo+ "\",\"" + nomeArtistico+ "\",\"" + nomeArte+ "\")'
 
 
 function botaoFotoFakeCadart(el) {

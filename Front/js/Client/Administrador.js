@@ -194,12 +194,13 @@ function mostrarInput(tipo) {
 }
 
 function mostrarInputCadastroEvento() {
-    if($("#localidadeAdm").val() == ""){
+    if($("#tipoAdm").val() == ""){
         $("#localAdm").hide();
-    }else if($("#localAdm").attr('onclick')){
-
+    }else if($("#tipoAdm").val() == "g"){
+        $("#localAdm").hide();
+    }else{
+        $("#localAdm").show();
     }
-
 }
 
 function limparEListarEventoAdm() {

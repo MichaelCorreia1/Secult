@@ -17,6 +17,7 @@ angular.module('app.controllers', [])
     .controller('cadartCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             listarCadart();
+            usuarioAtivo();
         }])
 
     .controller('usuarioCtrl', ['$scope', '$stateParams',

@@ -23,6 +23,7 @@ angular.module('app.controllers', [])
         function ($scope, $stateParams) {
             textAreaUp();
             botaoFotoFakeCadart(1);
+            usuarioLogado();
         }])
 
     .controller('cadastrarCtrl', ['$scope', '$stateParams',
@@ -95,6 +96,7 @@ angular.module('app.controllers', [])
             saveFotoEventoLSCdt()
             textArea("descricaoAdm");
             selectLocalidadeCadastro();
+            mostrarInputCadastroEvento();
         }])
 
     .controller('informacoesNoticiasCtrl', ['$scope', '$stateParams',
@@ -115,8 +117,7 @@ angular.module('app.controllers', [])
     .controller('updateEventoCtrl', ['$scope', '$stateParams',
         function ($scope, $stateParams) {
             saveFotoEventoLS();
-            selectLocalidadeCadastro();
-
+            selectLocalidadeUp();
         }])
 
     .controller('cultTobiasCtrl', ['$scope', '$stateParams',

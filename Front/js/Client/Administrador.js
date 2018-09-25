@@ -95,7 +95,7 @@ function listarEvento() {
                     "\n" +
                     "            <li class=\"item\" style=\"padding: 0px\">\n" +
                     "                <div  class=\"button-bar\">\n" +
-                    "                    <a class='button button-light button-outline' href='#/page20' onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\",\"" + localCidade + "\")'><div  style=\"font-weight:600;color:#0092FF;font-size:17px;\"\n" +
+                    "                    <a class='button button-light button-outline' href='#/page20' onclick='preencherEventoAtualizar(" + id + ",\"" + visibilidade + "\",\"" + titulo + "\",\"" + dataEvento + "\",\"" + descricao + "\",\"" + horaEvento + "\",\"" + tipo + "\",\"" + idLocalidade + "\",\"" + imagem + "\",\"" + localCidade + "\"), mostrarInput(\""+ tipo +"\")'><div  style=\"font-weight:600;color:#0092FF;font-size:17px;\"\n" +
                     "                              id='" + id + "'>Editar\n" +
                     "                    </div></a>\n" +
                     "                    <a class='button button-light button-outline' onclick=\"excluirEvento(" + id + ")\"><div  style=\"font-weight:600;color:#FF0020;font-size:17px;\" >Excluir\n" +
@@ -183,6 +183,24 @@ function updateEvento(id) {
     $.getJSON(json, onSuccess).fail();
 }
 
+function mostrarInput(tipo) {
+        setTimeout(function () {
+            if(tipo != 'p'){
+                $("#labelLocal").hide();
+            }else if(tipo == 'p') {
+                $("#labelLocal").show();
+            }
+        },300);
+}
+
+function mostrarInputCadastroEvento() {
+    if($("#localidadeAdm").val() == ""){
+        $("#localAdm").hide();
+    }else if($("#localAdm").attr('onclick')){
+
+    }
+
+}
 
 function limparEListarEventoAdm() {
 

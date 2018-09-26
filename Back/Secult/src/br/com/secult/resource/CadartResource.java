@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.secult.resource;
 
 import br.com.secult.dao.CadartDao;
@@ -37,11 +32,11 @@ import javax.ws.rs.core.Response;
  */
 @Path("/cadart")
 public class CadartResource {
-//a
+
     @GET
     @Path("/insertUsuario/{cpf}&{nome}&{nomeArtistico}&{telefone}&{email}&{sexo}&{descricao}&{projetoAtual}&{idade}&{senha}&{idArte}&{visibilidade}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertUsuario(@PathParam("cpf") long cpf, @PathParam("nome") String nome, @PathParam("telefone") String telefone ,@PathParam("email") String email, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao, @PathParam("projetoAtual") String projetoAtual, @PathParam("idade") int idade, @PathParam("senha") String senha, @PathParam("idArte") int idArte, @PathParam("visibilidade") String visibilidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public Response insertUsuario(@PathParam("cpf") long cpf, @PathParam("nome") String nome, @PathParam("telefone") String telefone, @PathParam("email") String email, @PathParam("nomeArtistico") String nomeArtistico, @PathParam("sexo") String sexo, @PathParam("descricao") String descricao, @PathParam("projetoAtual") String projetoAtual, @PathParam("idade") int idade, @PathParam("senha") String senha, @PathParam("idArte") int idArte, @PathParam("visibilidade") String visibilidade) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
 
         Cadart cadart = new Cadart();
         cadart.setCpf(cpf);
@@ -56,7 +51,7 @@ public class CadartResource {
         cadart.setSenha(senha);
         cadart.setIdArte(idArte);
         cadart.setVisibilidade(visibilidade);
-        
+
         CadartDao cadartDao = new CadartDao();
 
         if (cadartDao.insert(cadart)) {
@@ -74,7 +69,7 @@ public class CadartResource {
         CadartDao usuarioDao = new CadartDao();
         List<Cadart> usuarios = usuarioDao.listarUsuario();
 
-                tratarImagem(usuarios);
+        tratarImagem(usuarios);
 
         Gson gson = new GsonBuilder().create();
 
@@ -83,10 +78,10 @@ public class CadartResource {
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("usuario", ArrayUsarios);
 
-                return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
+
     @GET
     @Path("/listarUsuarioByVisibilidade")
     @Produces(MediaType.APPLICATION_JSON)
@@ -103,12 +98,11 @@ public class CadartResource {
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("usuario", ArrayUsarios);
 
-                return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-
+        return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
-    
-     @GET
+
+    @GET
     @Path("/getByVisibilidadeDiferenteS")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getByVisibilidadeDiferenteS() throws SQLException, Exception {
@@ -126,9 +120,8 @@ public class CadartResource {
 
         return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
-
     }
-    
+
     public void tratarImagem(List<Cadart> usuarios) {
         for (int i = 0; i < usuarios.size(); i++) {
 
@@ -182,6 +175,7 @@ public class CadartResource {
             return Response.ok("{\"status\":\"erro\"}").build();
         }
     }
+
     @GET
     @Path("/autenticar/{email}&{senha}")
     @Produces("application/json")
@@ -194,21 +188,17 @@ public class CadartResource {
         List<Cadart> cadarts = cadartDao.autenticar(cadart);
 
         Gson gson = new GsonBuilder().create();
-        
+
         tratarImagem(cadarts);
-        
-        
+
         JsonArray ArrayUsarios = gson.toJsonTree(cadarts).getAsJsonArray();
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("usuario", ArrayUsarios);
-        
 
-     
         return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
-            
-        
     }
+
     @GET
     @Path("/updateSenha/{cpf}&{senha}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -219,13 +209,13 @@ public class CadartResource {
 
         CadartDao cadartDao = new CadartDao();
 
-         if (cadartDao.updateSenha(cadart)) {
+        if (cadartDao.updateSenha(cadart)) {
             return Response.ok("{\"status\":\"ok\", \"id_usuario\":\"" + cadart.getCpf() + "\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } else {
             return Response.ok("{\"status\":\"erro\"}").build();
         }
     }
-    
+
     @GET
     @Path("/updateVisibilidadeS/{cpf}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -241,8 +231,8 @@ public class CadartResource {
             return Response.ok("{\"status\":\"erro\"}").build();
         }
     }
-    
-     @GET
+
+    @GET
     @Path("/updateVisibilidadeN/{cpf}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateVisibilidadeN(@PathParam("cpf") long cpf) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
@@ -257,7 +247,7 @@ public class CadartResource {
             return Response.ok("{\"status\":\"erro\"}").build();
         }
     }
-    
+
     @POST
     @Path("/salvarFoto/{cpf}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -285,6 +275,7 @@ public class CadartResource {
 
         return Response.ok().header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
     }
+
     @GET
     @Path("/find/{cpf}")
     @Produces({"image/png", "image/jpg"})

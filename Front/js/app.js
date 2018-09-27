@@ -6,8 +6,8 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-localStorage.setItem("servidor", "http://salesdomain.com.br:8081")
-//localStorage.setItem("servidor", "http://localhost:8080")
+//localStorage.setItem("servidor", "http://salesdomain.com.br:8081")
+localStorage.setItem("servidor", "http://localhost:8080")
 
 angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives', 'app.services',])
 

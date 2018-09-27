@@ -3,7 +3,7 @@ package br.com.secult.model;
 
 public class RedesSociais {
     private int id;
-    private int idCadart;
+    private long idCadart;
     private String nomeRede;
     private String nomeLink;
 
@@ -15,11 +15,11 @@ public class RedesSociais {
         this.id = id;
     }
 
-    public int getIdCadart() {
+    public long getIdCadart() {
         return idCadart;
     }
 
-    public void setIdCadart(int idCadart) {
+    public void setIdCadart(long idCadart) {
         this.idCadart = idCadart;
     }
 

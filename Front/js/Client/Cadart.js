@@ -255,7 +255,9 @@ function cadastrarCdt() {
         resultado = jsonRestultado.status;
         if (resultado == "ok") {
             inserirFoto(cpf);
-
+            cadastrarRedeSocial(cpf,"redeSocial1")
+            cadastrarRedeSocial(cpf,"redeSocial2")
+            cadastrarRedeSocial(cpf,"redeSocial3")
             swal({
                 title: "Cadastrado!",
                 text: "Aguarde nosso pessoal validar seus dados!",
@@ -557,15 +559,16 @@ function carregarInfoCadart(urlImagem, nome, idade, email, tel, descricao, proje
 
         if (vindoDe == "adm") {
             $("#btnInfo").css('display', 'block')
-            $("#btnInfo").text('Tornar Usuario Visivel Na lista')
+            $("#btnInfo").text('Tornar usuario visivel na lista')
 
             $("#btnInfo").attr('onclick', 'autenticarVisibilidadeS(' + cpf + ')');
         }
         if (vindoDe == "desAutenticar") {
             $("#btnInfo").css('display', 'block')
-            $("#btnInfo").text('Tornar Usuario Invisivel Na lista')
+            $("#btnInfo").text('Tornar usuario invisivel na lista')
             $("#btnInfo").attr('onclick', 'autenticarVisibilidadeN(' + cpf + ')');
         }
+        listarRedeSociais(cpf);
     }, 100)
 }
 

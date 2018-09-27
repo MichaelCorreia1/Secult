@@ -34,7 +34,7 @@ public class RedesSociasResource {
     @GET
     @Path("/inserirRedes/{nome_rede}&{nome_link}&{id_cadart}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response inserirRede(@PathParam("nome_rede") String nomeRede, @PathParam("nome_link") String nomeLink, @PathParam("id_cadart") int idCadart) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    public Response inserirRede(@PathParam("nome_rede") String nomeRede, @PathParam("nome_link") String nomeLink, @PathParam("id_cadart") long idCadart) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         
         RedesSociais redes = new RedesSociais();
         redes.setNomeRede(nomeRede);
@@ -50,19 +50,19 @@ public class RedesSociasResource {
         }
         }
     @GET
-    @Path("/listarRedes")
+    @Path("/listarRedesById/{id_cadart}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listarRedesSociais() throws SQLException, Exception {
-
+    public Response listarRedesSociais(@PathParam("id_cadart") int id) throws SQLException, Exception {
+        
         RedesSociasDao redesDao = new RedesSociasDao();
-        List<RedesSociais> redes = redesDao.listarRedes();
+        List<RedesSociais> redes = redesDao.listarRedes(id);
 
         Gson gson = new GsonBuilder().create();
 
         JsonArray ArrayUsarios = gson.toJsonTree(redes).getAsJsonArray();
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.add("rede social", ArrayUsarios);
+        jsonObject.add("redeSocial", ArrayUsarios);
 
         return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 

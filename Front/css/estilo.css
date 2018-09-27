@@ -173,4 +173,39 @@ ion-view {
 .listaCadartUsuarios{
     border-width: 0px 0px 1px 0px;
 }
+i.icon.ion-social-instagram.instaIcone{
+    color: #ffffff;
+    background-image: linear-gradient(to bottom,#ae16ff,#7900c8, #540255, #cb03c9, #ed25f2, #df0000 , #e2245a , #ff502b 85%);
+    border-radius: 30%;
+    border: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-top: none;
+    padding: 2px;
+}
+
+.semBorda{
+    border:none;
+}
+.semBorda a, .semBorda textarea {
+    background: transparent;
+}
+
+label.item.item-input.item-stacked-label{
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+label.item.item-input.redeSocial {
+    border-width: 1px 0px 0px 0px;
+}
+label.item.item-input {
+    border-width: 1px 0px 1px 0px;
+}
+select#arteCdt {
+    border-width: 0px 0px 0px 1px;
+}
+select#sexoCdt {
+    border-width: 0px 0px 0px 0px;
+}
 

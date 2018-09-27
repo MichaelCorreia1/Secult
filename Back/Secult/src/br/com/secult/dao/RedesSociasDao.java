@@ -16,13 +16,13 @@ public class RedesSociasDao {
         this.con = new ConnectionFactory().getConnection();
         boolean erro = true;
         PreparedStatement stmt = null;
-        String sql = "INSERT INTO redes_socias(nome_rede, nome_link, id_cadart) VALUES (?,?,?)";
+        String sql = "INSERT INTO redes_sociais(nome_rede, nome_link, id_cadart) VALUES (?,?,?)";
         try {
             stmt = con.prepareStatement(sql);
 
             stmt.setString(1, redes.getNomeRede());
             stmt.setString(2, redes.getNomeLink());
-            stmt.setInt(3, redes.getIdCadart());
+            stmt.setLong(3, redes.getIdCadart());
 
             stmt.execute();
         } catch (Exception e) {
@@ -34,15 +34,17 @@ public class RedesSociasDao {
         return erro;
     }
 
-    public List<RedesSociais> listarRedes() {
+    public List<RedesSociais> listarRedes(int id) {
         List<RedesSociais> listaRedes = new ArrayList<>();
         this.con = new ConnectionFactory().getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        String slq = "SELECT nome_rede, nome_link, id_cadart FROM redes_socias";
+        String slq = "SELECT nome_rede, nome_link, id_cadart FROM redes_sociais WHERE id_cadart=?";
         try {
             stmt = con.prepareStatement(slq);
-
+            
+            stmt.setInt(1, id);
+            
             rs = stmt.executeQuery();
 
             while (rs.next()) {

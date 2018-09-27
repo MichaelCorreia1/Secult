@@ -34,7 +34,7 @@ public class RedesSociasDao {
         return erro;
     }
 
-    public List<RedesSociais> listarRedes(int id) {
+    public List<RedesSociais> listarRedes(RedesSociais rede) {
         List<RedesSociais> listaRedes = new ArrayList<>();
         this.con = new ConnectionFactory().getConnection();
         PreparedStatement stmt = null;
@@ -43,7 +43,7 @@ public class RedesSociasDao {
         try {
             stmt = con.prepareStatement(slq);
             
-            stmt.setInt(1, id);
+            stmt.setLong(1, rede.getIdCadart());
             
             rs = stmt.executeQuery();
 
@@ -52,7 +52,7 @@ public class RedesSociasDao {
 
                 redes.setNomeRede(rs.getString("nome_rede"));
                 redes.setNomeLink(rs.getString("nome_link"));
-                redes.setIdCadart(rs.getInt("id_cadart"));
+                redes.setIdCadart(rs.getLong("id_cadart"));
 
                 listaRedes.add(redes);
             }

@@ -52,10 +52,12 @@ public class RedesSociasResource {
     @GET
     @Path("/listarRedesById/{id_cadart}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listarRedesSociais(@PathParam("id_cadart") int id) throws SQLException, Exception {
-        
+    public Response listarRedesSociais(@PathParam("id_cadart") long id) throws SQLException, Exception {
+        RedesSociais rede = new RedesSociais();
+        rede.setIdCadart(id);
         RedesSociasDao redesDao = new RedesSociasDao();
-        List<RedesSociais> redes = redesDao.listarRedes(id);
+        
+        List<RedesSociais> redes = redesDao.listarRedes(rede);
 
         Gson gson = new GsonBuilder().create();
 

@@ -69,4 +69,22 @@ public class RedesSociasResource {
         return Response.ok(jsonObject.toString()).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
 
     }
+    @GET
+    @Path("/alterarRedes/{nome_rede}&{nome_link}&{id_cadart}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response upadetEvento(@PathParam("id_cadart") long id, @PathParam("nome_rede") String nomeRede, @PathParam("nome_link") String nomeLink) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException, Exception {
+        RedesSociais rede = new RedesSociais();
+
+        rede.setIdCadart(id);
+        rede.setNomeRede(nomeRede);
+        rede.setNomeLink(nomeLink);
+
+        RedesSociasDao redesDao = new RedesSociasDao();
+
+        if (redesDao.alterarRedes(rede)) {
+            return Response.ok("{\"status\":\"ok\"}").header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS").header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        } else {
+            return Response.ok("{\"status\":\"erro\"}").build();
+        }
+    }
     }

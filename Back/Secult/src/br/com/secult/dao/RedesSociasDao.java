@@ -68,4 +68,26 @@ public class RedesSociasDao {
             return listaRedes;
         }
     }
+    
+    public boolean alterarRedes(RedesSociais rede) throws SQLException{
+        this.con = new ConnectionFactory().getConnection();
+        boolean hasError = true;
+        PreparedStatement stmt = null;
+        String sql = "UPDATE redes_sociais SET nome_rede=?, nome_link=? WHERE id_cadart=?";
+        try {
+            stmt = con.prepareStatement(sql);
+            
+            stmt.setString(1, rede.getNomeRede());
+            stmt.setString(2, rede.getNomeLink());
+            stmt.setLong(3, rede.getIdCadart());
+            
+            stmt.execute();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            hasError = false;
+        }finally{
+            stmt.close();   
+        }
+        return hasError;
+    }
 }

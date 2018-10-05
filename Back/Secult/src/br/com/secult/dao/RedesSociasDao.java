@@ -73,15 +73,15 @@ public class RedesSociasDao {
         this.con = new ConnectionFactory().getConnection();
         boolean hasError = true;
         PreparedStatement stmt = null;
-        String sql = "UPDATE redes_sociais SET nome_rede=?, nome_link=? WHERE id_cadart=?";
+        String sql = "UPDATE redes_sociais SET nome_link=? where nome_rede=? and id_cadart=?";
         try {
             stmt = con.prepareStatement(sql);
-            
-            stmt.setString(1, rede.getNomeRede());
-            stmt.setString(2, rede.getNomeLink());
+                        
+            stmt.setString(1, rede.getNomeLink());
+            stmt.setString(2, rede.getNomeRede());
             stmt.setLong(3, rede.getIdCadart());
             
-            stmt.execute();
+            stmt.executeUpdate();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             hasError = false;

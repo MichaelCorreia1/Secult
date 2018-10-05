@@ -38,6 +38,45 @@ function inserirFoto(cpf) {
 
 }
 
+function inserirFotoUP(cpf) {
+    var json = servidor + "/Secult/cadart/salvarFoto/" + cpf;
+
+    var ImageURL = localStorage.getItem("fotoCadastro");
+
+    var block = ImageURL.split(";");
+
+    var contentType = block[0].split(":")[1];
+
+    var realData = block[1].split(",")[1];
+
+    var blob = b64toBlob(realData, contentType);
+
+    var formDataToUpload = new FormData();
+
+    formDataToUpload.append("id", cpf);
+    formDataToUpload.append("foto_perfil", blob);
+
+    $.ajax({
+        url: json,
+        data: formDataToUpload,
+        type: "POST",
+        contentType: false,
+        processData: false,
+        cache: false,
+        dataType: "json",
+
+        error: function (err) {
+            console.log(err);
+
+        },
+
+        complete: function () {
+
+        },
+    })
+
+}
+
 function saveFotoLS() {
 
     //document.getElementById("tableBanner").style.display = "none";
@@ -90,6 +129,7 @@ function saveFotoLSUp() {
             img.onload = function () {
 
                 localStorage.setItem("fotoCadastro", toBase64String(img));
+                inserirFotoUP(localStorage.getItem("cpf"));
 
             };
             img.src = fReader.result;
@@ -496,6 +536,7 @@ function usuarioAtivo() {
 
 function usuarioLogado(){
     setTimeout(function () {
+        preencherCamposRedesUpdate(localStorage.getItem("cpf"));
         $("#nomeUp").val(localStorage.getItem("nome"));
         $("#dtNascimentoUp").val(localStorage.getItem("idade"));
         $("#emailUp").val(localStorage.getItem("email"));
@@ -548,6 +589,7 @@ function carregarInfoCadart(urlImagem, nome, idade, email, tel, descricao, proje
         $("#descricaoInfo").text(descricao);
         $("#projetosInfo").text(projetoAtual);
         $("#nomeArtisticoInfo").text(nomeArtistico);
+
         if (sexo == 'm') {
             sexo = 'Masculino'
         } else {
@@ -589,6 +631,8 @@ function botaoFotoFakeCadart(el) {
 
 }
 
+
+
 function updateCadart() {
     var cpf = localStorage.getItem('cpf')
 
@@ -607,21 +651,21 @@ function updateCadart() {
         var status = result.status;
 
         if (status == "ok") {
-            inserirFoto(cpf);
-
 
             localStorage.setItem("cpf", cpf);
             localStorage.setItem("nome", nome);
             localStorage.setItem("nomeArtistico", nomeArtistico);
             localStorage.setItem("email", email);
             localStorage.setItem("telefone", tel);
-            localStorage.setItem("idArte", id);
             localStorage.setItem("sexo", sexo);
             localStorage.setItem("idArte", idArte);
             localStorage.setItem("idade", idade);
             localStorage.setItem("descricao", desc);
             localStorage.setItem("projetoAtual", projeto);
 
+            updateRedeSocial(localStorage.getItem("cpf"), "upRedeSocial1", "Facebook");
+            updateRedeSocial(localStorage.getItem("cpf"), "upRedeSocial2", "Instagram");
+            updateRedeSocial(localStorage.getItem("cpf"), "upRedeSocial3", "Youtube");
             swal({
                 title: "Cadastrado!",
                 text: "Seus dados foram alterados com sucesso!",
@@ -629,7 +673,8 @@ function updateCadart() {
                 button: false,
             });
             setTimeout(function () {
-                window.location.href = "#/page3";
+                window.location = "#/page3";
+
 
             }, 2000)
         } else if (resultado == "erro") {
